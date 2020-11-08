@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import FooterContent from './FooterContent/FooterContent'
 import "./MyFooter.css";
 
 export default function MyFooter({ props }: { props: object }) {
@@ -11,10 +12,9 @@ export default function MyFooter({ props }: { props: object }) {
       {props["isBlack"] ? (
         <footer className="footer">
           <div className="footerBox">
-            {props["showMoreFooter"] ? <div>展示更多</div> : null}
-            <div className="footerContent"></div>
+            {props["showMoreFooter"] ? <FooterContent></FooterContent> : null}
             <div className="copyright">
-              <span>领课网络 Copyright © 2015-现在</span>
+              领课网络 Copyright © 2015-现在
             </div>
             <div className="icp_num">
               <a

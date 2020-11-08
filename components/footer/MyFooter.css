@@ -23,6 +23,7 @@
   background: #333;
   /* padding-top: 60px; */
   position: relative;
+  width: 100%;
 }
 .footerContent {
   width: 100vw;
@@ -38,6 +39,9 @@
   text-align: center;
   color: #ccc;
   margin-top: 25px;
+  display: flex;
+  width: 100vw;
+  justify-content: center;
 }
 .footerBox .icp_num {
   line-height: 30px;
