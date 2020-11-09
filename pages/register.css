@@ -1,0 +1,25 @@
+.register_box {
+  height: calc(100vh - 68px);
+  position: relative;
+  overflow: hidden;
+  background: #0661e3;
+  background-size: 100% auto;
+}
+.register_box .center_box {
+  width: 1200px;
+  margin: 0 auto;
+  background: #fff;
+}
+
+.protocol {
+  color: #107ec4;
+}
+.protocol:hover {
+  color: red;
+}
+
+.protocol_body {
+  height: 350px;
+  overflow-y: auto;
+  padding: 0 20px;
+}

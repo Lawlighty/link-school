@@ -1,8 +1,10 @@
 import Head from "next/head";
 import "./MyHead.css";
 import { EllipsisOutlined, SearchOutlined } from "@ant-design/icons";
-import { Input, Menu } from "antd";
+import { Input } from "antd";
 import Link from "next/link";
+import { ModelContext } from "../../models/main";
+import { useContext, useReducer } from "react";
 
 const seo = {
   keywords: "领课学院的关键字",
@@ -11,6 +13,9 @@ const seo = {
 };
 
 export default function MyHead() {
+  // const { model_state, model_dispatch } = useContext(ModelContext);
+
+  console.log;
   return (
     <>
       <Head>

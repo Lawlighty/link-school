@@ -1,37 +1,50 @@
-import { createContext, useReducer } from 'react';
-
+import { createContext, useReducer } from "react";
 
 export const ModelContext = createContext({});
+//actions.types
+export const UPDATE_HEADER_INDEX = "UPDATE_HEADER_INDEX";
+export const UPDATE_HEADER_MORE_INDEX = "UPDATE_HEADER_MORE_INDEX";
 
+const header_state: {
+  header_index: number;
+  header_more_index: number;
+} = {
+  header_index: 0,
+  header_more_index: 0,
+};
 
-const model_state : object = {
+const header_state_reducer = (state: object, action: any) => {
+  switch (action.type) {
+    case UPDATE_HEADER_INDEX:
+      return {
+        ...state,
+        header_index: action.header_index,
+      };
+    case UPDATE_HEADER_MORE_INDEX:
+      return {
+        ...state,
+        header_more_index: action.header_more_index,
+      };
+    default:
+      return state;
+  }
+};
+export const ModelContextComp = (props: any) => {
+  const [headerState, headerStateDispatch] = useReducer(
+    header_state_reducer,
+    header_state
+  );
 
-}
+  const model_state = {
+    headerState: headerState,
+  };
+  const model_dispatch = {
+    headerStateDispatch: headerStateDispatch,
+  };
 
-const model_reducer =(state : object, action : any )=> {
-    switch(action.type){
-        case 1:
-            return{
-                ...state,
-                action
-            }
-        default:
-            return state
-    }
-}
-export const ModelContextComp = (props:any) => {
-    const [modelState, modelDispatch] = useReducer(model_reducer, model_state);
-
-    const _model_state = {
-        modelState: modelState,
-    }
-    const _model_dispatch = {
-        modelDispatch:modelDispatch,
-    }
-
-    return(
-        <ModelContext.Provider value={{_model_state, _model_dispatch}}>
-            {props.children}
-        </ModelContext.Provider>
-    )
-}
+  return (
+    <ModelContext.Provider value={{ model_state, model_dispatch }}>
+      {props.children}
+    </ModelContext.Provider>
+  );
+};
