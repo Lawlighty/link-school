@@ -1,5 +1,5 @@
 .register_box {
-  height: calc(100vh - 68px);
+  height: calc(100vh - 168px);
   position: relative;
   overflow: hidden;
   background: #0661e3;
@@ -11,15 +11,119 @@
   background: #fff;
 }
 
+.center_box .register_form{
+  width: 380px;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  border-radius: 6px;
+  background: #fff;
+  transform: translate(-50%,-56%);
+  transition: all .8s;
+  padding: 0 30px;
+}
+.center_box .register_form .title {
+  font-size: 16px;
+  /* width: 50%; */
+  font-weight: 500;
+  color: #333;
+  text-align: left;
+  display: flex;
+  padding: 20px 0;
+  
+}
+.title .title_tab {
+  flex: 1;
+
+}
+.title .title_tab span {
+  cursor: pointer;
+} 
+.tologin {
+  color: #09f !important;
+  font-size: 13px;
+}
+.register_form_row {
+  height: 40px;
+  margin-top: 12px;
+
+  width: 100%;
+  height: 46px;
+  padding-left: 10px;
+  margin-top: 20px;
+  border-radius: 6px;
+  font-size: 14px;
+  border-color: #e6e6e6;
+  flex: 1;
+}
+.verify_code {
+  display: flex;
+  padding-left: 0;
+  border-radius: 0;
+}
+.input_verify_code{
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+}
+.get_verify_code {
+  height: 46px;
+  color: #fff;
+  background: #2388ec;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+  min-width: 100px;
+}
+
+.protocol_div{
+  margin: 10px 0 20px 0;
+  font-size: 12px !important;
+}
+.protocol_check {
+  font-size: 12px;
+}
 .protocol {
   color: #107ec4;
+  cursor: pointer;
 }
 .protocol:hover {
   color: red;
+}
+.register_form .toregbtn{
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  width: 100%;
+  border-radius: 5px;
+  background: #ccc;
+  padding: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;;
+}
+.register_form .toregbtn:hover{
+  background: #ccc;
+  color: #fff;
+}
+/* .register_form:hover{
+  background: #ccc;
+  color: #fff;
+} */
+.register_form .active{
+  background: #2388ec;
+}
+.register_form .active:hover{
+  background: #2388ec;
+  color: #fff;
 }
 
 .protocol_body {
   height: 350px;
   overflow-y: auto;
   padding: 0 20px;
+}
+.protocol_modal {
+  width: 900px !important;
+  height: 500px;
 }

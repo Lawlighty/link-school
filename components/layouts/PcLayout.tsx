@@ -20,7 +20,9 @@ export default function PcLayout({
         {showFooter ? (
           //展示帮助中心...   是否为黑底
           <MyFooter props={{ showMoreFooter: true, isBlack: true }} />
-        ) : null}
+        ) : (
+          <MyFooter props={{ showMoreFooter: false, isBlack: false }} />
+        )}
       </div>
     </ModelContextComp>
   );

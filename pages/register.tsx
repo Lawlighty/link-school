@@ -1,20 +1,63 @@
 import PcLayout from "../components/layouts/PcLayout";
 import Link from "next/link";
 import "./register.css";
-import { Input, Checkbox, Modal } from "antd";
-import { useState } from "react";
+import { Input, Checkbox, Modal, Button } from "antd";
+import { useState, useEffect } from "react";
+import { timer_clock } from '../config'
 
 export default function Register() {
   const { Search } = Input;
 
-  const [protocolvisible, setProtocolvisible] = useState(false);
-  //获取验证码
-  const onSearch = () => {
-    console.log("获取验证码");
-  };
+  //验证码
+  const [codeString, setCodeString] = useState('获取验证码');
+  //是否发送验证码
+  const [isSendCode, setIsSendCode] = useState(false);
 
-  const onChange = (e) => {
-    console.log(`checked = ${e.target.checked}`);
+  const getVerifyCode=(timer_clock)=>{
+    //验证信息
+    if(1){
+      setIsSendCode(true)
+      setCodeString('60')
+      
+      // //倒计时
+      // let t = setInterval(function () {
+      //     countdown()
+      // }, 1000)
+    }
+    
+    
+  }
+  
+
+  const countdown =()=>{
+    if (parseInt(codeString) == 0) {
+          setCodeString('重新获取')
+          setIsSendCode(false)
+          // clearInterval(t);
+      }else{
+        setCodeString('60')
+        
+      }
+  }
+  useEffect(()=>{
+    console.log('现在的codeString==>',codeString)
+    countdown()
+
+  }, [codeString])
+
+  
+
+  //是否勾选
+  const [isread, setIsread] = useState(false);
+  const onChangeIsRead = (e:any) => {
+    setIsread(e.target.checked)
+  }
+  //是否展示协议
+  const [protocolvisible, setProtocolvisible] = useState(false);
+  
+
+  const onChange = (e:any) => {
+    setProtocolvisible(e.target.checked)
   };
 
   return (
@@ -23,36 +66,52 @@ export default function Register() {
         <div className="center_box">
           <div className="register_form">
             <div className="title">
-              <div>注册用户</div>
+              <div className="title_tab"><span>注册用户</span></div>
               <Link href="/login">
-                <a>已有账号，立即登录</a>
+                <a className='tologin'>已有账号，立即登录</a>
               </Link>
             </div>
-            <Input placeholder="请输入手机号" />
-            <Search
+            <Input placeholder="请输入手机号" className="register_form_row"/>
+            <div className="register_form_row verify_code">
+              <Input placeholder="请输入手机验证码" className="input_verify_code"/>
+            <Button type="primary" className="get_verify_code" disabled={isSendCode} onClick={getVerifyCode}>{ codeString }</Button>
+            </div>
+            {/* <Search
+              className="register_form_row"
               placeholder="请输入手机验证码"
               allowClear
               enterButton="获取验证码"
               size="large"
               onSearch={onSearch}
-            />
-            <Input placeholder="6-20位密码，可用数字/字母/符号组合" />
-            <Input placeholder="确认密码" />
-            <Input prefix="推荐码" placeholder="没有可不填" />
-            <Checkbox onChange={onChange}>
-              我已经阅读并同意{" "}
+            /> */}
+            <Input placeholder="6-20位密码，可用数字/字母/符号组合"  className="register_form_row"/>
+            <Input placeholder="确认密码"  className="register_form_row"/>
+            <Input prefix="推荐码" placeholder="没有可不填"  className="register_form_row"/>
+            <div className="protocol_div">
+              <Checkbox onChange={onChangeIsRead} className="protocol_check">
+                我已经阅读并同意{" "}
+                
+              </Checkbox>
               <span
-                onClick={() => setProtocolvisible(true)}
-                className="protocol"
-              >
-                《用户协议》
+                  onClick={() => setProtocolvisible(true)}
+                  className="protocol"
+                >
+                  《用户协议》
               </span>
-            </Checkbox>
+
+            </div>
+
+            <Button type="primary" className={[isread?'active':'', 'toregbtn'].join(' ')} disabled={!isread}>注册</Button>
+            
             <Modal
+              className="protocol_modal"
               title="用户协议"
               visible={protocolvisible}
               onOk={() => setProtocolvisible(false)}
               onCancel={() => setProtocolvisible(false)}
+              closable={false}
+              okText='确认'
+              cancelText='取消'
             >
               <div className="protocol_body">
                 <p> 一、用户协议总则</p>
