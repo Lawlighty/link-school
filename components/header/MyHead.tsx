@@ -12,7 +12,7 @@ const seo = {
   title: "领课学院",
 };
 
-export default function MyHead() {
+export default function MyHead({isLogin}:{isLogin:boolean}) {
   // const { model_state, model_dispatch } = useContext(ModelContext);
 
   console.log;
@@ -141,14 +141,40 @@ export default function MyHead() {
               >
                 <div className="item">讲师入驻</div>
               </a>
-              <div>
-                <span className="login item">登录</span>
-                <Link href="/register">
-                  <a className="">
-                    <div className="registers item">注册</div>
-                  </a>
-                </Link>
-              </div>
+              {
+                !isLogin?
+                (
+                  <div>
+                    <Link href="/login">
+                      <a className="">
+                      <span className="login item">登录</span>
+                      </a>
+                    </Link>
+                    <Link href="/register">
+                      <a className="">
+                        <div className="registers item">注册</div>
+                      </a>
+                    </Link>
+                  </div>
+                )
+                :
+                (
+                  <div>
+                    <Link href="/account/message">
+                      <a className="">
+                        <img src="/imgs/邮件.png" alt="" className="item"/>
+                      {/* <span className="login item">通知</span> */}
+                      </a>
+                    </Link>
+                    <Link href="/account/info">
+                      <a className="">
+                        <img src="/imgs/头像.png" alt="" className="item"/>
+                      </a>
+                    </Link>
+                  </div>
+                )
+              }
+              
             </div>
           </div>
         </div>

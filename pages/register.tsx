@@ -1,67 +1,120 @@
 import PcLayout from "../components/layouts/PcLayout";
 import Link from "next/link";
 import "./register.css";
-import { Input, Checkbox, Modal, Button } from "antd";
+import { Input, Checkbox, Modal, Button, message } from "antd";
 import { useState, useEffect } from "react";
 import { timer_clock } from '../config'
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router'
+
+const { confirm } = Modal;
+
+let phone_reg = /^[1][3,4,5,7,8][0-9]{9}$/;;
+let psw_reg = /((?=.*[a-z])|(?=.*\d)|(?=.*[#@!~%^&*]))[a-z\d#@!~%^&*]{6,20}/i
 
 export default function Register() {
+  const router = useRouter()
   const { Search } = Input;
 
+  //手机号
+  const [ phoneNumber, setPhoneNumber ] = useState('');
   //验证码
-  const [codeString, setCodeString] = useState('获取验证码');
-  //是否发送验证码
-  const [isSendCode, setIsSendCode] = useState(false);
-
-  const getVerifyCode=(timer_clock)=>{
-    //验证信息
-    if(1){
-      setIsSendCode(true)
-      setCodeString('60')
-      
-      // //倒计时
-      // let t = setInterval(function () {
-      //     countdown()
-      // }, 1000)
-    }
-    
-    
-  }
-  
-
-  const countdown =()=>{
-    if (parseInt(codeString) == 0) {
-          setCodeString('重新获取')
-          setIsSendCode(false)
-          // clearInterval(t);
-      }else{
-        setCodeString('60')
-        
-      }
-  }
-  useEffect(()=>{
-    console.log('现在的codeString==>',codeString)
-    countdown()
-
-  }, [codeString])
-
-  
-
+  const [ verifyCode, setVerifyCode ] = useState('');
+  //密码
+  const [ passWord, setPassWord ] = useState('');
+  //确认密码
+  const [ repassWord, setRePassWord ] = useState('');
+  //推荐码
+  const [ referralCode, setReferralCode] = useState('');
   //是否勾选
   const [isread, setIsread] = useState(false);
   const onChangeIsRead = (e:any) => {
     setIsread(e.target.checked)
   }
+
+  //验证码倒计时
+  const [codeString, setCodeString] = useState('获取验证码');
+  //是否发送验证码
+  const [isSendCode, setIsSendCode] = useState(false);
+
+  const getVerifyCode=()=>{
+    //验证信息
+    if(phoneNumber&&phone_reg.test(phoneNumber)){
+      setIsSendCode(true)
+      setCodeString(timer_clock+'')
+    }else{
+      message.error('请输入正确的手机号!');
+    } 
+  }
+  
+  useEffect(()=>{
+    if(isSendCode){
+      let timerId = null;
+      const run = () => {
+        if (parseInt(codeString) <= 0) {
+          setCodeString('重新获取')
+          setIsSendCode(false)
+          return;
+        }
+        setCodeString(parseInt(codeString)  - 1+'');
+        timerId = setTimeout(run, 1000);
+      };
+      timerId = setTimeout(run, 1000);
+      return () => {
+        timerId && clearTimeout(timerId);
+      };
+    }
+  }, [codeString,isSendCode])
+
   //是否展示协议
   const [protocolvisible, setProtocolvisible] = useState(false);
   
 
-  const onChange = (e:any) => {
-    setProtocolvisible(e.target.checked)
-  };
-
+  //注册
+  const tologin = ()=>{
+    //表单验证
+    if(!phoneNumber||!phone_reg.test(phoneNumber)){
+      console.log('phoneNumber==>',phoneNumber)
+      message.error('请输入正确的手机号!');
+      return
+    }
+    if(!verifyCode){
+      console.log('verifyCode==>',verifyCode)
+      message.error('请输入验证码!');
+      return
+    }
+    if(!passWord||!psw_reg.test(passWord)){
+      console.log('passWord==>',passWord)
+      message.error('请输入正确的密码!');
+      return
+    }
+    if(!repassWord||!psw_reg.test(repassWord)||passWord!=repassWord){
+      console.log('repassWord==>',repassWord)
+      message.error('请输入正确的确认密码!');
+      return
+    }
+    //后台验证
+    if(1){
+      //注册提示
+      confirm({
+        style:{marginTop:200},
+        title: '注册成功!',
+        icon: <ExclamationCircleOutlined />,
+        okText: '立即登录',
+        cancelText: '取消',
+        onOk() {
+          //去首页
+          router.push('/')
+        },
+        onCancel() {
+          //去登录界面
+          router.push('/login')
+        },
+      });
+    }
+  }
   return (
-    <PcLayout showFooter={false}>
+    <PcLayout showFooter={false} >
       <div className="register_box">
         <div className="center_box">
           <div className="register_form">
@@ -71,22 +124,14 @@ export default function Register() {
                 <a className='tologin'>已有账号，立即登录</a>
               </Link>
             </div>
-            <Input placeholder="请输入手机号" className="register_form_row"/>
+            <Input placeholder="请输入手机号" className="register_form_row" onChange={(e)=>{setPhoneNumber(e.target.value)}}/>
             <div className="register_form_row verify_code">
-              <Input placeholder="请输入手机验证码" className="input_verify_code"/>
-            <Button type="primary" className="get_verify_code" disabled={isSendCode} onClick={getVerifyCode}>{ codeString }</Button>
+              <Input placeholder="请输入手机验证码" className="input_verify_code" onChange={(e)=>{setVerifyCode(e.target.value)}}/>
+              <Button type="primary" className="get_verify_code" disabled={isSendCode} onClick={getVerifyCode}>{ codeString }</Button>
             </div>
-            {/* <Search
-              className="register_form_row"
-              placeholder="请输入手机验证码"
-              allowClear
-              enterButton="获取验证码"
-              size="large"
-              onSearch={onSearch}
-            /> */}
-            <Input placeholder="6-20位密码，可用数字/字母/符号组合"  className="register_form_row"/>
-            <Input placeholder="确认密码"  className="register_form_row"/>
-            <Input prefix="推荐码" placeholder="没有可不填"  className="register_form_row"/>
+            <Input.Password placeholder="6-20位密码，可用数字/字母/符号组合"  className="register_form_row" onChange={(e)=>{setPassWord(e.target.value)}}/>
+            <Input.Password placeholder="确认密码"  className="register_form_row" onChange={(e)=>{setRePassWord(e.target.value)}}/>
+            <Input prefix="推荐码" placeholder="没有可不填"  className="register_form_row" onChange={(e)=>{setReferralCode(e.target.value)}}/>
             <div className="protocol_div">
               <Checkbox onChange={onChangeIsRead} className="protocol_check">
                 我已经阅读并同意{" "}
@@ -101,7 +146,7 @@ export default function Register() {
 
             </div>
 
-            <Button type="primary" className={[isread?'active':'', 'toregbtn'].join(' ')} disabled={!isread}>注册</Button>
+            <Button type="primary" className={[isread?'active':'', 'toregbtn'].join(' ')} disabled={!isread} onClick={tologin}>注册</Button>
             
             <Modal
               className="protocol_modal"

@@ -3,9 +3,9 @@ import FooterContent from './FooterContent/FooterContent'
 import "./MyFooter.css";
 
 export default function MyFooter({ props }: { props: object }) {
-  useEffect(() => {
-    console.log("MyFooter 页面的props", props);
-  });
+  // useEffect(() => {
+  //   console.log("MyFooter 页面的props", props);
+  // });
 
   return (
     <div>
