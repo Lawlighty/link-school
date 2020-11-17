@@ -43,7 +43,7 @@
   color: #09f !important;
   font-size: 13px;
 }
-.register_form_row {
+/* .register_form_row {
   height: 40px;
   margin-top: 12px;
 
@@ -55,15 +55,15 @@
   font-size: 14px;
   border-color: #e6e6e6;
   flex: 1;
-}
+} */
 .verify_code {
   display: flex;
-  padding-left: 0;
-  border-radius: 0;
+  padding-left: 0 !important;
+  border-radius: 0!important;
 }
 .input_verify_code{
-  border-top-left-radius: 6px;
-  border-bottom-left-radius: 6px;
+  border-top-left-radius: 6px !important;
+  border-bottom-left-radius: 6px !important;
 }
 .get_verify_code {
   height: 46px;
@@ -126,4 +126,8 @@
 .protocol_modal {
   width: 900px !important;
   height: 500px;
+}
+.protocol_check .ant-checkbox{
+  position: relative;
+  top: -1px;
 }

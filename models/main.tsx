@@ -1,9 +1,16 @@
-import { createContext, useReducer } from "react";
+import { createContext, Dispatch, useReducer } from 'react';
+type TModelContext = {
+  model_state: {
+    headerState: { header_index: number; header_more_index: number };
+  };
+  model_dispatch: { headerStateDispatch: Dispatch<any> };
+};
 
-export const ModelContext = createContext({});
+
+export const ModelContext = createContext<TModelContext>(null);
 //actions.types
-export const UPDATE_HEADER_INDEX = "UPDATE_HEADER_INDEX";
-export const UPDATE_HEADER_MORE_INDEX = "UPDATE_HEADER_MORE_INDEX";
+export const UPDATE_HEADER_INDEX = 'UPDATE_HEADER_INDEX';
+export const UPDATE_HEADER_MORE_INDEX = 'UPDATE_HEADER_MORE_INDEX';
 
 const header_state: {
   header_index: number;
@@ -32,10 +39,10 @@ const header_state_reducer = (state: object, action: any) => {
 export const ModelContextComp = (props: any) => {
   const [headerState, headerStateDispatch] = useReducer(
     header_state_reducer,
-    header_state
+    header_state,
   );
 
-  const model_state = {
+  const model_state : { headerState:any}= {
     headerState: headerState,
   };
   const model_dispatch = {

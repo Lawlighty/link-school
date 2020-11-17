@@ -1,6 +1,5 @@
 import PcLayout from "../components/layouts/PcLayout";
 import Link from "next/link";
-import "./register.css";
 import { Input, Checkbox, Modal, Button, message } from "antd";
 import { useState, useEffect } from "react";
 import { timer_clock } from '../config'
@@ -114,30 +113,68 @@ export default function Reset() {
     }
   }
   return (
-    <PcLayout showFooter={false} >
-      <div className="register_box">
-        <div className="center_box">
-          <div className="register_form">
-            <div className="title">
-              <div className="title_tab"><span>重置密码</span></div>
-              <Link href="/login">
-                <a className='tologin'>返回登录</a>
-              </Link>
-            </div>
-            <Input placeholder="请输入手机号" className="register_form_row" onChange={(e)=>{setPhoneNumber(e.target.value)}}/>
-            <div className="register_form_row verify_code">
-              <Input placeholder="请输入手机验证码" className="input_verify_code" onChange={(e)=>{setVerifyCode(e.target.value)}}/>
-              <Button type="primary" className="get_verify_code" disabled={isSendCode} onClick={getVerifyCode}>{ codeString }</Button>
-            </div>
-            <Input.Password placeholder="6-20位新密码，可用数字/字母/符号组合"  className="register_form_row" onChange={(e)=>{setPassWord(e.target.value)}}/>
-            <Input.Password placeholder="确认新密码"  className="register_form_row" onChange={(e)=>{setRePassWord(e.target.value)}}/>
+      <PcLayout showFooter={false} isBlack={false}>
+          <div className="register_box">
+              <div className="center_box">
+                  <div className="register_form">
+                      <div className="title">
+                          <div className="title_tab">
+                              <span>重置密码</span>
+                          </div>
+                          <Link href="/login">
+                              <a className="tologin">返回登录</a>
+                          </Link>
+                      </div>
+                      <Input
+                          placeholder="请输入手机号"
+                          className="register_form_row"
+                          onChange={(e) => {
+                              setPhoneNumber(e.target.value);
+                          }}
+                      />
+                      <div className="register_form_row verify_code">
+                          <Input
+                              placeholder="请输入手机验证码"
+                              className="input_verify_code"
+                              onChange={(e) => {
+                                  setVerifyCode(e.target.value);
+                              }}
+                          />
+                          <Button
+                              type="primary"
+                              className="get_verify_code"
+                              disabled={isSendCode}
+                              onClick={getVerifyCode}
+                          >
+                              {codeString}
+                          </Button>
+                      </div>
+                      <Input.Password
+                          placeholder="6-20位新密码，可用数字/字母/符号组合"
+                          className="register_form_row"
+                          onChange={(e) => {
+                              setPassWord(e.target.value);
+                          }}
+                      />
+                      <Input.Password
+                          placeholder="确认新密码"
+                          className="register_form_row"
+                          onChange={(e) => {
+                              setRePassWord(e.target.value);
+                          }}
+                      />
 
-            <div style={{ marginTop:20 }}></div>
-            <Button type="primary" className= 'toregbtn active' onClick={toRest}>确定</Button>
-            
-            </div>
-        </div>
-      </div>
-    </PcLayout>
+                      <div style={{ marginTop: 20 }}></div>
+                      <Button
+                          type="primary"
+                          className="toregbtn active"
+                          onClick={toRest}
+                      >
+                          确定
+                      </Button>
+                  </div>
+              </div>
+          </div>
+      </PcLayout>
   );
 }
