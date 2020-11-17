@@ -25,7 +25,7 @@ export default function PcLayout({
         <HeaderIndexer.Provider initialState={0}>
             <ModelContextComp>
                 <div className={styles.container}>
-                    <MyHead isLogin={false}></MyHead>
+                    <MyHead isLogin={true}></MyHead>
 
                     <main>{children}</main>
 

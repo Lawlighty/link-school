@@ -54,9 +54,10 @@ export default function Login() {
   }, [codeString,isSendCode])
 
   const toLogin = ()=>{
-    if(!phoneNumber||!phone_reg.test(phoneNumber)){
-      message.error('请输入正确的手机号!');
-    }
+      if (!phoneNumber) {
+          //||!phone_reg.test(phoneNumber)
+          message.error('请输入正确的手机号!');
+      }
     else{
       if(loginTab===0){
         //密码登录

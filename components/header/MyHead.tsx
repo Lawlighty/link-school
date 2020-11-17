@@ -1,6 +1,10 @@
 import Head from "next/head";
 import "./MyHead.css";
-import { EllipsisOutlined, SearchOutlined } from "@ant-design/icons";
+import {
+    EllipsisOutlined,
+    SearchOutlined,
+    CaretUpOutlined,
+} from '@ant-design/icons';
 import { Input } from "antd";
 import Link from "next/link";
 import { ModelContext,UPDATE_HEADER_INDEX } from "../../models/main";
@@ -91,36 +95,36 @@ export default function MyHead({ isLogin }: { isLogin: boolean }) {
                       </div>
                       <ul className="h_nav_ul clearfix">
                           {/* <Link href="/"> */}
-                              <a
-                                  //   href="#!"
-                                  target="_self"
-                                  onClick={() => headerSkip(0)}
+                          <a
+                              //   href="#!"
+                              target="_self"
+                              onClick={() => headerSkip(0)}
+                          >
+                              <li
+                                  className={[
+                                      'nav_item',
+                                      header_index === 0 ? 'active' : '',
+                                  ].join(' ')}
                               >
-                                  <li
-                                      className={[
-                                          'nav_item',
-                                          header_index === 0 ? 'active' : '',
-                                      ].join(' ')}
-                                  >
-                                      首页
-                                  </li>
-                              </a>
+                                  首页
+                              </li>
+                          </a>
                           {/* </Link> */}
                           {/* <Link href="/list"> */}
-                              <a
-                                //   href="#!"
-                                  target="_self"
-                                  onClick={() => headerSkip(1)}
+                          <a
+                              //   href="#!"
+                              target="_self"
+                              onClick={() => headerSkip(1)}
+                          >
+                              <li
+                                  className={[
+                                      'nav_item',
+                                      header_index === 1 ? 'active' : '',
+                                  ].join(' ')}
                               >
-                                  <li
-                                      className={[
-                                          'nav_item',
-                                          header_index === 1 ? 'active' : '',
-                                      ].join(' ')}
-                                  >
-                                      视频
-                                  </li>
-                              </a>
+                                  视频
+                              </li>
+                          </a>
                           {/* </Link> */}
                           <a href="/resource" target="_self">
                               <li
@@ -142,105 +146,60 @@ export default function MyHead({ isLogin }: { isLogin: boolean }) {
                                   论坛
                               </li>
                           </a>
-                          {/* <a href="/live" target="_self">
-                <li
-                  className={[
-                    'nav_item',
-                    header_index === 2
-                      ? 'active'
-                      : '',
-                  ].join(' ')}
-                >直播中心</li>
-              </a> */}
-                          {/* <a href="/exam" target="_self">
-                <li
-                  className={[
-                    'nav_item',
-                    header_index === 3
-                      ? 'active'
-                      : '',
-                  ].join(' ')}
-                >试卷中心</li>
-              </a> */}
                           <span>
                               <li
+                                  style={{ display: 'none' }}
                                   className="nav_item more_box"
                                   aria-describedby="el-popover-3303"
                               >
                                   <EllipsisOutlined className="el-icon-more" />
                                   <div className="clearfix more_items">
                                       <div className="div1out">
-                                          <div
-                                              className="div1"
-                                              data-v-af389e24=""
-                                          ></div>
+                                          <div className="div1"></div>
                                       </div>
-                                      <ul
-                                          className="clearfix more_items_ul"
-                                          data-v-af389e24=""
-                                      >
+                                      <ul className="clearfix more_items_ul">
                                           <a
                                               href="/info"
                                               target="_self"
-                                              data-v-af389e24=""
                                               className=""
                                           >
-                                              <li
-                                                  className="more_item"
-                                                  data-v-af389e24=""
-                                              >
+                                              <li className="more_item">
                                                   资讯中心
                                               </li>
                                           </a>
                                           <a
                                               href="/recruit"
                                               target="_blank"
-                                              data-v-af389e24=""
                                               className=""
                                           >
-                                              <li
-                                                  className="more_item"
-                                                  data-v-af389e24=""
-                                              >
+                                              <li className="more_item">
                                                   讲师招募
                                               </li>
                                           </a>
                                           <a
                                               href="/blog"
                                               target="_blank"
-                                              data-v-af389e24=""
                                               className=""
                                           >
-                                              <li
-                                                  className="more_item"
-                                                  data-v-af389e24=""
-                                              >
+                                              <li className="more_item">
                                                   博客中心
                                               </li>
                                           </a>
                                           <a
                                               href="/question"
                                               target="_blank"
-                                              data-v-af389e24=""
                                               className=""
                                           >
-                                              <li
-                                                  className="more_item"
-                                                  data-v-af389e24=""
-                                              >
+                                              <li className="more_item">
                                                   知识问答
                                               </li>
                                           </a>
                                           <a
                                               href="/vip"
                                               target="_blank"
-                                              data-v-af389e24=""
                                               className=""
                                           >
-                                              <li
-                                                  className="more_item"
-                                                  data-v-af389e24=""
-                                              >
+                                              <li className="more_item">
                                                   超级会员
                                               </li>
                                           </a>
@@ -298,15 +257,45 @@ export default function MyHead({ isLogin }: { isLogin: boolean }) {
                                           {/* <span className="login item">通知</span> */}
                                       </a>
                                   </Link>
-                                  <Link href="/account/info">
-                                      <a className="">
-                                          <img
-                                              src="/imgs/头像.png"
-                                              alt=""
-                                              className="item"
-                                          />
-                                      </a>
-                                  </Link>
+
+                                  <div className="mine">
+                                      <img
+                                          src="/imgs/头像.png"
+                                          alt=""
+                                          className="item"
+                                          onClick={() => {
+                                              router.push('/account/info');
+                                          }}
+                                      />
+                                      <div className="mine_more_items">
+                                          <ul
+                                              className="clearfix more_items_ul"
+                                              style={{
+                                                  position: 'relative',
+                                              }}
+                                          >
+                                              <CaretUpOutlined className="mine_circle" />
+                                              <a
+                                                  href="/vip"
+                                                  target="_blank"
+                                                  className=""
+                                              >
+                                                  <li className="more_item">
+                                                      超级会员
+                                                  </li>
+                                              </a>
+                                              <Link href="/login">
+                                                  <a
+                                                      className=""
+                                                  >
+                                                      <li className="more_item">
+                                                          退出登录
+                                                      </li>
+                                                  </a>
+                                              </Link>
+                                          </ul>
+                                      </div>
+                                  </div>
                               </div>
                           )}
                       </div>

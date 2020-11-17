@@ -3,7 +3,8 @@
   width: 100%;
 }
 .h_header {
-  background: #fff;
+  /* background: #fff; */
+  background: rgb(253,253,253);
   position: relative;
   height: 66px;
   position: fixed;
@@ -55,10 +56,25 @@
 .more_items {
   display: none;
 }
+.mine_more_items {
+  display: none;
+    text-align: center;
+    line-height: 50px;
+    cursor: pointer;
+    z-index: 999;
+    position: absolute;
+    left: -27px;
+    background: #fff;
+    top: 66px;
+    width: 112px;
+}
 .more_box {
   position: relative;
 }
 .more_box:hover .more_items {
+  display: block;
+}
+.mine:hover .mine_more_items{
   display: block;
 }
 .more_box .el-icon-more {
@@ -67,6 +83,10 @@
   top: 10px;
 }
 
+.mine {
+  display: inline-block;
+  position: relative;
+}
 .nav-right {
   width: 460px;
   height: 66px;
@@ -154,13 +174,16 @@
 .more_items_ul {
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
 }
-.more_items .more_item {
+.more_items_ul  a{
+  color: #333;
+}
+ .more_item {
   border-bottom: 1px solid #ebebeb;
   /* margin-bottom: 3px; */
   /* box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); */
 }
-.more_items .more_item.active,
-.more_items .more_item:hover {
+ .more_item.active,
+ .more_item:hover {
   background: #409eff;
   color: #fff;
 }
@@ -176,7 +199,14 @@
   border-style: solid;
   border-width: 0px 8px 8px 8px;
   border-color: transparent transparent #fff transparent;
+  /* border-color: transparent transparent red transparent; */
   width: 0px;
   height: 0px;
   margin: 0 auto;
+}
+.mine_circle{
+  position: absolute;
+    left: 49px;
+    top: -10px;
+    color: #fff;
 }
