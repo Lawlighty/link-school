@@ -1,15 +1,12 @@
 import PcLayout from "../components/layouts/PcLayout";
 import Link from "next/link";
-import { Input, Checkbox, Modal, Button, message } from "antd";
+import { Input, Modal, Button, message } from "antd";
 import { useState, useEffect } from "react";
-import { timer_clock } from '../config'
+import { timer_clock, phone_reg, psw_reg } from '../config';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 
 const { confirm } = Modal;
-
-let phone_reg = /^[1][3,4,5,7,8][0-9]{9}$/;;
-let psw_reg = /((?=.*[a-z])|(?=.*\d)|(?=.*[#@!~%^&*]))[a-z\d#@!~%^&*]{6,20}/i
 
 export default function Reset() {
   const router = useRouter()
@@ -113,7 +110,7 @@ export default function Reset() {
     }
   }
   return (
-      <PcLayout showFooter={false} isBlack={false}>
+      <PcLayout showHeader customSeo={null} showFooter={false} isBlack={false}>
           <div className="register_box">
               <div className="center_box">
                   <div className="register_form">
@@ -146,7 +143,9 @@ export default function Reset() {
                               disabled={isSendCode}
                               onClick={getVerifyCode}
                           >
-                              {codeString}
+                              {parseInt(codeString)
+                                  ? codeString + ' s'
+                                  : codeString}
                           </Button>
                       </div>
                       <Input.Password

@@ -2,13 +2,18 @@ import PcLayout from "../../components/layouts/PcLayout";
 import { withRouter } from 'next/router';
 // import './list_index.css';
 import { Card, Avatar, Pagination } from 'antd';
-import { useState } from 'react'
+import { useState } from 'react';
 import {
     UserOutlined,
 } from '@ant-design/icons';
 
-
 const List = ({ router }) => {
+
+    // useEffect(() => {
+    //     const headerIndexer = HeaderIndexer.useContainer();
+    //     headerIndexer.changeCurrentHeaderIndex(2);
+    // }, []);
+
     console.log('视频界面的router', router);
     const query = router.query
     console.log('视频界面的query', query);
@@ -190,7 +195,12 @@ const List = ({ router }) => {
         console.log('page',page); 
     }
     return (
-        <PcLayout showFooter={true} isBlack={false}>
+        <PcLayout
+            showHeader={true}
+            customSeo={null}
+            showFooter={true}
+            isBlack={false}
+        >
             <div className="list_page">
                 <div className="header_list">
                     <div className="list_content">
@@ -274,6 +284,9 @@ const List = ({ router }) => {
                             {boutique_reco.map((item) => (
                                 <div className="zone_body_item" key={item.name}>
                                     <Card
+                                        onClick={() => {
+                                            router.push('view/123');
+                                        }}
                                         hoverable
                                         style={{ width: '100%' }}
                                         cover={

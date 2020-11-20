@@ -1,0 +1,41 @@
+
+.account_left{
+    width: 168px;
+    display: inline-block;
+    margin-right: 20px;
+}
+.account_left .menu_panel {
+    background-color: #fff;
+    margin-bottom: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.account_left .menu_panel .title {
+    color: #333;
+    line-height: 60px;
+    border-bottom: 1px solid #f2f2f2;
+    padding-right: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.account_left .menu_panel .title .iconfont {
+    width: 20px;
+    margin-right: 8px;
+}
+.account_left .menus li {
+    line-height: 40px;
+    text-align: center;
+}
+.account_left .menus a {
+    color: #333;
+    font-size: 14px;
+}
+.account_left .menus a:hover {
+    color: #d51423;
+}
+.account_left .menus a.on {
+    color: #d51423;
+}

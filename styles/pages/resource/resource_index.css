@@ -14,6 +14,7 @@
 .resource_page .content_ul {
     display: inline-block;
     margin-top: 23px;
+    margin-block-end: 1em !important;
 }
 .resource_page .content_ul li {
     float: left;

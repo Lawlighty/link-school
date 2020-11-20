@@ -48,6 +48,41 @@ li {
   width: 100% !important;
 }
 
+.c_blue {
+    color: #107ec4;
+}
+.c_red {
+    color: #d51423;
+}
+.c_333 {
+    color: #333;
+}
+.c_999 {
+    color: #999;
+}
+.font16 {
+    font-size: 16px;
+}
+.font_b {
+    font-weight: 700;
+}
+.mgt20 {
+    margin-top: 20px;
+}
+.col {
+    width: 4px;
+    height: 14px;
+    background: #333;
+    display: inline-block;
+}
+
+.c_gold {
+    color: #ca9e70;
+}
+.font_12{
+  font-size: 12px;
+}
+
 /* 登录注册输入框 */
 .register_form_row {
   height: 40px  !important;
@@ -76,4 +111,7 @@ li {
   display: flex;
   padding-left: 0 !important;
   border-radius: 0!important;
+}
+.relative{
+  position: relative;
 }

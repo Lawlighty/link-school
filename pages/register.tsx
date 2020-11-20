@@ -2,16 +2,15 @@ import PcLayout from "../components/layouts/PcLayout";
 import Link from "next/link";
 import { Input, Checkbox, Modal, Button, message } from "antd";
 import { useState, useEffect } from "react";
-import { timer_clock } from '../config'
+import { timer_clock, psw_reg, phone_reg } from '../config';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
+import AccountState from '../store/accountinfo';
 
 const { confirm } = Modal;
 
-let phone_reg = /^[1][3,4,5,7,8][0-9]{9}$/;;
-let psw_reg = /((?=.*[a-z])|(?=.*\d)|(?=.*[#@!~%^&*]))[a-z\d#@!~%^&*]{6,20}/i
-
 export default function Register() {
+ const accountState = AccountState.useContainer();
   const router = useRouter()
   const { Search } = Input;
 
@@ -102,18 +101,29 @@ export default function Register() {
         okText: '立即登录',
         cancelText: '取消',
         onOk() {
-          //去首页
-          router.push('/')
+            //去首页
+            router.push('/');
+            //更新全局accountInfo
+            let now_accountinfo = {
+                isLogin: true,
+                phoneNumber: phoneNumber,
+                userName: '',
+                profilephoto:
+                    'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg',
+                gender: 2,
+                age: null,
+            };
+            accountState.setAccount(now_accountinfo);
         },
-        onCancel() {
-          //去登录界面
-          router.push('/login')
-        },
+          onCancel() {
+              //去登录界面
+              router.push('/login');
+          },
       });
     }
   }
   return (
-      <PcLayout showFooter={false} isBlack={false}>
+      <PcLayout showHeader customSeo={null} showFooter={false} isBlack={false}>
           <div className="register_box">
               <div className="center_box">
                   <div className="register_form">
@@ -146,7 +156,9 @@ export default function Register() {
                               disabled={isSendCode}
                               onClick={getVerifyCode}
                           >
-                              {codeString}
+                              {parseInt(codeString)
+                                  ? codeString + ' s'
+                                  : codeString}
                           </Button>
                       </div>
                       <Input.Password
@@ -336,7 +348,7 @@ export default function Register() {
                               </p>
                               <p>七、其他约定</p>
                               <p>
-                                  1、用户同意因本平台服务产生的任何争议均适用中华人民共和国法律，相关争议任何一方可向领课科技住所地人民法院提起诉讼解决。
+                                  1、用户同意因本平台服务产生的任何争议均适用中华人民共和国法律，相关争议任何一方可向极课科技住所地人民法院提起诉讼解决。
                               </p>
                               <p>
                                   2、本协议中的标题仅为方便而设，不影响对于条款本身的解释。本协议中的任何条款无论因何种原因完全或部分无效或不具有执行力，其余条款仍应具有约束力。

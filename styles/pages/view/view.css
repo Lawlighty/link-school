@@ -1,0 +1,298 @@
+.view_page{
+    background: #f5f5f5;
+}
+.view_page .detail_video{
+    background: #333;
+}
+.view_page .detail_video .video_content{
+    width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+}
+.view_page .video_body .win_box {
+    overflow: hidden;
+    float: left;
+    width: 1120px;
+    height: 622px;
+    margin: 5px 0;
+    border-radius: 8px;
+    border: 5px solid #000;
+}
+.view_page .video_body .video_info {
+    position: relative;
+    z-index: 41;
+    float: right;
+    padding-top: 20px;
+    height: 622px;
+    background-color: #333;
+    color: #ccc;
+}
+.view_page .video_body .video_info .video_info_tab:first {
+    margin-top:10px;
+}
+.view_page .video_body .video_info .video_info_tab {
+    margin-bottom:20px;
+    padding: 20px;
+    cursor: pointer;
+}
+.view_page .video_body .video_info .video_info_tab:hover{
+    background:#000
+}
+.view_page .video_body .video_info .icon{
+    font-size:30px;
+    color: #ccc;
+}
+
+.view_page .detail_box{
+    padding-bottom: 50px;
+}
+.view_page .detail_info {
+    margin: 20px auto 60px;
+    width: 1200px;
+}
+
+.view_page .detail_info .layout_left {
+    width: 920px;
+}
+
+.view_page .course_tab {
+    padding-left: 30px;
+    background: #fff;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.view_page .course_tab li {
+    float: left;
+    height: 66px;
+    line-height: 66px;
+    margin-right: 80px;
+}
+.view_page .course_tab li a {
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+}
+.view_page .course_tab li.on {
+    border-bottom: 2px solid #d51423;
+}
+.view_page .course_tab li.on a {
+    color: #d51423;
+}
+.view_page .collect_btn {
+    color: #666;
+    float: right;
+    height: 36px;
+    line-height: 36px;
+    margin-right: 10px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+.view_page .collect_btn img{
+    width: 20px
+}
+.view_page .collect_btn.on{
+    color: #d51423;
+}
+.detail_box .content_info {
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    min-height: 400px;
+    margin-top: 25px;
+}
+.detail_box .content_info .introduce {
+    font-size: 14px;
+    line-height: 30px;
+    color: #333;
+    padding-left: 8px;
+}
+.detail_box .content_info .leftLine{
+    border-left: 4px solid #333;
+    padding-left: 20px;
+}
+.detail_box .layout_right {
+    width: 260px;
+    float: right;
+}
+.detail_box .teacher_info {
+    background: #fff;
+    border-radius: 8px;
+    position: relative;
+    min-height: 180px;
+}
+.detail_box .teacher_info .head {
+    display: block;
+    line-height: 60px;
+    height: 60px;
+    padding-left: 20px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #e4e4e4;
+}
+.detail_box .teacher_msg  {
+   padding: 10px;
+}
+.teacher_name>a {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+}
+.teacher_name>a:hover{
+    color: #d51423;
+}
+.detail_box .teacher_name{
+    flex: 1;
+    text-align: center;
+}
+.detail_box .teacher_info .info_box{
+    margin-top: 10px;
+}
+
+.view_page .layout_right .recommend_box{
+    color: #333;
+    background: #fff;
+    margin-top: 30px;
+    border-radius: 8px;
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+.view_page .recommend_box .header {
+    padding-left: 20px;
+    line-height: 60px;
+    border-bottom: 1px solid #e4e4e4;
+}
+.view_page .recommend_box .course_item {
+    padding: 20px 20px 0;
+    display: flex;
+    cursor: pointer;
+}
+.view_page .recommend_box .img_box img {
+    width: 120px;
+    height: 60px;
+}
+.view_page .recommend_box .course_info {
+    flex: 1;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.view_page .course_info_bottom {
+    flex: 1;
+    justify-content: flex-end;
+    display: flex;
+    flex-direction: column;
+}
+.view_page .recommend_box .course_text {
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.content_info .content_item{
+    margin-left: 10px;
+}
+.content_info .content_item_item{
+    height: 46px;
+    line-height: 46px;
+    overflow: hidden;
+    cursor: pointer;
+    display: flex;
+}
+.content_info .content_item_item:hover{
+    background: #f5f5f5;
+}
+.content_info .content_item_item_title{
+    width: 500px;
+}
+.content_info .content_item_item_end{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+.content_info .comm .inputBox {
+    margin-top: 10px;
+    padding: 0 115px 30px 0;
+    position: relative;
+    
+}
+.content_info .comm  .box_has_bor {
+    border-bottom: 1px solid #ddd;
+}
+.content_info .comm .inputBox .commentInput {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 50px 0 10px;
+    width: 100%;
+    color: #666;
+    border: none;
+    background: #f4f4f4;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.content_info .comm .inputBox .submitBtn {
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    outline: none;
+    border: none;
+    background: #f4f4f4;
+    border-radius: 8px;
+    color: #666;
+        display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.content_info .comm .inputBox  .cancom{
+    background: #2388ec;
+    color: #fff;
+}
+.comm .tip {
+    padding: 30px 15px 20px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+}
+.comm .courseCommentItem{
+    padding: 20px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+.comm .courseCommentItem .userLogo img{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.comm .courseCommentItem .courseCommentItemText .userName{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    margin-top: 2px;
+    margin-bottom: 15px;
+}
+.comm .courseCommentItem .courseCommentItemText .commentText{
+    font-size: 14px;
+    line-height: 20px;
+    color: #666;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    margin-left: 10px;
+}
+ .comm .courseCommentItem .courseCommentItemfooter{
+    font-size: 14px;
+    line-height: 20px;
+    color: #999;
+ }
+ .comm .courseCommentItem .courseCommentItemfooter .icon{
+    font-size: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+ }

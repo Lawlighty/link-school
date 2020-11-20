@@ -104,28 +104,28 @@ export default function FooterContent(){
     const [footerPic, setFooterPic] = useState(footer_pic)
 
     //友情链接
-    const friends_link:any[] = [
+    const friends_link: any[] = [
         {
-            title:'看看',
-            url:'https://www.baidu.com/',
-            target:'_blank'
+            title: '看看',
+            url: 'https://www.baidu.com/',
+            target: '_blank',
         },
         {
-            title:'平台帮助文档',
-            pic:'http://help.roncoo.net/',
-            target:'_blank'
+            title: '平台帮助文档',
+            pic: 'http://help.roncoo.net/',
+            target: '_blank',
         },
         {
-            title:'龙果学院',
-            pic:'https://www.roncoo.com/',
-            target:'_blank'
+            title: '龙果学院',
+            pic: 'https://www.roncoo.com/',
+            target: '_blank',
         },
         {
-            title:'领课网络',
-            pic:'https://www.roncoo.net/',
-            target:'_blank'
+            title: '极课网络',
+            pic: 'https://www.roncoo.net/',
+            target: '_blank',
         },
-    ]
+    ];
     const [friendsLink, setFriendsLink] = useState(friends_link)
     return(
         <>

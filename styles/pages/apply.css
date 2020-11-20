@@ -1,0 +1,137 @@
+.apply_page .register {
+    background: #f7f7f7;
+    padding-bottom: 30px;
+}
+.apply_page .register .register_body {
+    width: 900px;
+    margin: 0 auto 30px;
+}
+.apply_page .register_header {
+    height: 112px;
+    position: relative;
+}
+.apply_page .register_header .register_logo {
+    position: absolute;
+    top: 30px;
+}
+.apply_page .register_header .register_logo img {
+    width: 186px;
+    height: 52px;
+}
+
+.apply_page .register_content{
+    border-radius: 8px;
+    background: #fff;
+    padding-bottom: 30px;
+    min-height: 600px;
+}
+
+.apply_page .register_content .register_title {
+    border-radius: 8px 8px 0 0;
+    height: 80px;
+    line-height: 80px;
+    background: #e4e4e4;
+    font-size: 18px;
+    text-align: center;
+    color: #333;
+}
+.apply_page .steps {
+    width: 840px;
+    margin: 0 auto;
+}
+
+.apply_page .steps .step.step_ok {
+    background: #09f;
+    color: #fff;
+}
+.apply_page .steps .step {
+    display: inline-block;
+    line-height: 30px;
+    color: #999;
+    font-size: 13px;
+    width: 270px;
+    margin: 30px 1px;
+    background: #f2f2f2;
+    text-align: center;
+}
+.apply_page .step_info {
+    width: 798px;
+    padding: 20px;
+    border: 1px solid #e4e4e4;
+    margin: 0 auto;
+    font-size: 12px;
+}
+.apply_page .info_footer {
+    width: 798px;
+    line-height: 30px;
+    padding: 0 20px;
+    margin: 0 auto;
+    font-size: 14px;
+    border: 1px solid #e4e4e4;
+    display: flex;
+    align-items: center;
+}
+.apply_page .next_btn {
+    display: inline-block;
+    width: 320px;
+    line-height: 46px;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    background: #d51423;
+    border-radius: 6px;
+    position: relative;
+    left: 50%;
+    margin-left: -160px;
+    margin-top: 30px;
+    border: none;
+    cursor: pointer;
+}
+.apply_page_data_form  .ant-form-item-label{
+    min-width: 150px;
+}
+.apply_page_data_form  .ant-form-item-control-input input{
+    max-width: 300px;
+    height: 46px;
+    line-height:46px;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+.apply_page .success_msg {
+    width: 450px;
+    margin: 0 auto;
+    position: relative;
+    padding-bottom: 30px;
+}
+.apply_page .success_msg img{
+    width: 110px;
+    margin-right: 20px;
+}
+.apply_page .success_msg p.success_one {
+    font-size: 20px;
+    color: #333;
+    top: 0;
+}
+.apply_page .success_msg p.success_two {
+    color: #999;
+    font-size: 14px;
+    top: 44px;
+    padding: 0;
+    text-align: left;
+}
+.apply_page .braftEditor_box {
+    width: 700px;
+    border: 1px solid #ccc;
+    height: 300px;
+}
+.apply_page .bf-content {
+    height: 252px;
+}
+
+

@@ -200,7 +200,12 @@ const Resource = ({ router }) => {
     };
 
     return (
-        <PcLayout showFooter={true} isBlack={false}>
+        <PcLayout
+            showHeader={true}
+            customSeo={null}
+            showFooter={true}
+            isBlack={false}
+        >
             <div className="resource_page">
                 <div className="header_list">
                     <div className="list_content">
@@ -305,7 +310,7 @@ const Resource = ({ router }) => {
                                 </div>
                             </div>
                         </Affix>
-                        <div className="flex_1" style={{marginLeft:15}}>
+                        <div className="flex_1" style={{ marginLeft: 15 }}>
                             {boutique_reco.map((item) => (
                                 <div
                                     className="zone_body_item width100"
@@ -402,7 +407,7 @@ const Resource = ({ router }) => {
                                 total={50}
                                 onChange={onChangePage}
                                 defaultPageSize={20}
-                                style={{ textAlign: 'center' , marginTop:20}}
+                                style={{ textAlign: 'center', marginTop: 20 }}
                             />
                         </div>
                     </div>

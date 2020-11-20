@@ -3,12 +3,15 @@ import Link from "next/link";
 import { Input, Checkbox, Modal, Button, message } from "antd";
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { timer_clock } from '../config'
+import { timer_clock, phone_reg } from '../config';
 import { _login_with_account } from '../server/server';
+import AccountState from '../store/accountinfo';
+
 
 export default function Login() {
+
+  const accountState = AccountState.useContainer()
   const router = useRouter()
-  const phone_reg = /^[1][3,4,5,7,8][0-9]{9}$/;
 
   //登录选项
   const [ loginTab, setLoginTab ] = useState(0);
@@ -72,12 +75,25 @@ export default function Login() {
             );
             let asyLogin = async () => {
                 try {
-                    console.log('aaa');
-                    let response = await _login_with_account(
-                        phoneNumber,
-                        passWord,
-                    );
-                    console.log('response==>', response);
+                    // console.log('aaa');
+                    // let response = await _login_with_account(
+                    //     phoneNumber,
+                    //     passWord,
+                    // );
+                    // console.log('response==>', response);
+
+                    //更新全局accountInfo
+                    let now_accountinfo = {
+                        isLogin: true,
+                        phoneNumber: phoneNumber,
+                        userName: '',
+                        profilephoto:
+                            'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg',
+                        gender: 2,
+                        age:null,
+                    };
+                    accountState.setAccount(now_accountinfo);
+                    router.push('/')
                 }
                 catch (err) {
                     console.log('bbb');
@@ -105,7 +121,7 @@ export default function Login() {
     
   }
   return (
-      <PcLayout showFooter={false} isBlack={false}>
+      <PcLayout showHeader customSeo={null} showFooter={false} isBlack={false}>
           <div className="register_box">
               <img src="/imgs/logins_bg.png" alt="" className="login_img" />
               <div className="login_center_box">
@@ -166,7 +182,9 @@ export default function Login() {
                                       disabled={isSendCode}
                                       onClick={getVerifyCode}
                                   >
-                                      {codeString}
+                                      {parseInt(codeString)
+                                          ? codeString + ' s'
+                                          : codeString}
                                   </Button>
                               </div>
                           )}
