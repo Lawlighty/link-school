@@ -21,7 +21,7 @@
 }
 .view_page .video_body .video_info {
     position: relative;
-    z-index: 41;
+    z-index: 10;
     float: right;
     padding-top: 20px;
     height: 622px;

@@ -100,7 +100,7 @@ export default function View() {
                                     onClose={onClose}
                                     visible={visible}
                                     getContainer={false}
-                                    style={{ position: 'absolute' }}
+                                    style={{ position: 'absolute',zIndex: 10}}
                                 >
                                     <Tree
                                         showLine
