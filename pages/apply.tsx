@@ -391,7 +391,7 @@ export default function Apply() {
                                             <div className="braftEditor_box">
                                                 <BraftEditor
                                                     className="my-editor"
-                                                    controls={controls}
+                                                    // controls={controls}
                                                     placeholder="请输入简介"
                                                 />
                                             </div>
