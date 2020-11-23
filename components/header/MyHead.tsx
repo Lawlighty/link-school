@@ -20,6 +20,7 @@ const seo = {
         'https://static-dev.roncoo.com/course/133f1c0dc6634da9a9fb67e98d8f489d.ico',
 };
 
+const { Search } = Input;
 export default function MyHead({
     customSeo,
     showHeader,
@@ -77,10 +78,17 @@ export default function MyHead({
         accountState.clearAccount();
         router.push('/login')
     }
+    const onKeyup = (e) => {
+        console.log('onKeyup', e.target.value);
+         if (e.keyCode === 13 && e.target.value) {
+             router.push('/search/' + e.target.value);
+         }
+    }
     return (
         <>
             <Head>
                 <meta charSet="UTF-8" />
+                <meta http-equiv="Access-Control-Allow-Origin" content="*" />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
@@ -243,16 +251,15 @@ export default function MyHead({
                             </ul>
                             <div className="fr nav-right">
                                 <div className=" search_box ">
-                                    <form action="" className="">
-                                        <Input
-                                            prefix={
-                                                <SearchOutlined className="search_icon" />
-                                            }
-                                            placeholder="请输入搜索内容"
-                                            // value=""
-                                            className="search_input"
-                                        />
-                                    </form>
+                                    <Input
+                                        prefix={
+                                            <SearchOutlined className="search_icon" />
+                                        }
+                                        placeholder="请输入搜索内容"
+                                        // value=""
+                                        className="search_input"
+                                        onKeyUp={onKeyup}
+                                    />
                                 </div>
                                 <Link href="/recruit">
                                     <a className="">

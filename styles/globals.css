@@ -51,8 +51,14 @@ li {
 .c_blue {
     color: #107ec4;
 }
+.c_bg_blue {
+    background: #107ec4 !important;
+}
 .c_red {
     color: #d51423;
+}
+.c_bg_red {
+    background: #d51423 !important;
 }
 .c_333 {
     color: #333;
@@ -81,6 +87,40 @@ li {
 }
 .font_12{
   font-size: 12px;
+}
+.font14 {
+    font-size: 14px;
+}
+.pd20 {
+    padding: 20px;
+}
+.b_fff {
+    background: #fff;
+}
+.c_ccc {
+    color: #ccc;
+}
+.font24 {
+    font-size: 24px;
+}
+.font_b {
+    font-weight: 700;
+}
+.flex_c{
+  display: flex;
+  flex-direction: column;
+}
+
+.border-right{
+      border-right: 1px solid #e6e6e6;
+}
+/* title */
+.t_1{
+  font-size:16px;
+  font-weight:bold;
+}
+.t_2{
+ font-size: 12px;
 }
 
 /* 登录注册输入框 */

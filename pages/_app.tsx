@@ -18,6 +18,10 @@ import '../styles/pages/account/components/AccountLeft.css'; //个人信息
 import '../styles/pages/view/view.css'; //个人信息
 import { AppProps } from "next/app";
 import StateProviders from '../store';
+//搜索
+import '../styles/pages/search/search.css'; 
+//讲师
+import '../styles/pages/lecturer/lecturer.css'; 
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

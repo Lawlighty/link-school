@@ -4,8 +4,13 @@ import { useState, useEffect } from 'react';
 import {RightOutlined, UserOutlined, EyeOutlined, LikeOutlined } from '@ant-design/icons';
 import HeaderIndexer from '../store/headerIndex';
 import { useRouter } from 'next/router';
+import { demo } from '../server/server';
 
 export default function Home() {
+    useEffect(() => {
+        // console.log('diaoy demo');
+        // demo(1,'123','123');
+    },[])
   const router = useRouter();
   const { SubMenu } = Menu;
   //轮播图

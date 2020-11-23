@@ -9,3 +9,12 @@ export const _login_with_account = async (phone: string, password: string) => {
         password:password,
     });
 };
+
+//demo
+export const demo = async (id: number, username: string, password: string) => {
+    return await request('/remove', MethodType.DELETE, {
+        id: id,
+        // username: username,
+        // password: password,
+    });
+};

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { message, } from 'antd';
 
- axios.defaults.baseURL = 'http://172.20.16.15:8888';
+ axios.defaults.baseURL = 'http://172.20.16.15:8070';
 export const MethodType = {
     GET: 'GET',
     POST: 'POST',
