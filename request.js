@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { message, } from 'antd';
 
- axios.defaults.baseURL = 'http://172.20.16.15:8070';
+//  axios.defaults.baseURL = 'http://172.20.16.15:8070';
+ axios.defaults.baseURL = 'http://222.186.174.33:8070';
 export const MethodType = {
     GET: 'GET',
     POST: 'POST',
@@ -23,9 +24,10 @@ export const request = (
     const apiToken = '';
     const data = method === 'GET' ? 'params' : 'data';
     let headers = {
-        'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiToken}`,
+        // 'X-Requested-With': 'XMLHttpRequest',
+        // 'Content-Type': 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
+        // Authorization: `Bearer ${apiToken}`,
     };
     if (config.headers) {
         headers = {

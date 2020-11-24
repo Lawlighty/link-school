@@ -447,7 +447,8 @@ export default function View() {
                                                     }}
                                                 >
                                                     <img
-                                                        src="/imgs/头像 (1).png"
+                                                        // src="/imgs/头像 (1).png"
+                                                        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
                                                         alt=""
                                                         className="item"
                                                         style={{
@@ -456,7 +457,7 @@ export default function View() {
                                                         }}
                                                     />
                                                     <div className="teacher_name">
-                                                        <a>讲师昵称</a>
+                                                        <a>讲师陈平安</a>
                                                     </div>
 
                                                     <a

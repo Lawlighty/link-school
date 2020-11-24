@@ -12,7 +12,7 @@ export const _login_with_account = async (phone: string, password: string) => {
 
 //demo
 export const demo = async (id: number, username: string, password: string) => {
-    return await request('/remove', MethodType.DELETE, {
+    return await request('/remove', MethodType.GET, {
         id: id,
         // username: username,
         // password: password,

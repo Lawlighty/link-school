@@ -70,34 +70,34 @@ const Searcher = ({ router }) => {
                 'http://edu-image.nosdn.127.net/B2B4D218926FB3D1D7A569B7D9EBADA4.png?imageView&thumbnail=426y240&quality=100',
         },
         {
-            title: '面向对象程序设计----JAVA',
-            auther: '张三李四',
+            title: 'Android 开发实战',
+            auther: '张三',
             avatar: '',
             brief:
-                'java语言是一种面向对象语言，是业界使用最为广泛的语言，十二年前就占据了1/4的编程语言份额，到今天仍然以1/5的比例站在编程语言排行榜的前列。十二年前就占据了1/4的编程语言份额，到今天仍然以1/5的比例站在编程语言排行榜的前列。',
+                'Android 开发实战：微博之发微博页面图片处理十二年前就占据了1/4的编程语言份额，到今天仍然以1/5的比例站在编程语言排行榜的前列。',
             people: '1234',
             img:
-                'http://edu-image.nosdn.127.net/B2B4D218926FB3D1D7A569B7D9EBADA4.png?imageView&thumbnail=426y240&quality=100',
+                'https://a1.jikexueyuan.com/home/201507/22/ff2e/55af4bf0d4eed.jpg',
         },
         {
-            title: '面向对象程序设计----JAVA',
-            auther: '张三李四',
+            title: 'Mysql入门到精通',
+            auther: '王五',
             avatar: '',
             brief:
-                'java语言是一种面向对象语言，是业界使用最为广泛的语言，十二年前就占据了1/4的编程语言份额，到今天仍然以1/5的比例站在编程语言排行榜的前列。十二年前就占据了1/4的编程语言份额，到今天仍然以1/5的比例站在编程语言排行榜的前列。',
+                '本节课我们来了解纹理相关基础知识，如纹理坐标、纹理过滤方式、纹理缠绕等等。我们还将学习Three.js中对纹理的封装，讲解',
             people: '1234',
             img:
-                'http://edu-image.nosdn.127.net/B2B4D218926FB3D1D7A569B7D9EBADA4.png?imageView&thumbnail=426y240&quality=100',
+                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
         },
         {
-            title: '面向对象程序设计----JAVA',
+            title: '大数据',
             auther: '张三李四',
             avatar: '',
             brief:
-                'java语言是一种面向对象语言，是业界使用最为广泛的语言，十二年前就占据了1/4的编程语言份额，到今天仍然以1/5的比例站在编程语言排行榜的前列。十二年前就占据了1/4的编程语言份额，到今天仍然以1/5的比例站在编程语言排行榜的前列。',
+                'java语言是一种面向对象语言，是业界使用最为广泛的语言，十二年前就占据了1/4的编程语言份额，到今天仍然以1/5的比例站在编程语言排行榜的前列。十二年前就占据了1/4的编程语言份额',
             people: '1234',
             img:
-                'http://edu-image.nosdn.127.net/B2B4D218926FB3D1D7A569B7D9EBADA4.png?imageView&thumbnail=426y240&quality=100',
+                'https://static-dev.roncoo.com/course/ZtTftX23I4jJ7QsMubVrVm65srIGgsRS.jpg',
         },
     ];
     
@@ -170,7 +170,7 @@ const Searcher = ({ router }) => {
 
                             <div className="item_lists">
                                 {seasrch_list.map((item, index) => (
-                                    <div className="item">
+                                    <div className="item" onClick={()=>{router.push('/view/'+index);}}>
                                         <div className="item_img_div">
                                             <img
                                                 className="item_img"
@@ -182,6 +182,8 @@ const Searcher = ({ router }) => {
                                             style={{
                                                 display: 'flex',
                                                 flexDirection: 'column',
+                                                maxWidth: '610px',
+                                                marginRight: '10px',
                                             }}
                                         >
                                             <div className="t_1">
@@ -204,7 +206,7 @@ const Searcher = ({ router }) => {
                                                         icon={<UserOutlined />}
                                                     />
                                                 )}
-                                                <div style={{ marginLeft: 10 }}>
+                                                <div style={{ marginLeft: 10 }} onClick={(e) => { e.stopPropagation();router.push('/lecturer/'+index);}}>
                                                     {item.auther}
                                                 </div>
                                             </div>

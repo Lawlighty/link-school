@@ -101,99 +101,130 @@ const Resource = ({ router }) => {
     };
 
     //精品推荐
-    const boutique_reco = [
-        {
-            img_url:
-                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-            name: 'Mysql入门到精通1',
-            isfree: true,
-            price: '',
-            vip_price: '',
-            avatar:
-                'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            username: '张三',
-            leanrs: 135,
-        },
-        {
-            img_url:
-                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-            name: 'Mysql入门到精通2',
-            isfree: false,
-            price: 100,
-            vip_price: 59.9,
-            avatar: '',
-            username: '张三',
-            leanrs: 135,
-        },
-        {
-            img_url:
-                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-            name: 'Mysql入门到精通3',
-            isfree: true,
-            price: '',
-            vip_price: '',
-            avatar:
-                'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            username: '张三',
-            leanrs: 135,
-        },
-        {
-            img_url:
-                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-            name: 'Mysql入门到精通4',
-            isfree: false,
-            price: 100,
-            vip_price: 59.9,
-            avatar: '',
-            username: '张三',
-            leanrs: 135,
-        },
-        {
-            img_url:
-                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-            name: 'Mysql入门到精通5',
-            isfree: true,
-            price: '',
-            vip_price: '',
-            avatar: '',
-            username: '张三',
-            leanrs: 135,
-        },
-        {
-            img_url:
-                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-            name: 'Mysql入门到精通6',
-            isfree: false,
-            price: 100,
-            vip_price: 59.9,
-            avatar:
-                'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-            username: '张三',
-            leanrs: 135,
-        },
-        {
-            img_url:
-                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-            name: 'Mysql入门到精通7',
-            isfree: true,
-            price: '',
-            vip_price: '',
-            avatar: '',
-            username: '张三',
-            leanrs: 135,
-        },
-        {
-            img_url:
-                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-            name: 'Mysql入门到精通8',
-            isfree: true,
-            price: '',
-            vip_price: '',
-            avatar: '',
-            username: '张三',
-            leanrs: 135,
-        },
-    ];
+   const boutique_reco = [
+       {
+           img_url:
+               'https://a1.jikexueyuan.com/home/201507/22/ff2e/55af4bf0d4eed.jpg',
+           name: 'Android 开发实战：微博之发微博页面图片处理',
+           isfree: true,
+           price: '',
+           vip_price: '',
+           avatar: '',
+           username: '张三',
+           leanrs: 135,
+           desc:
+               ' 通过本课程的学习，您将学会： 1.如何配置和连接到 Amazon Aurora Serverless。 创建并配置新的 Aurora Serverless 数据库集',
+       },
+       {
+           img_url:
+               'https://a1.jikexueyuan.com/home/201507/17/94b9/55a86c6be0ac1.jpg',
+           name: 'Cocos2d-x CURL 和 HttpClient',
+           isfree: true,
+           price: '',
+           vip_price: '',
+           avatar: '',
+           username: '张三',
+           leanrs: 135,
+           sale_tag: 10,
+           live_time: '2020-09-09 22:31:00',
+           desc:
+               '本课程主要向大家讲解Android Studio的使用，从基本的安装配置，到进阶的插件安装、代码模板设计等。帮助大家通过熟练使用Android Studio提高自己的开发效率',
+       },
+       {
+           img_url:
+               'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
+           name: 'Mysql入门到精通',
+           isfree: true,
+           price: '',
+           vip_price: '',
+           avatar:
+               'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+           username: '张三',
+           leanrs: 135,
+           desc:
+               '本课程是为初学者准备的版本控制工具课程，主要从本地操作、远程操作、图形工具化三个方面，带领你学会现今流行的 Git/GitHub 工具的使用。',
+       },
+       {
+           img_url:
+               'https://static-dev.roncoo.com/course/ZtTftX23I4jJ7QsMubVrVm65srIGgsRS.jpg',
+           name: '大数据',
+           isfree: false,
+           price: 100,
+           vip_price: 59.9,
+           avatar: '',
+           username: '李四',
+           leanrs: 135,
+           desc:
+               '网络编程是Android开发中核心功能模块，涉及的知识较多。本门课程由Java到Android，对网络编程进行全方面讲解。',
+       },
+       {
+           img_url:
+               'https://static-dev.roncoo.com/course/8ad63395b81f41c58cbae578019a40da.jpg',
+           name: 'Java SpringBoot',
+           isfree: true,
+           price: '',
+           vip_price: '',
+           avatar:
+               'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+           username: '王五',
+           leanrs: 135,
+           desc:'本课程介绍3d开发中常用的模型文件、模型文件格式，以及Three.js中对模型的解析方式'
+       },
+       {
+           img_url:
+               'https://a1.jikexueyuan.com/home/201507/30/cf6e/55b98d818c820.jpg',
+           name: 'React 组件性能调优',
+           isfree: false,
+           price: 100,
+           vip_price: 59.9,
+           avatar: '',
+           username: '张三',
+           leanrs: 135,
+           desc:
+               '本课程主要介绍点击拾取的基本原理，以及如何使用Three.js提供的RayCaster来做相交处理。',
+       },
+       {
+           img_url:
+               'https://a1.jikexueyuan.com/home/201507/22/8f57/55aeffca72c34.jpg',
+           name: 'css 兼容',
+           isfree: false,
+           price: 100,
+           vip_price: 59.9,
+           avatar: '',
+           username: '李四',
+           leanrs: 135,
+           desc:
+               '本课程主要讲解 3D 图形学入门基础知识，内容包括坐标系、点、线和面，转换的通俗概念以及矩阵、纹理和着色器等。',
+       },
+       {
+           img_url:
+               'https://a1.jikexueyuan.com/home/201609/30/3910/57ee150c63c28.jpg',
+           name: '如何一小时快速搭建一个应用号',
+           isfree: true,
+           price: '',
+           vip_price: '',
+           avatar:
+               'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+           username: '王五',
+           leanrs: 135,
+           desc:
+               '本课程介绍常用前端开发工具 Sublime Text / Dreamweaver / WebStorm 的安装与使用技巧',
+       },
+       {
+           img_url:
+               'https://a1.jikexueyuan.com/home/201811/28/4fb5/5bfe769f8b7e1.png',
+           name: '光线投射',
+           isfree: false,
+           price: 100,
+           vip_price: 59.9,
+           avatar: '',
+           username: '张三',
+           leanrs: 135,
+           desc:
+               '本节课我们来了解Three.js中提供的几个相机控制类，每个类都有一套独立的控制算法，我们以OrbitControls为例详细讲解该控',
+       },
+   ];
+    
 
     const onChangePage = (page) => {
         console.log('page', page);
@@ -291,33 +322,69 @@ const Resource = ({ router }) => {
                                 </div>
                                 <div className="resource_left_list">
                                     <ul>
-                                        <li>
-                                            Dubbo是一个被国内很多互联网公司广泛使用的开源分布式服务框架
+                                        <li
+                                            onClick={() => {
+                                                router.push('/resource/aa');
+                                            }}
+                                        >
+                                            启用Amazon EC2 实例新方式之AWS Deep
+                                            Learning AMI
                                         </li>
-                                        <li>
-                                            Dubbo是一个被国内很多互联网公司广泛使用的开源分布式服务框架
+                                        <li
+                                            onClick={() => {
+                                                router.push('/resource/aa');
+                                            }}
+                                        >
+                                            网站和应用程序技巧集锦：AWS
+                                            Lambda与VPC、IAM
                                         </li>
-                                        <li>
-                                            Dubbo是一个被国内很多互联网公司广泛使用的开源分布式服务框架
+                                        <li
+                                            onClick={() => {
+                                                router.push('/resource/aa');
+                                            }}
+                                        >
+                                            启动Wordpress网站及部署AWS EC2
+                                            实例还能这么做！
                                         </li>
-                                        <li>
-                                            Dubbo是一个被国内很多互联网公司广泛使用的开源分布式服务框架
+                                        <li
+                                            onClick={() => {
+                                                router.push('/resource/aa');
+                                            }}
+                                        >
+                                            揭秘你不知道的CloudFront用法
                                         </li>
-                                        <li>
-                                            Dubbo是一个被国内很多互联网公司广泛使用的开源分布式服务框架
+                                        <li
+                                            onClick={() => {
+                                                router.push('/resource/aa');
+                                            }}
+                                        >
+                                            Amazon Polly 上手实验
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </Affix>
                         <div className="flex_1" style={{ marginLeft: 15 }}>
-                            {boutique_reco.map((item) => (
+                            {boutique_reco.map((item, index) => (
                                 <div
+                                    onClick={() => {
+                                        router.push('/resource/' + index);
+                                    }}
                                     className="zone_body_item width100"
-                                    key={item.name}
+                                    key={index}
                                     style={{ marginBottom: 8 }}
                                 >
-                                    <Card hoverable style={{ width: '100%' }}>
+                                    <Card
+                                        hoverable
+                                        style={{
+                                            width: '100%',
+                                            position: 'relative',
+                                        }}
+                                        className="doc_div"
+                                    >
+                                        <div className="desc">
+                                            <a className="text">{item.desc}</a>
+                                        </div>
                                         <div className="flex">
                                             <div>
                                                 <img

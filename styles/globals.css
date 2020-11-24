@@ -48,6 +48,9 @@ li {
   width: 100% !important;
 }
 
+.c_green{
+  color: #19be6b;
+}
 .c_blue {
     color: #107ec4;
 }
@@ -105,6 +108,10 @@ li {
 }
 .font_b {
     font-weight: 700;
+}
+.flex_r_a{
+  display: flex;
+  align-items: center;
 }
 .flex_c{
   display: flex;

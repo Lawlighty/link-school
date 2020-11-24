@@ -7,10 +7,10 @@ import { useRouter } from 'next/router';
 import { demo } from '../server/server';
 
 export default function Home() {
-    useEffect(() => {
-        // console.log('diaoy demo');
-        // demo(1,'123','123');
-    },[])
+    // useEffect(() => {
+    //     console.log('diaoy demo');
+    //     demo(1,'123','123');
+    // },[])
   const router = useRouter();
   const { SubMenu } = Menu;
   //轮播图
@@ -54,25 +54,61 @@ export default function Home() {
                   vip_price: 90,
               },
               {
-                  url: 'http://static.roncoos.com/edu/edu.jpg',
+                  url:
+                      'https://static-dev.roncoo.com/course/ZtTftX23I4jJ7QsMubVrVm65srIGgsRS.jpg',
                   href: '/view/123',
-                  name: '极课教育系统',
+                  name: '云计算',
                   price: 100,
                   vip_price: 90,
               },
           ],
       },
       {
-          title: '后台开发2',
+          title: '前端开发',
           lists: [
               {
-                  name: '后台管理系统',
+                  name: 'javascript',
               },
               {
-                  name: '系统架构',
+                  name: 'HTML&CSS',
               },
               {
-                  name: '单点突破',
+                  name: 'React',
+              },
+              {
+                  name: 'Vue',
+              },
+          ],
+          recommend_classes: [
+              {
+                  url:
+                      'https://a1.jikexueyuan.com/home/201603/28/f439/56f8999e09c24.jpg',
+                  href: '/view/123',
+                  name: 'JS轻松学习',
+                  price: 100,
+                  vip_price: 90,
+              },
+              {
+                  url:
+                      'https://static-dev.roncoo.com/course/ZtTftX23I4jJ7QsMubVrVm65srIGgsRS.jpg',
+                  href: '/view/123',
+                  name: '云计算',
+                  price: 100,
+                  vip_price: 90,
+              },
+          ],
+      },
+      {
+          title: '移动开发',
+          lists: [
+              {
+                  name: 'Android',
+              },
+              {
+                  name: 'IOS',
+              },
+              {
+                  name: 'Cocos',
               },
               {
                   name: '项目实战',
@@ -96,52 +132,16 @@ export default function Home() {
           ],
       },
       {
-          title: '后台开发3',
+          title: '数据库',
           lists: [
               {
-                  name: '后台管理系统',
+                  name: 'Mysql',
               },
               {
-                  name: '系统架构',
+                  name: 'Sqlite',
               },
               {
-                  name: '单点突破',
-              },
-              {
-                  name: '项目实战',
-              },
-          ],
-          recommend_classes: [
-              {
-                  url: 'http://static.roncoos.com/edu/edu.jpg',
-                  href: '/view/123',
-                  name: '极课教育系统',
-                  price: 100,
-                  vip_price: 90,
-              },
-              {
-                  url: 'http://static.roncoos.com/edu/edu.jpg',
-                  href: '/view/123',
-                  name: '极课教育系统',
-                  price: 100,
-                  vip_price: 90,
-              },
-          ],
-      },
-      {
-          title: '后台开发4',
-          lists: [
-              {
-                  name: '后台管理系统',
-              },
-              {
-                  name: '系统架构',
-              },
-              {
-                  name: '单点突破',
-              },
-              {
-                  name: '项目实战',
+                  name: 'MangoDb',
               },
           ],
           recommend_classes: [
@@ -164,218 +164,273 @@ export default function Home() {
   ]);
   
   //精品推荐
-  const boutique_reco = [
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通1',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通2',
-      isfree:false,
-      price:100,
-      vip_price:59.9,
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通3',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通4',
-      isfree:false,
-      price:100,
-      vip_price:59.9,
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通5',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通6',
-      isfree:false,
-      price:100,
-      vip_price:59.9,
-      avatar:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通7',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通8',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-
-  ]
+    const boutique_reco = [
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201507/22/ff2e/55af4bf0d4eed.jpg',
+            name: 'Android 开发实战：微博之发微博页面图片处理',
+            isfree: true,
+            price: '',
+            vip_price: '',
+            avatar: '',
+            username: '张三',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201507/17/94b9/55a86c6be0ac1.jpg',
+            name: 'Cocos2d-x CURL 和 HttpClient',
+            isfree: true,
+            price: '',
+            vip_price: '',
+            avatar: '',
+            username: '张三',
+            leanrs: 135,
+            sale_tag: 10,
+            live_time: '2020-09-09 22:31:00',
+        },
+        {
+            img_url:
+                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
+            name: 'Mysql入门到精通',
+            isfree: true,
+            price: '',
+            vip_price: '',
+            avatar:
+                'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            username: '张三',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://static-dev.roncoo.com/course/ZtTftX23I4jJ7QsMubVrVm65srIGgsRS.jpg',
+            name: '大数据',
+            isfree: false,
+            price: 100,
+            vip_price: 59.9,
+            avatar: '',
+            username: '李四',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://static-dev.roncoo.com/course/8ad63395b81f41c58cbae578019a40da.jpg',
+            name: 'Java SpringBoot',
+            isfree: true,
+            price: '',
+            vip_price: '',
+            avatar:
+                'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            username: '王五',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201507/30/cf6e/55b98d818c820.jpg',
+            name: 'React 组件性能调优',
+            isfree: false,
+            price: 100,
+            vip_price: 59.9,
+            avatar: '',
+            username: '张三',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201507/22/8f57/55aeffca72c34.jpg',
+            name: 'css 兼容',
+            isfree: false,
+            price: 100,
+            vip_price: 59.9,
+            avatar: '',
+            username: '李四',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201609/30/3910/57ee150c63c28.jpg',
+            name: '如何一小时快速搭建一个应用号',
+            isfree: true,
+            price: '',
+            vip_price: '',
+            avatar:
+                'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            username: '王五',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201811/28/4fb5/5bfe769f8b7e1.png',
+            name: '光线投射',
+            isfree: false,
+            price: 100,
+            vip_price: 59.9,
+            avatar: '',
+            username: '张三',
+            leanrs: 135,
+        },
+    ];
 
   //试卷
   const test_paper = [
-    {
-      name:'广州天河数学二模1',
-      href:'',
-      tag:'九',
-      price:'',
-      looks:116,
-      download:5
-    },
-    {
-      name:'广州天河数学二模2',
-      href:'',
-      tag:'一',
-      price:'45',
-      looks:116,
-      download:50
-    },
-    {
-      name:'广州天河数学二模3',
-      href:'',
-      tag:'七',
-      price:'',
-      looks:54,
-      download:5
-    },
-    {
-      name:'广州天河数学二模4',
-      href:'',
-      tag:'九',
-      price:'',
-      looks:116,
-      download:5
-    },
-  ]
+      {
+          name: 'Cocos2d-JS 俄罗斯方块 管理层实现',
+          href: '',
+          tag:
+              'https://a1.jikexueyuan.com/home/201809/03/ebcb/5b8ceaef9f623.jpeg',
+          price: '',
+          looks: 116,
+          download: 5,
+          desc:
+              '这个Wiki项目展示的是和极客学院V6课程--《微信小程序从基础到实战》的相关文档和资料',
+      },
+      {
+          name: '资深前端开发工程师面试题',
+          href: '',
+          tag:
+              'https://a1.jikexueyuan.com/home/201507/21/0e3c/55adaba4911b6.jpg',
+          price: '45',
+          looks: 116,
+          download: 50,
+          desc:
+              '本课程介绍一下资深前端开发工程师在面试中需要注意的事项以及常见的面试题。',
+      },
+      {
+          name: 'HTML5 微场景实战',
+          href: '',
+          tag:
+              'https://a1.jikexueyuan.com/home/201507/30/6156/55b983f9bd934.jpg',
+          price: '',
+          looks: 54,
+          download: 5,
+          desc:
+              '本课程主要讲解如何使用 HTML5 实现一个微场景，通过 CSS3 与 JavaScript 的配合，完成 PPT 中的基础动作',
+      },
+      {
+          name: 'JavaScript 设计模式之组合模式',
+          href: '',
+          tag:
+              'https://a1.jikexueyuan.com/home/201507/27/294d/55b5919e9c7a3.jpg',
+          price: '45',
+          looks: 116,
+          download: 50,
+          desc:
+              '本课程介绍组合模式，组合模式（Composite）将对象组合成树形结构以表示“部分-整体”的层次结构',
+      },
+      {
+          name: 'Phaser.js 游戏的创建',
+          href: '',
+          tag: '',
+          price: '',
+          looks: 54,
+          download: 5,
+          desc:
+              '本课程首先对 Phaser.js 游戏框架做一个简单的介绍，然后讲解怎么用 Phaser.js 来创建一个游戏',
+      },
+  ];
 
   // 直播
   const live_reco = [
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通1',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      username:'张三',
-      leanrs:135,
-      sale_tag:10,
-      live_time:'2020-09-09 22:31:00'
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通2',
-      isfree:false,
-      price:100,
-      vip_price:59.9,
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通3',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      username:'张三',
-      leanrs:135,
-      sale_tag:10,
-      live_time:'2020-09-09 22:31:00'
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通4',
-      isfree:false,
-      price:100,
-      vip_price:59.9,
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通5',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'',
-      username:'张三',
-      leanrs:135,
-      sale_tag:10,
-      live_time:'2020-09-09 22:31:00'
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通6',
-      isfree:false,
-      price:100,
-      vip_price:59.9,
-      avatar:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通7',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通8',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'',
-      username:'张三',
-      leanrs:135,
-      sale_tag:10,
-      live_time:'2020-09-09 22:31:00'
-    },
-
-  ]
+      {
+          img_url:
+              'https://a1.jikexueyuan.com/home/201710/30/d090/59f6d46dcb4dc.jpg',
+          name: '微软人工智能 － 服务和API',
+          isfree: true,
+          price: '',
+          vip_price: '',
+          avatar:
+              'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          username: '张三',
+          leanrs: 135,
+          sale_tag: 10,
+          live_time: '2020-09-09 22:31:00',
+      },
+      {
+          img_url:
+              'https://a1.jikexueyuan.com/home/201707/12/7df7/5965c20d2f215.jpg',
+          name: 'AWS 人工智能新服务解析—Rekognition、Polly 及 Lex 服务',
+          isfree: false,
+          price: 100,
+          vip_price: 59.9,
+          avatar: '',
+          username: '张三',
+          leanrs: 135,
+      },
+      {
+          img_url:
+              'https://a1.jikexueyuan.com/home/201507/29/371a/55b836173569a.jpg',
+          name: '嵌入式系统简介',
+          isfree: true,
+          price: '',
+          vip_price: '',
+          avatar:
+              'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          username: '张三',
+          leanrs: 135,
+          sale_tag: 10,
+          live_time: '2020-09-09 22:31:00',
+      },
+      {
+          img_url:
+              'https://a1.jikexueyuan.com/home/201507/22/9066/55af023a95763.jpg',
+          name: 'NFC 开发基础',
+          isfree: false,
+          price: 100,
+          vip_price: 59.9,
+          avatar: '',
+          username: '张三',
+          leanrs: 135,
+      },
+      {
+          img_url:
+              'https://a1.jikexueyuan.com/home/201507/30/a97b/55b97fd56d0a3.jpg',
+          name: 'Android 开发实战：微博之发微博页面表情面板和接口开发',
+          isfree: true,
+          price: '',
+          vip_price: '',
+          avatar: '',
+          username: '张三',
+          leanrs: 135,
+          sale_tag: 10,
+          live_time: '2020-09-09 22:31:00',
+      },
+      {
+          img_url:
+              'https://a1.jikexueyuan.com/home/201606/12/3cfe/575cd230c4638.jpg',
+          name: '虚幻4零基础入门',
+          isfree: false,
+          price: 100,
+          vip_price: 59.9,
+          avatar:
+              'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+          username: '张三',
+          leanrs: 135,
+      },
+      {
+          img_url:
+              'https://a1.jikexueyuan.com/home/201507/22/ff2e/55af4bf0d4eed.jpg',
+          name: 'Android 开发实战：微博之发微博页面图片处理',
+          isfree: true,
+          price: '',
+          vip_price: '',
+          avatar: '',
+          username: '张三',
+          leanrs: 135,
+      },
+      {
+          img_url:
+              'https://a1.jikexueyuan.com/home/201507/17/94b9/55a86c6be0ac1.jpg',
+          name: 'Cocos2d-x CURL 和 HttpClient',
+          isfree: true,
+          price: '',
+          vip_price: '',
+          avatar: '',
+          username: '张三',
+          leanrs: 135,
+          sale_tag: 10,
+          live_time: '2020-09-09 22:31:00',
+      },
+  ];
   return (
       <PcLayout
           showHeader={true}
@@ -390,7 +445,10 @@ export default function Home() {
                       <div className="class_block">
                           <Menu className="banner_list" mode="vertical">
                               {sub_items.map((item, index) => (
-                                  <SubMenu key={item.title} title={item.title}>
+                                  <SubMenu
+                                      key={item.title + index}
+                                      title={item.title}
+                                  >
                                       <div
                                           className="banner_list_sub"
                                           style={{
@@ -407,7 +465,14 @@ export default function Home() {
                                                               lindex
                                                           }
                                                       >
-                                                          <a className="name">
+                                                          <a
+                                                              className="name"
+                                                              onClick={() => {
+                                                                  router.push(
+                                                                      '/list',
+                                                                  );
+                                                              }}
+                                                          >
                                                               {litem.name}
                                                           </a>
                                                       </div>
@@ -482,8 +547,8 @@ export default function Home() {
                               className="banner_dots"
                               autoplay
                           >
-                              {banner_picm.map((item) => (
-                                  <div key={item.url}>
+                              {banner_picm.map((item, index) => (
+                                  <div key={item.url + index}>
                                       <img
                                           className="banner_img"
                                           src={item.url}
@@ -516,8 +581,11 @@ export default function Home() {
                       </div>
 
                       <div className="zone_body">
-                          {boutique_reco.map((item) => (
-                              <div className="zone_body_item" key={item.name}>
+                          {boutique_reco.map((item, index) => (
+                              <div
+                                  className="zone_body_item"
+                                  key={item.name + index}
+                              >
                                   <Card
                                       onClick={() => {
                                           router.push('view/123');
@@ -587,7 +655,16 @@ export default function Home() {
                                                       />
                                                   )}
 
-                                                  <div className="name">
+                                                  <div
+                                                      className="name"
+                                                      onClick={(e) => {
+                                                          e.stopPropagation()
+                                                          router.push(
+                                                              '/lecturer/' +
+                                                                  index,
+                                                          );
+                                                      }}
+                                                  >
                                                       {item.username}
                                                   </div>
                                               </div>
@@ -612,12 +689,15 @@ export default function Home() {
                       <div className="zone_header">
                           <div className="big_text">
                               <div style={{ flex: 1 }}>
-                                  试卷专区
-                                  <span className="small_text">试卷专区</span>
+                                  文档专区
+                                  <span className="small_text">文档专区</span>
                               </div>
 
-                              <a href="/list" className="small_text link_text">
-                                  更多试卷
+                              <a
+                                  href="/resource"
+                                  className="small_text link_text"
+                              >
+                                  更多文档
                                   <RightOutlined />
                               </a>
                           </div>
@@ -627,38 +707,73 @@ export default function Home() {
                           className="zone_body bg_white"
                           style={{ padding: '20px' }}
                       >
-                          {test_paper.map((item) => (
-                              <div className="exam_div">
-                                  <div className="exam_item">
-                                      <div className="exam_item_title_div">
-                                          <div className="exam_item_title_tag">
-                                              {item.tag}
-                                          </div>
-                                          <div className="exam_item_title">
-                                              {item.name}
-                                          </div>
-                                          {item.price ? (
-                                              <div className="exam_item_title_price">
-                                                  ￥ {item.price}
-                                              </div>
+                          {test_paper.map((item, index) => (
+                              <div className="exam_div doc_div" key={index}>
+                                  <div
+                                      className="exam_item"
+                                      onClick={() => {
+                                          router.push('/resource/' + index);
+                                      }}
+                                  >
+                                      <div className="desc">
+                                          <a className="text">{item.desc}</a>
+                                      </div>
+                                      <div className="">
+                                          {item.tag ? (
+                                              // <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                                              <img
+                                                  style={{
+                                                      width: '100px',
+                                                      height: '60px',
+                                                      marginRight: '20px',
+                                                  }}
+                                                  src={item.tag}
+                                                  alt=""
+                                              />
                                           ) : (
-                                              <div className="exam_item_title_price">
-                                                  免费
-                                              </div>
+                                              <img
+                                                  style={{
+                                                      width: '100px',
+                                                      height: '60px',
+                                                      marginRight: '20px',
+                                                  }}
+                                                  src="https://a1.jikexueyuan.com/home/201507/22/d4b9/55af0345ca2d0.jpg"
+                                                  alt=""
+                                              />
                                           )}
                                       </div>
+                                      <div className="flex_1">
+                                          <div className="exam_item_title_div">
+                                              {/* <div className="exam_item_title_tag">
+                                                  {item.tag}
+                                              </div> */}
+                                              <div className="exam_item_title">
+                                                  {item.name}
+                                              </div>
+                                              {/* {item.price ? (
+                                                  <div className="exam_item_title_price">
+                                                      ￥ {item.price}
+                                                  </div>
+                                              ) : (
+                                                  <div className="exam_item_title_price">
+                                                      免费
+                                                  </div>
+                                              )} */}
+                                          </div>
 
-                                      <div className="exam-item-tip">
-                                          浏览:
-                                          <span style={{ margin: '0 5px' }}>
-                                              {item.looks}
-                                          </span>{' '}
-                                          下载:
-                                          <span style={{ margin: '0 5px' }}>
-                                              {item.download}
-                                          </span>
-                                          次
+                                          <div className="exam-item-tip">
+                                              浏览:
+                                              <span style={{ margin: '0 5px' }}>
+                                                  {item.looks}
+                                              </span>{' '}
+                                              下载:
+                                              <span style={{ margin: '0 5px' }}>
+                                                  {item.download}
+                                              </span>
+                                              次
+                                          </div>
                                       </div>
+                                      <div></div>
                                   </div>
                               </div>
                           ))}
@@ -686,8 +801,8 @@ export default function Home() {
                       </div>
 
                       <div className="zone_body">
-                          {boutique_reco.map((item) => (
-                              <div className="zone_body_item" key={item.name}>
+                          {boutique_reco.map((item, index) => (
+                              <div className="zone_body_item" key={index}>
                                   <Card
                                       onClick={() => {
                                           router.push('view/123');
@@ -757,7 +872,16 @@ export default function Home() {
                                                       />
                                                   )}
 
-                                                  <div className="name">
+                                                  <div
+                                                      className="name"
+                                                      onClick={(e) => {
+                                                          e.stopPropagation();
+                                                          router.push(
+                                                              '/lecturer/' +
+                                                                  index,
+                                                          );
+                                                      }}
+                                                  >
                                                       {item.username}
                                                   </div>
                                               </div>
@@ -796,8 +920,11 @@ export default function Home() {
                       </div>
 
                       <div className="zone_body">
-                          {live_reco.map((item) => (
-                              <div className="zone_body_item" key={item.name}>
+                          {live_reco.map((item, index) => (
+                              <div
+                                  className="zone_body_item"
+                                  key={item.name + index}
+                              >
                                   {item.sale_tag ? (
                                       <div className="sale_tag">
                                           优惠券
@@ -879,7 +1006,16 @@ export default function Home() {
                                                       />
                                                   )}
 
-                                                  <div className="name">
+                                                  <div
+                                                      className="name"
+                                                      onClick={(e) => {
+                                                          e.stopPropagation();
+                                                          router.push(
+                                                              '/lecturer/' +
+                                                                  index,
+                                                          );
+                                                      }}
+                                                  >
                                                       {item.username}
                                                   </div>
                                               </div>
@@ -918,8 +1054,8 @@ export default function Home() {
                       </div>
 
                       <div className="zone_body">
-                          {[1, 2, 3, 4, 5, 6, 7].map((item) => (
-                              <div className="info_item">
+                          {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
+                              <div className="info_item" key={index}>
                                   <div
                                       className="info_item_div"
                                       style={{

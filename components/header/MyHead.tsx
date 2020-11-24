@@ -175,18 +175,20 @@ export default function MyHead({
                                         </li>
                                     </a>
                                 </Link>
-                                <a href="/forum" target="_self">
-                                    <li
-                                        className={[
-                                            'nav_item',
-                                            headerIndexer.headerIndex === 3
-                                                ? 'active'
-                                                : '',
-                                        ].join(' ')}
-                                    >
-                                        论坛
-                                    </li>
-                                </a>
+                                <Link href="/forum">
+                                    <a  target="_self">
+                                        <li
+                                            className={[
+                                                'nav_item',
+                                                headerIndexer.headerIndex === 3
+                                                    ? 'active'
+                                                    : '',
+                                            ].join(' ')}
+                                        >
+                                            论坛
+                                        </li>
+                                    </a>
+                                </Link>
                                 <span>
                                     <li
                                         style={{ display: 'none' }}

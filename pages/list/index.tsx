@@ -108,88 +108,111 @@ const List = ({ router }) => {
         setCurrentFour(index);
     };
     const boutique_reco = [
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通1',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通2',
-      isfree:false,
-      price:100,
-      vip_price:59.9,
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通3',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通4',
-      isfree:false,
-      price:100,
-      vip_price:59.9,
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通5',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通6',
-      isfree:false,
-      price:100,
-      vip_price:59.9,
-      avatar:'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通7',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-    {
-      img_url:'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
-      name:'Mysql入门到精通8',
-      isfree:true,
-      price:'',
-      vip_price:'',
-      avatar:'',
-      username:'张三',
-      leanrs:135
-    },
-
-    ]
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201507/22/ff2e/55af4bf0d4eed.jpg',
+            name: 'Android 开发实战：微博之发微博页面图片处理',
+            isfree: true,
+            price: '',
+            vip_price: '',
+            avatar: '',
+            username: '张三',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201507/17/94b9/55a86c6be0ac1.jpg',
+            name: 'Cocos2d-x CURL 和 HttpClient',
+            isfree: true,
+            price: '',
+            vip_price: '',
+            avatar: '',
+            username: '张三',
+            leanrs: 135,
+            sale_tag: 10,
+            live_time: '2020-09-09 22:31:00',
+        },
+        {
+            img_url:
+                'https://static-dev.roncoo.com/course/gLlVYUikWX4PXn7vw1NYwgcLQRhe4ctl.jpg',
+            name: 'Mysql入门到精通',
+            isfree: true,
+            price: '',
+            vip_price: '',
+            avatar:
+                'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            username: '张三',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://static-dev.roncoo.com/course/ZtTftX23I4jJ7QsMubVrVm65srIGgsRS.jpg',
+            name: '大数据',
+            isfree: false,
+            price: 100,
+            vip_price: 59.9,
+            avatar: '',
+            username: '李四',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://static-dev.roncoo.com/course/8ad63395b81f41c58cbae578019a40da.jpg',
+            name: 'Java SpringBoot',
+            isfree: true,
+            price: '',
+            vip_price: '',
+            avatar:
+                'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            username: '王五',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201507/30/cf6e/55b98d818c820.jpg',
+            name: 'React 组件性能调优',
+            isfree: false,
+            price: 100,
+            vip_price: 59.9,
+            avatar: '',
+            username: '张三',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201507/22/8f57/55aeffca72c34.jpg',
+            name: 'css 兼容',
+            isfree: false,
+            price: 100,
+            vip_price: 59.9,
+            avatar: '',
+            username: '李四',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201609/30/3910/57ee150c63c28.jpg',
+            name: '如何一小时快速搭建一个应用号',
+            isfree: true,
+            price: '',
+            vip_price: '',
+            avatar:
+                'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            username: '王五',
+            leanrs: 135,
+        },
+        {
+            img_url:
+                'https://a1.jikexueyuan.com/home/201811/28/4fb5/5bfe769f8b7e1.png',
+            name: '光线投射',
+            isfree: false,
+            price: 100,
+            vip_price: 59.9,
+            avatar: '',
+            username: '张三',
+            leanrs: 135,
+        },
+    ];
     
     const onChangePage = (page) => {
         console.log('page',page); 

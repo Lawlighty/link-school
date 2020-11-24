@@ -22,6 +22,8 @@ import StateProviders from '../store';
 import '../styles/pages/search/search.css'; 
 //讲师
 import '../styles/pages/lecturer/lecturer.css'; 
+//文档
+import '../styles/pages/resource/resource_doc.css'; 
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
