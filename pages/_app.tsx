@@ -25,6 +25,12 @@ import '../styles/pages/lecturer/lecturer.css';
 //文档
 import '../styles/pages/resource/resource_doc.css'; 
 
+//论坛
+import '../styles/components/comment/Comment.css'; 
+import '../styles/pages/forum/index.css'; 
+
+
+
 function MyApp({ Component, pageProps }: AppProps) {
   return (
       <StateProviders>

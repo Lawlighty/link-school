@@ -69,14 +69,21 @@ li {
 .c_999 {
     color: #999;
 }
-.font16 {
-    font-size: 16px;
-}
-.font_b {
-    font-weight: 700;
-}
+
 .mgt20 {
     margin-top: 20px;
+}
+.mgt10 {
+    margin-top: 10px;
+}
+.mgb10 {
+    margin-bottom: 10px;
+}
+.pat10 {
+    padding-top: 10px;
+}
+.pab10 {
+    padding-bottom: 10px;
 }
 .col {
     width: 4px;
@@ -94,6 +101,15 @@ li {
 .font14 {
     font-size: 14px;
 }
+.font16 {
+    font-size: 16px;
+}
+.font24 {
+    font-size: 24px;
+}
+.font_b {
+    font-weight: 700;
+}
 .pd20 {
     padding: 20px;
 }
@@ -103,12 +119,11 @@ li {
 .c_ccc {
     color: #ccc;
 }
-.font24 {
-    font-size: 24px;
+
+.bor_bot_f0{
+  border-bottom:  1px  solid #f0f0f0
 }
-.font_b {
-    font-weight: 700;
-}
+
 .flex_r_a{
   display: flex;
   align-items: center;

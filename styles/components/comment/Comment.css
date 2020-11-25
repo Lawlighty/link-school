@@ -1,0 +1,81 @@
+.comm_comm .comm .inputBox {
+    margin-top: 10px;
+    padding: 0 115px 30px 0;
+    position: relative;
+    
+}
+.comm_comm .comm  .box_has_bor {
+    border-bottom: 1px solid #ddd;
+}
+.comm_comm .comm .inputBox .commentInput {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 50px 0 10px;
+    width: 100%;
+    color: #666;
+    border: none;
+    background: #f4f4f4;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+.comm_comm .comm .inputBox .submitBtn {
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    outline: none;
+    border: none;
+    background: #f4f4f4;
+    border-radius: 8px;
+    color: #666;
+        display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.comm_comm .comm .inputBox  .cancom{
+    background: #2388ec;
+    color: #fff;
+}
+.comm_comm  .comm .tip {
+    padding: 30px 15px 20px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+}
+.comm_comm .comm .courseCommentItem{
+    padding: 20px 0;
+    border-bottom: 1px solid #e5e5e5;
+}
+.comm_comm .comm .courseCommentItem .userLogo img{
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.comm_comm .comm .courseCommentItem .courseCommentItemText .userName{
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+    margin-top: 2px;
+    margin-bottom: 15px;
+}
+.comm_comm .comm .courseCommentItem .courseCommentItemText .commentText{
+    font-size: 14px;
+    line-height: 20px;
+    color: #666;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    margin-left: 10px;
+}
+ .comm_comm .comm .courseCommentItem .courseCommentItemfooter{
+    font-size: 14px;
+    line-height: 20px;
+    color: #999;
+ }
+ .comm_comm .comm .courseCommentItem .courseCommentItemfooter .icon{
+    font-size: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+ }

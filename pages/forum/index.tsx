@@ -5,16 +5,19 @@ import {
     AppstoreFilled,
     FireFilled,
     StarFilled,
+    EyeOutlined,
+    CommentOutlined,
 } from '@ant-design/icons';
 import { withRouter } from 'next/router';
 import { getWeekDate } from '../../utils/utils';
 import AccountState from '../../store/accountinfo';
-import './index.css';
+
 
 
 const Forum = ({ router }) => {
     const accountState = AccountState.useContainer();
     const [top, setTop] = useState(90);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     const rmtj2 = [
         {
@@ -31,6 +34,108 @@ const Forum = ({ router }) => {
         },
     ];
 
+    const posts = [
+        {
+            title: 'JAVA 学习路线老哥提供一下',
+            href: '/forum/1',
+            avatar: '',
+            auther: '￥絶境逢生￥',
+            date: '2020-02-14',
+            last_back: '2020-11-21 20:39',
+            looks: 45,
+            talks: 22,
+        },
+        {
+            title: 'node.js 有啥东西',
+            href: '/forum/2',
+            avatar:
+                'https://api.jikipedia.com/upload/ccf299950da5409ccb9109e6068be0ee_scaled_avatar.jpg',
+            auther: '爷傲奈我何',
+            date: '2020-02-14',
+            last_back: '2020-11-21 20:39',
+            looks: 25,
+            talks: 42,
+        },
+        {
+            title: 'PHP是世界上最好的语言',
+            href: '/forum/3',
+            avatar:
+                'https://feed-image.baidu.com/0/pic/327375c109b2776581ca9179205f1b37.jpg',
+            auther: '乱世佳人',
+            date: '2020-02-14',
+            last_back: '2020-11-21 20:39',
+            looks: 456,
+            talks: 28,
+        },
+        {
+            title: 'JAVA 学习路线老哥提供一下',
+            href: '/forum/1',
+            avatar: '',
+            auther: '￥絶境逢生￥',
+            date: '2020-02-14',
+            last_back: '2020-11-21 20:39',
+            looks: 45,
+            talks: 22,
+        },
+        {
+            title: 'node.js 有啥东西',
+            href: '/forum/2',
+            avatar:
+                'https://api.jikipedia.com/upload/ccf299950da5409ccb9109e6068be0ee_scaled_avatar.jpg',
+            auther: '爷傲奈我何',
+            date: '2020-02-14',
+            last_back: '2020-11-21 20:39',
+            looks: 25,
+            talks: 42,
+        },
+        {
+            title: 'PHP是世界上最好的语言',
+            href: '/forum/3',
+            avatar:
+                'https://feed-image.baidu.com/0/pic/327375c109b2776581ca9179205f1b37.jpg',
+            auther: '乱世佳人',
+            date: '2020-02-14',
+            last_back: '2020-11-21 20:39',
+            looks: 456,
+            talks: 28,
+        },
+        {
+            title: 'JAVA 学习路线老哥提供一下',
+            href: '/forum/1',
+            avatar: '',
+            auther: '￥絶境逢生￥',
+            date: '2020-02-14',
+            last_back: '2020-11-21 20:39',
+            looks: 45,
+            talks: 22,
+        },
+        {
+            title: 'node.js 有啥东西',
+            href: '/forum/2',
+            avatar:
+                'https://api.jikipedia.com/upload/ccf299950da5409ccb9109e6068be0ee_scaled_avatar.jpg',
+            auther: '爷傲奈我何',
+            date: '2020-02-14',
+            last_back: '2020-11-21 20:39',
+            looks: 25,
+            talks: 42,
+        },
+        {
+            title: 'PHP是世界上最好的语言',
+            href: '/forum/3',
+            avatar:
+                'https://feed-image.baidu.com/0/pic/327375c109b2776581ca9179205f1b37.jpg',
+            auther: '乱世佳人',
+            date: '2020-02-14',
+            last_back: '2020-11-21 20:39',
+            looks: 456,
+            talks: 28,
+        },
+    ];
+
+    const onChangePage = (page) => {
+        console.log('page', page);
+    };
     return (
         <PcLayout
             showHeader={true}
@@ -45,7 +150,13 @@ const Forum = ({ router }) => {
                             <ul className="form_head_ul">
                                 <li
                                     style={{ border: 'none' }}
-                                    className="flex_r_a"
+                                    className={[
+                                        'flex_r_a',
+                                        currentIndex === 0 ? 'c_red' : '',
+                                    ].join(' ')}
+                                    onClick={() => {
+                                        setCurrentIndex(0);
+                                    }}
                                 >
                                     <AppstoreFilled
                                         style={{
@@ -55,7 +166,15 @@ const Forum = ({ router }) => {
                                     />
                                     全部
                                 </li>
-                                <li className="flex_r_a">
+                                <li
+                                    className={[
+                                        'flex_r_a',
+                                        currentIndex === 1 ? 'c_red' : '',
+                                    ].join(' ')}
+                                    onClick={() => {
+                                        setCurrentIndex(1);
+                                    }}
+                                >
                                     <FireFilled
                                         style={{
                                             marginRight: '10px',
@@ -64,7 +183,15 @@ const Forum = ({ router }) => {
                                     />
                                     精华
                                 </li>
-                                <li className="flex_r_a">
+                                <li
+                                    className={[
+                                        'flex_r_a',
+                                        currentIndex === 2 ? 'c_red' : '',
+                                    ].join(' ')}
+                                    onClick={() => {
+                                        setCurrentIndex(2);
+                                    }}
+                                >
                                     <StarFilled
                                         style={{
                                             marginRight: '10px',
@@ -77,27 +204,71 @@ const Forum = ({ router }) => {
                         </div>
 
                         <div className="post_items">
-                            <div className="post_item">
-                                <div className="user_img_div">
-                                    <img
-                                        src="https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg"
-                                        alt=""
-                                        className="user_img"
-                                    />
-                                </div>
-                                <div className="post_item_body flex_1">
-                                    <div className="post_item_body_title">
-                                        【标签】2018年度千元拍照王：非诺基亚X7莫属
+                            {posts.map((item, index) => (
+                                <div className="post_item" key={index}>
+                                    <div className="user_img_div">
+                                        <img
+                                            src={
+                                                item.avatar
+                                                    ? item.avatar
+                                                    : 'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg'
+                                            }
+                                            alt=""
+                                            className="user_img"
+                                        />
                                     </div>
-                                    <div className="post_item_body_info">
-                                        <div>
-                                            作者：CNMO官方报道
-                                            2020-10-26|最新回帖：一天前
+                                    <div className="post_item_body flex_1">
+                                        <div
+                                            className="post_item_body_title"
+                                            onClick={() => {
+                                                router.push(item.href);
+                                            }}
+                                        >
+                                            【标签】{item.title}
                                         </div>
-                                        <div>10.23 54</div>
+                                        <div className="post_item_body_info">
+                                            <div>
+                                                作者：{item.auther}
+                                                <span
+                                                    style={{
+                                                        display: 'inline-block',
+                                                        margin: '0 10px',
+                                                    }}
+                                                >
+                                                    |
+                                                </span>
+                                                最新回帖：{item.last_back}
+                                            </div>
+                                            <div>
+                                                <EyeOutlined
+                                                    style={{
+                                                        margin: '0 10px 0 20px',
+                                                    }}
+                                                />
+                                                {item.looks}
+                                                <CommentOutlined
+                                                    style={{
+                                                        margin: '0 10px 0 20px',
+                                                    }}
+                                                />
+                                                {item.talks}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            ))}
+
+                            <Pagination
+                                defaultCurrent={1}
+                                total={50}
+                                onChange={onChangePage}
+                                defaultPageSize={10}
+                                style={{
+                                    textAlign: 'center',
+                                    margin: '20px 0',
+                                    paddingBottom: '20px',
+                                }}
+                            />
                         </div>
                     </div>
                     <div className="forum_left_div">
@@ -189,6 +360,7 @@ const Forum = ({ router }) => {
                                             <div
                                                 style={{
                                                     paddingBottom: '10px',
+                                                    maxWidth: '120px',
                                                 }}
                                             >
                                                 {accountState.account
@@ -203,6 +375,7 @@ const Forum = ({ router }) => {
                                             <div
                                                 style={{
                                                     paddingBottom: '10px',
+                                                    maxWidth: '120px',
                                                 }}
                                             >
                                                 游客,你好

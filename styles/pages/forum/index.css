@@ -145,5 +145,34 @@
 .post_item_body_info{
     display:flex;
     justify-content: space-between;
+    color: #999;
 }
+.poster_tag{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.poster_info{
+    display:flex;
+    align-items: center;
+    color: #999;
+}
+.poster_div .poster_name,.poster_div  .posts,.poster_div .serum{
+    cursor: pointer;
+}
+.poster_div .poster_name:hover,.poster_div  .posts:hover,.poster_div .serum:hover{
+    color: #d51423 !important;
+}
+.post_main_body{
+    margin:10px 0
+}
+
+/* 评论 */
+.comm_box{
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
 
