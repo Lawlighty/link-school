@@ -44,6 +44,8 @@ export default function MyHead({
             headerIndexer.changeCurrentHeaderIndex(1);
         } else if (router.route === '/resource') {
             headerIndexer.changeCurrentHeaderIndex(2);
+        }else if (router.route === '/forum') {
+            headerIndexer.changeCurrentHeaderIndex(3);
         } else {
             headerIndexer.changeCurrentHeaderIndex(10);
         }
@@ -69,6 +71,10 @@ export default function MyHead({
                 case 2:
                     headerIndexer.changeCurrentHeaderIndex(2);
                     console.log('进入文档');
+                    router.push('/resource');
+                    break;
+                case 3:
+                    headerIndexer.changeCurrentHeaderIndex(3);
                     router.push('/resource');
                     break;
             }
