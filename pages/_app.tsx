@@ -28,6 +28,7 @@ import '../styles/pages/resource/resource_doc.css';
 //论坛
 import '../styles/components/comment/Comment.css'; 
 import '../styles/pages/forum/index.css'; 
+import '../styles/pages/forum/EditPost.css'; 
 
 
 

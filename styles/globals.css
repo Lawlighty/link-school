@@ -70,8 +70,14 @@ li {
     color: #999;
 }
 
+.ma_t_b_20{
+  margin:20px 0
+}
 .mgt20 {
     margin-top: 20px;
+}
+.ma_r_20{
+  margin-right: 20px;
 }
 .mgt10 {
     margin-top: 10px;
@@ -104,9 +110,28 @@ li {
 .font16 {
     font-size: 16px;
 }
+.font18 {
+    font-size: 18px;
+}
+.font20 {
+    font-size: 20px;
+}
+.font22 {
+    font-size: 22px;
+}
 .font24 {
     font-size: 24px;
 }
+.font26 {
+    font-size: 26px;
+}
+.font28 {
+    font-size: 28px;
+}
+.font30 {
+    font-size: 30px;
+}
+
 .font_b {
     font-weight: 700;
 }
@@ -124,6 +149,27 @@ li {
   border-bottom:  1px  solid #f0f0f0
 }
 
+/* //flex */
+.flex {
+  display: flex;
+}
+.flex_c {
+  display: flex;
+  flex-direction: column;
+}
+.flex_a_c {
+  align-items: center;
+}
+.flex_a_s {
+  align-items: flex-start;
+}
+.flex_j_c {
+  justify-content: center;
+}
+.flex_1 {
+  flex: 1;
+}
+
 .flex_r_a{
   display: flex;
   align-items: center;
@@ -132,6 +178,7 @@ li {
   display: flex;
   flex-direction: column;
 }
+
 
 .border-right{
       border-right: 1px solid #e6e6e6;
@@ -145,6 +192,39 @@ li {
  font-size: 12px;
 }
 
+/* img */
+.img_w_50_cir{
+  width: 50px;
+  border-radius: 50%;
+}
+
+/* menu */
+.ant-menu-submenu-popup{
+  z-index: 200 !important;
+}
+.page_f5f5f5{
+  background: #f5f5f5;
+  padding: 20px 0 60px 0;
+}
+.page_fff{
+  background: #fff;
+}
+.div_1200{
+  width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.bor_r_8{
+  border-radius: 8px;
+}
+.bor_r_10{
+  border-radius: 10px;
+}
+
+.pointer{
+  cursor: pointer;
+}
 /* 登录注册输入框 */
 .register_form_row {
   height: 40px  !important;

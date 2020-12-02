@@ -10,8 +10,9 @@ import AccountState from '../store/accountinfo';
 
 export default function Login() {
 
-  const accountState = AccountState.useContainer()
-  const router = useRouter()
+    const accountState = AccountState.useContainer()
+    const router = useRouter()
+    
 
   //登录选项
   const [ loginTab, setLoginTab ] = useState(0);
@@ -90,10 +91,16 @@ export default function Login() {
                         profilephoto:
                             'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg',
                         gender: 2,
-                        age:null,
+                        age: null,
                     };
                     accountState.setAccount(now_accountinfo);
-                    router.push('/')
+                    // console.log('router.query.form', router.query.from);
+                    if (router.query.from) {
+                        router.push(router.query.from + '');
+                    }
+                    else {
+                        router.push('/');
+                    }
                 }
                 catch (err) {
                     console.log('bbb');

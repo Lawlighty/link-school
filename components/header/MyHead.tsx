@@ -17,7 +17,8 @@ const seo = {
     description: '这是极课学院',
     title: '极课学院',
     icon:
-        'https://static-dev.roncoo.com/course/133f1c0dc6634da9a9fb67e98d8f489d.ico',
+        // 'https://static-dev.roncoo.com/course/133f1c0dc6634da9a9fb67e98d8f489d.ico',
+        '/imgs/geek_ico.ico',
 };
 
 const { Search } = Input;
@@ -132,7 +133,8 @@ export default function MyHead({
                             <div className="h_logo">
                                 <a href="/" className="nuxt-link-active">
                                     <img
-                                        src="https://static-dev.roncoo.com/course/QXWYm2L6itxhAlAJAq11UkHRpHTvL58h.png"
+                                        // src="https://static-dev.roncoo.com/course/QXWYm2L6itxhAlAJAq11UkHRpHTvL58h.png"
+                                        src="/imgs/geek_logo.png"
                                         width="auto"
                                         alt=""
                                     />

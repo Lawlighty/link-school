@@ -13,3 +13,16 @@ export const getWeekDate = () => {
     var week = weeks[day];
     return week;
 }
+
+export const getTagColor = (tag) => {
+    let color = 'red';
+    if (tag.length <= 4) {
+        color = 'magenta';
+    } else if (tag.length <= 6) {
+        color = 'green';
+    } else if (tag.length <= 8) {
+        color = 'geekblue';
+    }
+    return color;
+};
+

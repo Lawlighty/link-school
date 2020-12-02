@@ -177,10 +177,7 @@ export default function Apply() {
                         <div className="register_header">
                             <div className="register_logo">
                                 <a href="/" className="nuxt-link-active">
-                                    <img
-                                        src="https://static-dev.roncoo.com/course/QXWYm2L6itxhAlAJAq11UkHRpHTvL58h.png"
-                                        alt=""
-                                    />
+                                    <img src="/imgs/geek_logo.png" alt="" />
                                 </a>
                             </div>
                         </div>

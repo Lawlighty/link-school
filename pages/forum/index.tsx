@@ -136,6 +136,17 @@ const Forum = ({ router }) => {
     const onChangePage = (page) => {
         console.log('page', page);
     };
+
+
+    //发帖
+    const toPostPage = () => {
+        if (accountState.account.isLogin) {
+            router.push('/forum/EditPost');
+        }
+        else {
+            router.push('/login?from=/forum');
+        }
+    }
     return (
         <PcLayout
             showHeader={true}
@@ -314,6 +325,7 @@ const Forum = ({ router }) => {
                                 <div
                                     className="btn_item left1"
                                     style={{ borderRight: '1px solid #e4e4e4' }}
+                                    onClick={toPostPage}
                                 >
                                     <div className="item_div">
                                         <img
@@ -388,7 +400,9 @@ const Forum = ({ router }) => {
                                                     }}
                                                     className="tologin_green"
                                                     onClick={() => {
-                                                        router.push('/login');
+                                                        router.push(
+                                                            '/login?from=/forum',
+                                                        );
                                                     }}
                                                 >
                                                     登录

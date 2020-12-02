@@ -14,4 +14,7 @@ export const orderStatusList: string[] = ['待支付', '已完成'];
 export const payTypeList: string[] = ['支付宝', '微信'];
 
 //产品类型
-export const productTypeList: string[] = ['购买会员','点播课程'];
+export const productTypeList: string[] = ['购买会员', '点播课程'];
+
+//帖子默认标签
+export const postTags: string[] = ['Go', 'React',"node.js"];
