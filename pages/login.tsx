@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { timer_clock, phone_reg } from '../config';
 import { _login_with_account } from '../server/server';
+import { _get_users_list } from '../server/users';
 import AccountState from '../store/accountinfo';
 
 
@@ -83,24 +84,24 @@ export default function Login() {
                     // );
                     // console.log('response==>', response);
 
+                    await _login_with_account(phoneNumber, passWord);
                     //更新全局accountInfo
-                    let now_accountinfo = {
-                        isLogin: true,
-                        phoneNumber: phoneNumber,
-                        userName: '',
-                        profilephoto:
-                            'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg',
-                        gender: 2,
-                        age: null,
-                    };
-                    accountState.setAccount(now_accountinfo);
-                    // console.log('router.query.form', router.query.from);
-                    if (router.query.from) {
-                        router.push(router.query.from + '');
-                    }
-                    else {
-                        router.push('/');
-                    }
+                    // let now_accountinfo = {
+                    //     isLogin: true,
+                    //     phoneNumber: phoneNumber,
+                    //     userName: '',
+                    //     profilephoto:
+                    //         'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg',
+                    //     gender: 2,
+                    //     age: null,
+                    // };
+                    // accountState.setAccount(now_accountinfo);
+                    // if (router.query.from) {
+                    //     router.push(router.query.from + '');
+                    // }
+                    // else {
+                    //     router.push('/');
+                    // }
                 }
                 catch (err) {
                     console.log('bbb');

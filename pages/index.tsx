@@ -5,12 +5,12 @@ import {RightOutlined, UserOutlined, EyeOutlined, LikeOutlined } from '@ant-desi
 import HeaderIndexer from '../store/headerIndex';
 import { useRouter } from 'next/router';
 import { demo } from '../server/server';
+import { _get_users_list } from '../server/users';
 
 export default function Home() {
-    // useEffect(() => {
-    //     console.log('diaoy demo');
-    //     demo(1,'123','123');
-    // },[])
+    useEffect(() => {
+       getCourses()
+    })
   const router = useRouter();
   const { SubMenu } = Menu;
   //轮播图
@@ -430,7 +430,19 @@ export default function Home() {
           sale_tag: 10,
           live_time: '2020-09-09 22:31:00',
       },
-  ];
+    ];
+    // 查询限制(分页)
+    const query = {
+        limit: 1,
+        page:1
+    }
+  const getCourses = async() => {
+    await _get_users_list(query).then((data) => {
+        console.log('获取用户列表', data);
+        console.log('获取用户列表', data.data.data);
+    });
+  };
+    
   return (
       <PcLayout
           showHeader={true}
