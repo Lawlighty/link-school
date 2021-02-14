@@ -22,6 +22,8 @@ const seo = {
 };
 
 const { Search } = Input;
+let accountState={};
+let token='';
 export default function MyHead({
     customSeo,
     showHeader,
@@ -32,13 +34,19 @@ export default function MyHead({
     isLogin: boolean;
 }) {
     let router = useRouter();
+    const [accountState,setAccountState] = useState({});
+    const [token,setToken] = useState({});
     // const [headerIndexer, setHeaderIndexer] = useState(
     //     HeaderIndexer.useContainer(),
     // );
     const headerIndexer = HeaderIndexer.useContainer();
-    const accountState = AccountState.useContainer();
+    // const accountState = AccountState.useContainer();
+   
 
     useEffect(() => {
+        setAccountState(JSON.parse(localStorage.getItem('userInfo')));
+        setToken(localStorage.getItem('token'));
+
         if (router.route === '/') {
             headerIndexer.changeCurrentHeaderIndex(0);
         } else if (router.route === '/list') {
@@ -82,7 +90,9 @@ export default function MyHead({
         }
     };
     const toLogout=() => {
-        accountState.clearAccount();
+        // accountState.clearAccount();
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('token');
         router.push('/login')
     }
     const onKeyup = (e) => {
@@ -92,276 +102,215 @@ export default function MyHead({
          }
     }
     return (
-        <>
-            <Head>
-                <meta charSet="UTF-8" />
-                <meta http-equiv="Access-Control-Allow-Origin" content="*" />
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0"
-                />
-                <meta
-                    name="keywords"
-                    content={
-                        customSeo && customSeo.keywords
-                            ? customSeo.keywords
-                            : seo.keywords
-                    }
-                />
-                <meta
-                    name="description"
-                    content={
-                        customSeo && customSeo.description
-                            ? customSeo.description
-                            : seo.description
-                    }
-                />
-                <title>
-                    {customSeo && customSeo.title ? customSeo.title : seo.title}{' '}
-                </title>
-                <link
-                    rel="icon"
-                    href={
-                        customSeo && customSeo.icon ? customSeo.icon : seo.icon
-                    }
-                />
-            </Head>
-            {showHeader ? (
-                <div className="head-tab">
-                    <div className="h_header border_b">
-                        <div className="h_nav">
-                            <div className="h_logo">
-                                <a href="/" className="nuxt-link-active">
-                                    <img
-                                        // src="https://static-dev.roncoo.com/course/QXWYm2L6itxhAlAJAq11UkHRpHTvL58h.png"
-                                        src="/imgs/geek_logo.png"
-                                        width="auto"
-                                        alt=""
-                                    />
-                                </a>
-                            </div>
-                            <ul className="h_nav_ul clearfix">
-                                <Link href="/">
-                                    <a target="_self">
-                                        <li
-                                            className={[
-                                                'nav_item',
-                                                headerIndexer.headerIndex === 0
-                                                    ? 'active'
-                                                    : '',
-                                            ].join(' ')}
-                                        >
-                                            首页
-                                        </li>
-                                    </a>
-                                </Link>
-                                <Link href="/list">
-                                    <a target="_self">
-                                        <li
-                                            className={[
-                                                'nav_item',
-                                                headerIndexer.headerIndex === 1
-                                                    ? 'active'
-                                                    : '',
-                                            ].join(' ')}
-                                        >
-                                            视频
-                                        </li>
-                                    </a>
-                                </Link>
-                                <Link href="/resource">
-                                    <a target="_self">
-                                        <li
-                                            className={[
-                                                'nav_item',
-                                                headerIndexer.headerIndex === 2
-                                                    ? 'active'
-                                                    : '',
-                                            ].join(' ')}
-                                        >
-                                            文档
-                                        </li>
-                                    </a>
-                                </Link>
-                                <Link href="/forum">
-                                    <a  target="_self">
-                                        <li
-                                            className={[
-                                                'nav_item',
-                                                headerIndexer.headerIndex === 3
-                                                    ? 'active'
-                                                    : '',
-                                            ].join(' ')}
-                                        >
-                                            论坛
-                                        </li>
-                                    </a>
-                                </Link>
-                                <span>
-                                    <li
-                                        style={{ display: 'none' }}
-                                        className="nav_item more_box"
-                                        aria-describedby="el-popover-3303"
-                                    >
-                                        <EllipsisOutlined className="el-icon-more" />
-                                        <div className="clearfix more_items">
-                                            <div className="div1out">
-                                                <div className="div1"></div>
-                                            </div>
-                                            <ul className="clearfix more_items_ul">
-                                                <a
-                                                    href="/info"
-                                                    target="_self"
-                                                    className=""
-                                                >
-                                                    <li className="more_item">
-                                                        资讯中心
-                                                    </li>
-                                                </a>
-                                                <a
-                                                    href="/recruit"
-                                                    target="_blank"
-                                                    className=""
-                                                >
-                                                    <li className="more_item">
-                                                        讲师招募
-                                                    </li>
-                                                </a>
-                                                <a
-                                                    href="/blog"
-                                                    target="_blank"
-                                                    className=""
-                                                >
-                                                    <li className="more_item">
-                                                        博客中心
-                                                    </li>
-                                                </a>
-                                                <a
-                                                    href="/question"
-                                                    target="_blank"
-                                                    className=""
-                                                >
-                                                    <li className="more_item">
-                                                        知识问答
-                                                    </li>
-                                                </a>
-                                                <a
-                                                    href="/vip"
-                                                    target="_blank"
-                                                    className=""
-                                                >
-                                                    <li className="more_item">
-                                                        超级会员
-                                                    </li>
-                                                </a>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </span>
-                            </ul>
-                            <div className="fr nav-right">
-                                <div className=" search_box ">
-                                    <Input
-                                        prefix={
-                                            <SearchOutlined className="search_icon" />
-                                        }
-                                        placeholder="请输入搜索内容"
-                                        // value=""
-                                        className="search_input"
-                                        onKeyUp={onKeyup}
-                                    />
-                                </div>
-                                <Link href="/recruit">
-                                    <a className="">
-                                        <div className="item">讲师入驻</div>
-                                    </a>
-                                </Link>
-
-                                {!isLogin ? (
-                                    <div>
-                                        <Link href="/login">
-                                            <a className="">
-                                                <span className="login item">
-                                                    登录
-                                                </span>
-                                            </a>
-                                        </Link>
-                                        <Link href="/register">
-                                            <a className="">
-                                                <div className="registers item">
-                                                    注册
-                                                </div>
-                                            </a>
-                                        </Link>
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <Link href="/account/message">
-                                            <a className="">
-                                                <img
-                                                    src="/imgs/邮件.png"
-                                                    alt=""
-                                                    className="item"
-                                                />
-                                                {/* <span className="login item">通知</span> */}
-                                            </a>
-                                        </Link>
-
-                                        <div className="mine">
-                                            <img
-                                                src={
-                                                    accountState.account
-                                                        .profilephoto
-                                                        ? accountState.account
-                                                              .profilephoto
-                                                        : '/imgs/头像 (1).png'
-                                                }
-                                                alt=""
-                                                className="item"
-                                                onClick={() => {
-                                                    router.push(
-                                                        '/account/info',
-                                                    );
-                                                }}
-                                                style={{ borderRadius: '50%' }}
-                                            />
-                                            <div className="mine_more_items">
-                                                <ul
-                                                    className="clearfix more_items_ul"
-                                                    style={{
-                                                        position: 'relative',
-                                                    }}
-                                                >
-                                                    <CaretUpOutlined className="mine_circle" />
-                                                    <Link href="/vip">
-                                                        <a
-                                                            target="_blank"
-                                                            className=""
-                                                        >
-                                                            <li className="more_item">
-                                                                超级会员
-                                                            </li>
-                                                        </a>
-                                                    </Link>
-
-                                                    <a
-                                                        onClick={toLogout}
-                                                        className=""
-                                                    >
-                                                        <li className="more_item">
-                                                            退出登录
-                                                        </li>
-                                                    </a>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
+      <>
+        <Head>
+          <meta charSet="UTF-8" />
+          <meta http-equiv="Access-Control-Allow-Origin" content="*" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <meta
+            name="keywords"
+            content={
+              customSeo && customSeo.keywords
+                ? customSeo.keywords
+                : seo.keywords
+            }
+          />
+          <meta
+            name="description"
+            content={
+              customSeo && customSeo.description
+                ? customSeo.description
+                : seo.description
+            }
+          />
+          <title>
+            {customSeo && customSeo.title ? customSeo.title : seo.title}{' '}
+          </title>
+          <link
+            rel="icon"
+            href={customSeo && customSeo.icon ? customSeo.icon : seo.icon}
+          />
+        </Head>
+        {showHeader ? (
+          <div className="head-tab">
+            <div className="h_header border_b">
+              <div className="h_nav">
+                <div className="h_logo">
+                  <a href="/" className="nuxt-link-active">
+                    <img
+                      // src="https://static-dev.roncoo.com/course/QXWYm2L6itxhAlAJAq11UkHRpHTvL58h.png"
+                      src="/imgs/geek_logo.png"
+                      width="auto"
+                      alt=""
+                    />
+                  </a>
                 </div>
-            ) : null}
-        </>
+                <ul className="h_nav_ul clearfix">
+                  <Link href="/">
+                    <a target="_self">
+                      <li
+                        className={[
+                          'nav_item',
+                          headerIndexer.headerIndex === 0 ? 'active' : '',
+                        ].join(' ')}
+                      >
+                        首页
+                      </li>
+                    </a>
+                  </Link>
+                  <Link href="/list">
+                    <a target="_self">
+                      <li
+                        className={[
+                          'nav_item',
+                          headerIndexer.headerIndex === 1 ? 'active' : '',
+                        ].join(' ')}
+                      >
+                        视频
+                      </li>
+                    </a>
+                  </Link>
+                  <Link href="/resource">
+                    <a target="_self">
+                      <li
+                        className={[
+                          'nav_item',
+                          headerIndexer.headerIndex === 2 ? 'active' : '',
+                        ].join(' ')}
+                      >
+                        文档
+                      </li>
+                    </a>
+                  </Link>
+                  <Link href="/forum">
+                    <a target="_self">
+                      <li
+                        className={[
+                          'nav_item',
+                          headerIndexer.headerIndex === 3 ? 'active' : '',
+                        ].join(' ')}
+                      >
+                        论坛
+                      </li>
+                    </a>
+                  </Link>
+                  <span>
+                    <li
+                      style={{ display: 'none' }}
+                      className="nav_item more_box"
+                      aria-describedby="el-popover-3303"
+                    >
+                      <EllipsisOutlined className="el-icon-more" />
+                      <div className="clearfix more_items">
+                        <div className="div1out">
+                          <div className="div1"></div>
+                        </div>
+                        <ul className="clearfix more_items_ul">
+                          <a href="/info" target="_self" className="">
+                            <li className="more_item">资讯中心</li>
+                          </a>
+                          <a href="/recruit" target="_blank" className="">
+                            <li className="more_item">讲师招募</li>
+                          </a>
+                          <a href="/blog" target="_blank" className="">
+                            <li className="more_item">博客中心</li>
+                          </a>
+                          <a href="/question" target="_blank" className="">
+                            <li className="more_item">知识问答</li>
+                          </a>
+                          <a href="/vip" target="_blank" className="">
+                            <li className="more_item">超级会员</li>
+                          </a>
+                        </ul>
+                      </div>
+                    </li>
+                  </span>
+                </ul>
+                <div className="fr nav-right">
+                  <div className=" search_box ">
+                    <Input
+                      prefix={<SearchOutlined className="search_icon" />}
+                      placeholder="请输入搜索内容"
+                      // value=""
+                      className="search_input"
+                      onKeyUp={onKeyup}
+                    />
+                  </div>
+                  <Link href="/recruit">
+                    <a className="">
+                      <div className="item">讲师入驻</div>
+                    </a>
+                  </Link>
+
+                  {!token ? (
+                    <div>
+                      <Link href="/login">
+                        <a className="">
+                          <span className="login item">登录</span>
+                        </a>
+                      </Link>
+                      <Link href="/register">
+                        <a className="">
+                          <div className="registers item">注册</div>
+                        </a>
+                      </Link>
+                    </div>
+                  ) : (
+                    <div>
+                      <Link href="/account/message">
+                        <a className="">
+                          <img src="/imgs/邮件.png" alt="" className="item" />
+                          {/* <span className="login item">通知</span> */}
+                        </a>
+                      </Link>
+
+                      <div className="mine">
+                        <img
+                          src={
+                            accountState.avatar
+                              ? accountState.avatar
+                              : '/imgs/头像 (1).png'
+                          }
+                          //   src={
+                          //     '/imgs/头像 (1).png'
+                          //   }
+                          alt=""
+                          className="item"
+                          onClick={() => {
+                            router.push('/account/info');
+                          }}
+                          style={{ borderRadius: '50%' }}
+                        />
+                        <div className="mine_more_items">
+                          <ul
+                            className="clearfix more_items_ul"
+                            style={{
+                              position: 'relative',
+                            }}
+                          >
+                            <CaretUpOutlined className="mine_circle" />
+                            <Link href="/vip">
+                              <a target="_blank" className="">
+                                <li className="more_item">超级会员</li>
+                              </a>
+                            </Link>
+
+                            <a onClick={toLogout} className="">
+                              <li className="more_item">退出登录</li>
+                            </a>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </>
     );
 }

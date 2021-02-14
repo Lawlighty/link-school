@@ -9,7 +9,7 @@ import { _get_users_list } from '../server/users';
 
 export default function Home() {
     useEffect(() => {
-       getCourses()
+    //    getCourses()
     })
   const router = useRouter();
   const { SubMenu } = Menu;

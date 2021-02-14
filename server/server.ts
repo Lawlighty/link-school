@@ -1,5 +1,19 @@
 import { MethodType, request } from '../request.js';
 
+// 注册
+export const _register = async (
+  phone: string,
+  verifyCode:string,
+  password: string,
+  ref_code: string,
+) => {
+    const info = {
+        username: phone,
+        password: password,
+        ref_code: ref_code,
+    };
+  return await request('/auth/register', MethodType.POST, info);
+};
 
 //账号 登录 
 // export const _login_with_account = async (phone: string, password: string) => {

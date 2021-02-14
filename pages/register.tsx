@@ -6,6 +6,7 @@ import { timer_clock, psw_reg, phone_reg } from '../config';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 import AccountState from '../store/accountinfo';
+import { _register } from '../server/server';
 
 const { confirm } = Modal;
 
@@ -71,56 +72,67 @@ export default function Register() {
   //注册
   const tologin = ()=>{
     //表单验证
-    if(!phoneNumber||!phone_reg.test(phoneNumber)){
-      console.log('phoneNumber==>',phoneNumber)
+    if (!phoneNumber || !phone_reg.test(phoneNumber)) {
+      console.log('phoneNumber==>', phoneNumber);
       message.error('请输入正确的手机号!');
-      return
+      return;
     }
-    if(!verifyCode){
-      console.log('verifyCode==>',verifyCode)
+    if (!verifyCode) {
+      console.log('verifyCode==>', verifyCode);
       message.error('请输入验证码!');
-      return
+      return;
     }
-    if(!passWord||!psw_reg.test(passWord)){
-      console.log('passWord==>',passWord)
+    if (!passWord || !psw_reg.test(passWord)) {
+      console.log('passWord==>', passWord);
       message.error('请输入正确的密码!');
-      return
+      return;
     }
-    if(!repassWord||!psw_reg.test(repassWord)||passWord!=repassWord){
-      console.log('repassWord==>',repassWord)
+    if (!repassWord || !psw_reg.test(repassWord) || passWord != repassWord) {
+      console.log('repassWord==>', repassWord);
       message.error('请输入正确的确认密码!');
-      return
+      return;
     }
     //后台验证
-    if(1){
-      //注册提示
-      confirm({
-        style:{marginTop:200},
-        title: '注册成功!',
-        icon: <ExclamationCircleOutlined />,
-        okText: '立即登录',
-        cancelText: '取消',
-        onOk() {
-            //去首页
-            router.push('/');
-            //更新全局accountInfo
-            let now_accountinfo = {
-                isLogin: true,
-                phoneNumber: phoneNumber,
-                userName: '',
-                profilephoto:
-                    'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg',
-                gender: 2,
-                age: null,
-            };
-            accountState.setAccount(now_accountinfo);
-        },
-          onCancel() {
-              //去登录界面
-              router.push('/login');
-          },
-      });
-    }
+    // if (1) {
+    // }
+    let asyRegister = async () => {
+      await _register(phoneNumber, verifyCode, passWord, referralCode)
+          .then((data: any) => {
+              if (data.status && data.status === 201) { 
+                confirm({
+                style: { marginTop: 200 },
+                title: '注册成功!',
+                icon: <ExclamationCircleOutlined />,
+                okText: '立即登录',
+                cancelText: '取消',
+                onOk() {
+                    //去首页
+                    router.push('/');
+                    //更新全局accountInfo
+                    //   let now_accountinfo = {
+                    //     isLogin: true,
+                    //     phoneNumber: phoneNumber,
+                    //     userName: '',
+                    //     profilephoto:
+                    //       'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg',
+                    //     gender: 2,
+                    //     age: null,
+                    //   };
+                    //   accountState.setAccount(now_accountinfo);
+                },
+                onCancel() {
+                    //去登录界面
+                    router.push('/login');
+                },
+                });
+              }
+            console.log('注册成功',data)
+          //注册提示
+          
+        })
+        .catch((err: any) => {message.error(err.message);});
+      };
+      asyRegister();
   }
   return (
       <PcLayout showHeader customSeo={null} showFooter={false} isBlack={false}>

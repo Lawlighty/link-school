@@ -58,7 +58,8 @@ export default function Login() {
     }
   }, [codeString,isSendCode])
 
-  const toLogin = ()=>{
+    const toLogin = () => {
+      const _this = this;
       if (!phoneNumber) {
           //||!phone_reg.test(phoneNumber)
           message.error('请输入正确的手机号!');
@@ -76,7 +77,7 @@ export default function Login() {
                 phoneNumber + '   password ' + passWord,
             );
             let asyLogin = async () => {
-                try {
+               
                     // console.log('aaa');
                     // let response = await _login_with_account(
                     //     phoneNumber,
@@ -84,7 +85,29 @@ export default function Login() {
                     // );
                     // console.log('response==>', response);
 
-                    await _login_with_account(phoneNumber, passWord);
+                    await _login_with_account(phoneNumber, passWord).then((data:any) => {
+                        console.log('login data==>', data);
+                        console.log('login user==>', data.data.user);
+                        console.log('login token==>', data.data.token);
+                        if (data.status && data.status === 201) {
+                          message.success('登录成功');
+                          localStorage.setItem(
+                            'userInfo',
+                            JSON.stringify(data.data.user),
+                          );
+                          localStorage.setItem('token', data.data.token);
+                          if (router.query.from) {
+                            router.push(router.query.from + '');
+                          } else {
+                            router.push('/');
+                          }
+                        } else {
+                          message.error(data.message);
+                        }
+                    }).catch((err) => {
+                        message.error(err.message);
+                    });
+
                     //更新全局accountInfo
                     // let now_accountinfo = {
                     //     isLogin: true,
@@ -102,10 +125,7 @@ export default function Login() {
                     // else {
                     //     router.push('/');
                     // }
-                }
-                catch (err) {
-                    console.log('bbb');
-                }
+                
                 
             };
             asyLogin()
