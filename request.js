@@ -2,7 +2,9 @@ import axios from 'axios';
 import { message, } from 'antd';
 
 //  axios.defaults.baseURL = 'http://172.20.16.15:8070';
- axios.defaults.baseURL = 'http://localhost:3008';
+axios.defaults.baseURL = 'http://localhost:3008';
+axios.defaults.headers.post['Content-Type'] = 'application/json;charset=utf-8';
+ axios.defaults.timeout = 10000;
 export const MethodType = {
     GET: 'GET',
     POST: 'POST',
@@ -23,7 +25,7 @@ export const request =(url, method, params)=> {
           headers: {
             // token: localStorage.token,
             // 'X-AUTH-TOKEN': localStorage.token,
-            'Content-Type': 'application/json;charset=utf-8',
+            // 'Content-Type': 'application/json;charset=utf-8',
           },
         });
       case MethodType.POST:
@@ -31,7 +33,24 @@ export const request =(url, method, params)=> {
           headers: {
             // token: localStorage.token,
             // 'X-AUTH-TOKEN': localStorage.token,
-            'Content-Type': 'application/json;charset=utf-8',
+            // 'Content-Type': 'application/json;charset=utf-8',
+          },
+        });
+      case MethodType.PUT:
+        return axios.put(url, params, {
+          headers: {
+            // token: localStorage.token,
+            // 'X-AUTH-TOKEN': localStorage.token,
+            // 'Content-Type': 'application/json;charset=utf-8',
+          },
+        });
+      case MethodType.DELETE:
+        return axios.delete(url, {
+          params,
+          headers: {
+            // token: localStorage.token,
+            // 'X-AUTH-TOKEN': localStorage.token,
+            // 'Content-Type': 'application/json;charset=utf-8',
           },
         });
       default:
@@ -45,7 +64,7 @@ export const request2 = (
     config = {},
 ) => {
     const apiToken = '';
-    const data = method === 'GET' ? 'params' : 'data';
+    const data = method === 'GET' || 'DELETE' ? 'params' : 'data';
     let headers = {
         // 'X-Requested-With': 'XMLHttpRequest',
         // 'Content-Type': 'application/json',

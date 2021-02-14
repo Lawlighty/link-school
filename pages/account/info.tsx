@@ -7,10 +7,12 @@ import {
     Radio,  
     Upload,
 } from 'antd';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AccountLeft from '../../components/account_left/AccountLeft';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import AccountState from '../../store/accountinfo';
+import { _update_user_info } from '../../server/server';
+
 
 export default function AccountInfo() {
 
@@ -23,9 +25,20 @@ export default function AccountInfo() {
     //     gender: 0,
     //     profilephoto: 'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg',
     // }
-    let account = accountState.account;
+    // let account = accountState.account;
+    
+    let account = {};
 
-    const [accountInfo, setAccountInfo] = useState(account);
+    const [accountInfo, setAccountInfo] = useState<any>(account);
+
+    useEffect(() => {
+        setAccountInfo(JSON.parse(localStorage.getItem('userInfo')));
+        console.log(
+          'localStorage.getItem',
+          JSON.parse(localStorage.getItem('userInfo')),
+      );
+      
+    }, []);
 
     const [loading, setLoading] = useState(false);
     const [imageUrl, setImageUrl] = useState('');
@@ -73,7 +86,8 @@ export default function AccountInfo() {
             getBase64(info.file.originFileObj, (imageUrl) =>
                 {
                 setLoading(false);
-                setImageUrl(imageUrl);
+                // setImageUrl(imageUrl);
+                setAccountInfo({...accountInfo, ['avatar']:imageUrl});
                }
                 
             );
@@ -100,193 +114,204 @@ export default function AccountInfo() {
         );
     };
 
-    const updateAccountInfo = () => {
-        if (!accountInfo.userName) {
-             message.error('请输入昵称');
+  const updateAccountInfo = () => {
+    
+        if (!accountInfo.nickname) {
+          message.error('请输入昵称');
         }
-        else if (!accountInfo.age) {
-            message.error('请输入年龄!');
-        } else {
-            // account = accountInfo;
-            accountState.setAccount(accountInfo);
-            setIsEdit(false);
-            Modal.success({
-                content: '修改成功!',
-                okText: '确定',
-            });
+        // else if (!accountInfo.age) {
+        //     message.error('请输入年龄!');
+        // }
+        else {
+          // account = accountInfo;
+          // accountState.setAccount(accountInfo);
+          setIsEdit(false);
+          updateInfo();
         }
         
-    }
+  }
+  const updateInfo = async () => {
+    const user = {
+      _id: accountInfo._id,
+      avatar: accountInfo.avatar,
+      nickname: accountInfo.nickname,
+      gender: accountInfo.gender,
+    };
+    await _update_user_info(user._id, user)
+      .then((data) => {
+        if (data.data.code === 200) {
+          const new_accountInfo = accountInfo;
+          new_accountInfo['avatar'] = user.avatar;
+          new_accountInfo['nickname'] = user.nickname;
+          new_accountInfo['gender'] = user.gender;
+          localStorage.setItem('userInfo', JSON.stringify(new_accountInfo));
+          setAccountInfo(new_accountInfo);
+          Modal.success({
+            content: '修改成功!',
+            okText: '确定',
+          });
+        }
+      })
+      .catch((err) => {
+        console.log('更新err', err);
+        message.error(err.message);
+      });
+  }
     return (
-        <PcLayout
-            showHeader={true}
-            customSeo={null}
-            showFooter={true}
-            isBlack={false}
-        >
-            <div className="info_page">
-                <div className="container">
-                    <AccountLeft showPerCenter showRecruit={false} />
-                    <div className="main_box">
-                        <ul className="tabs ">
-                            <a className="tab on">基础信息</a>
-                        </ul>
+      <PcLayout
+        showHeader={true}
+        customSeo={null}
+        showFooter={true}
+        isBlack={false}
+      >
+        <div className="info_page">
+          <div className="container">
+            <AccountLeft showPerCenter showRecruit={false} />
+            <div className="main_box">
+              <ul className="tabs ">
+                <a className="tab on">基础信息</a>
+              </ul>
 
-                        <div className="main_cont form">
-                            <div className="form_item">
-                                <div className="label">手机:</div>
-                                <div className="text">
-                                    {accountInfo.phoneNumber}
-                                </div>
-                            </div>
-                            <div className="form_item">
-                                <div className="label">昵称:</div>
-                                {isEdit ? (
-                                    <Input
-                                        className="info_input"
-                                        placeholder="请输入昵称"
-                                        defaultValue={accountInfo.userName}
-                                        onChange={(e) => {
-                                            changeAccountInfo(
-                                                'userName',
-                                                e.target.value,
-                                            );
-                                        }}
-                                    />
-                                ) : (
-                                    <div className="text">
-                                        {accountInfo.userName}
-                                    </div>
-                                )}
-                            </div>
-                            <div className="form_item">
-                                <div className="label">年龄:</div>
-                                {isEdit ? (
-                                    <InputNumber
-                                        min={1}
-                                        max={150}
-                                        className="info_input"
-                                        placeholder="请输入年龄"
-                                        defaultValue={accountInfo.age}
-                                        onChange={(e) => {
-                                            changeAccountInfo('age', e);
-                                        }}
-                                    />
-                                ) : (
-                                    <div className="text">
-                                        {accountInfo.age}
-                                    </div>
-                                )}
-                            </div>
-                            <div className="form_item">
-                                <div className="label">性别:</div>
-                                {isEdit ? (
-                                    <Radio.Group
-                                        style={{ marginLeft: 20 }}
-                                        onChange={(e) => {
-                                            changeAccountInfo(
-                                                'gender',
-                                                e.target.value,
-                                            );
-                                        }}
-                                        defaultValue={accountInfo.gender}
-                                    >
-                                        <Radio value={0}>男</Radio>
-                                        <Radio value={1}>女</Radio>
-                                        <Radio value={2}>保密</Radio>
-                                    </Radio.Group>
-                                ) : (
-                                    <div className="text">
-                                        {accountInfo.gender === 0
-                                            ? '男'
-                                            : accountInfo.gender === 1
-                                            ? '女'
-                                            : '保密'}
-                                    </div>
-                                )}
-                            </div>
-                            <div className="form_item">
-                                <div className="label">头像:</div>
-                                <div className="text">
-                                    {isEdit ? (
-                                        <Upload
-                                            name="avatar"
-                                            listType="picture-card"
-                                            className="avatar-uploader"
-                                            showUploadList={false}
-                                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                                            beforeUpload={beforeUpload}
-                                            onChange={handleChange}
-                                            onPreview={handlePreview}
-                                        >
-                                            {imageUrl ? (
-                                                <img
-                                                    src={imageUrl}
-                                                    alt="avatar"
-                                                    style={{ width: '100%' }}
-                                                />
-                                            ) : (
-                                                <div>
-                                                    {loading ? (
-                                                        <LoadingOutlined />
-                                                    ) : (
-                                                        <PlusOutlined />
-                                                    )}
-                                                    点击上传
-                                                </div>
-                                            )}
-                                        </Upload>
-                                    ) : (
-                                        <img
-                                            style={{ width: '120px' }}
-                                            // src="https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg"
-                                            src="/imgs/头像 (1).png"
-                                            alt=""
-                                        />
-                                    )}
-                                </div>
-                            </div>
-                            <div className="form_item">
-                                <div className="label"></div>
-                                <div className="text">
-                                    {isEdit ? (
-                                        <button
-                                            className="submit_btn"
-                                            onClick={() => {
-                                                updateAccountInfo();
-                                            }}
-                                        >
-                                            提交
-                                        </button>
-                                    ) : (
-                                        <button
-                                            className="submit_btn"
-                                            onClick={() => {
-                                                setIsEdit(true);
-                                            }}
-                                        >
-                                            修改
-                                        </button>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <Modal
-                        visible={previewVisible}
-                        title={previewTitle}
-                        footer={null}
-                        onCancel={() => setPreviewVisible(false)}
-                    >
-                        <img
-                            alt="example"
-                            style={{ width: '100%' }}
-                            src={previewImage}
-                        />
-                    </Modal>
+              <div className="main_cont form">
+                <div className="form_item">
+                  <div className="label">手机:</div>
+                  <div className="text">{accountInfo.username}</div>
                 </div>
+                <div className="form_item">
+                  <div className="label">昵称:</div>
+                  {isEdit ? (
+                    <Input
+                      className="info_input"
+                      placeholder="请输入昵称"
+                      defaultValue={accountInfo.nickname}
+                      onChange={(e) => {
+                        changeAccountInfo('nickname', e.target.value);
+                      }}
+                    />
+                  ) : (
+                    <div className="text">{accountInfo.nickname}</div>
+                  )}
+                </div>
+                <div className="form_item">
+                  <div className="label">年龄:</div>
+                  {isEdit ? (
+                    <InputNumber
+                      min={1}
+                      max={150}
+                      className="info_input"
+                      placeholder="请输入年龄"
+                      defaultValue={accountInfo.age}
+                      onChange={(e) => {
+                        changeAccountInfo('age', e);
+                      }}
+                    />
+                  ) : (
+                    <div className="text">{accountInfo.age}</div>
+                  )}
+                </div>
+                <div className="form_item">
+                  <div className="label">性别:</div>
+                  {isEdit ? (
+                    <Radio.Group
+                      style={{ marginLeft: 20 }}
+                      onChange={(e) => {
+                        changeAccountInfo('gender', e.target.value);
+                      }}
+                      defaultValue={accountInfo.gender}
+                    >
+                      <Radio value={0}>男</Radio>
+                      <Radio value={1}>女</Radio>
+                      <Radio value={2}>保密</Radio>
+                    </Radio.Group>
+                  ) : (
+                    <div className="text">
+                      {accountInfo.gender === 0
+                        ? '男'
+                        : accountInfo.gender === 1
+                        ? '女'
+                        : '保密'}
+                    </div>
+                  )}
+                </div>
+                <div className="form_item">
+                  <div className="label">头像:</div>
+                  <div className="text">
+                    {isEdit ? (
+                      <Upload
+                        name="avatar"
+                        listType="picture-card"
+                        className="avatar-uploader"
+                        showUploadList={false}
+                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                        beforeUpload={beforeUpload}
+                        onChange={handleChange}
+                        onPreview={handlePreview}
+                      >
+                        {accountInfo.avatar ? (
+                          <img
+                            src={accountInfo.avatar}
+                            alt="avatar"
+                            style={{ width: '100%' }}
+                          />
+                        ) : (
+                          <div>
+                            {loading ? <LoadingOutlined /> : <PlusOutlined />}
+                            点击上传
+                          </div>
+                        )}
+                      </Upload>
+                    ) : (
+                      <img
+                        style={{ width: '120px' }}
+                        // src="https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg"
+                        // src="/imgs/头像 (1).png"
+                        src={
+                          accountInfo.avatar
+                            ? accountInfo.avatar
+                            : '/imgs/头像 (1).png'
+                        }
+                        alt=""
+                      />
+                    )}
+                  </div>
+                </div>
+                <div className="form_item">
+                  <div className="label"></div>
+                  <div className="text">
+                    {isEdit ? (
+                      <button
+                        className="submit_btn"
+                        onClick={() => {
+                          updateAccountInfo();
+                        }}
+                      >
+                        提交
+                      </button>
+                    ) : (
+                      <button
+                        className="submit_btn"
+                        onClick={() => {
+                          setIsEdit(true);
+                        }}
+                      >
+                        修改
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
-        </PcLayout>
+
+            <Modal
+              visible={previewVisible}
+              title={previewTitle}
+              footer={null}
+              onCancel={() => setPreviewVisible(false)}
+            >
+              <img alt="example" style={{ width: '100%' }} src={previewImage} />
+            </Modal>
+          </div>
+        </div>
+      </PcLayout>
     );
 }
