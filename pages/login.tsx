@@ -95,7 +95,11 @@ export default function Login() {
                             'userInfo',
                             JSON.stringify(data.data.user),
                           );
-                          localStorage.setItem('token', data.data.token);
+                          localStorage.setItem(
+                            'token',
+                            JSON.stringify(data.data.token)
+                          );
+
                           if (router.query.from) {
                             router.push(router.query.from + '');
                           } else {

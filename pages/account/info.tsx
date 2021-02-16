@@ -11,7 +11,8 @@ import { useState, useEffect } from 'react';
 import AccountLeft from '../../components/account_left/AccountLeft';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import AccountState from '../../store/accountinfo';
-import { _update_user_info } from '../../server/server';
+// import { _update_user_info } from '../../server/server';
+import { _update_user_info } from '@/server/server';
 
 
 export default function AccountInfo() {

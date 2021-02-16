@@ -12,16 +12,19 @@ const path = require('path');
 if (typeof require !== "undefined") {
   require.extensions[".css"] = (file) => {};
 }
-// module.exports = {
-//   webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
-//     config.resolve.alias = {
-//       ...config.resolve.alias,
-//       '@': path.resolve(__dirname),
-//       components: path.resolve(__dirname, 'components'),
-//       server: path.resolve(__dirname, 'server'),
-//     };
-//     return config;
-//   },
-// };
+module.exports = {
+  webpack: (config, { buildId, dev, isServer, defaultLoaders }) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      '@': path.resolve(__dirname),
+      components: path.resolve(__dirname, 'components'),
+      server: path.resolve(__dirname, 'server'),
+      page: path.resolve(__dirname, 'page'),
+      public: path.resolve(__dirname, 'public'),
+      utils: path.resolve(__dirname, 'utils'),
+    };
+    return config;
+  },
+};
 
 module.exports = withCss({});
