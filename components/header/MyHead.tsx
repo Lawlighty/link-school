@@ -52,11 +52,13 @@ export default function MyHead({
         } else if (router.route === '/list') {
             headerIndexer.changeCurrentHeaderIndex(1);
         } else if (router.route === '/resource') {
-            headerIndexer.changeCurrentHeaderIndex(2);
-        }else if (router.route === '/forum') {
-            headerIndexer.changeCurrentHeaderIndex(3);
+          headerIndexer.changeCurrentHeaderIndex(2);
+        } else if (router.route === '/question') {
+          headerIndexer.changeCurrentHeaderIndex(3);
+        } else if (router.route === '/forum') {
+          headerIndexer.changeCurrentHeaderIndex(4);
         } else {
-            headerIndexer.changeCurrentHeaderIndex(10);
+          headerIndexer.changeCurrentHeaderIndex(10);
         }
     }, []);
     const headerSkip = (target: number) => {
@@ -67,25 +69,26 @@ export default function MyHead({
         }
         if (1) {
             switch (target) {
-                case 0:
-                    headerIndexer.changeCurrentHeaderIndex(0);
-                    console.log('进入首页');
-                    router.push('/');
-                    break;
-                case 1:
-                    headerIndexer.changeCurrentHeaderIndex(1);
-                    console.log('进入视频');
-                    router.push('/list');
-                    break;
-                case 2:
-                    headerIndexer.changeCurrentHeaderIndex(2);
-                    console.log('进入文档');
-                    router.push('/resource');
-                    break;
-                case 3:
-                    headerIndexer.changeCurrentHeaderIndex(3);
-                    router.push('/resource');
-                    break;
+              case 0:
+                headerIndexer.changeCurrentHeaderIndex(0);
+                router.push('/');
+                break;
+              case 1:
+                headerIndexer.changeCurrentHeaderIndex(1);
+                router.push('/list');
+                break;
+              case 2:
+                headerIndexer.changeCurrentHeaderIndex(2);
+                router.push('/resource');
+                break;
+              case 3:
+                headerIndexer.changeCurrentHeaderIndex(3);
+                router.push('/question');
+                break;
+              case 4:
+                headerIndexer.changeCurrentHeaderIndex(4);
+                router.push('/forum');
+                break;
             }
         }
     };
@@ -185,12 +188,24 @@ export default function MyHead({
                       </li>
                     </a>
                   </Link>
-                  <Link href="/forum">
+                  <Link href="/question">
                     <a target="_self">
                       <li
                         className={[
                           'nav_item',
                           headerIndexer.headerIndex === 3 ? 'active' : '',
+                        ].join(' ')}
+                      >
+                        问答
+                      </li>
+                    </a>
+                  </Link>
+                  <Link href="/forum">
+                    <a target="_self">
+                      <li
+                        className={[
+                          'nav_item',
+                          headerIndexer.headerIndex === 4 ? 'active' : '',
                         ].join(' ')}
                       >
                         论坛
