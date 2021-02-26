@@ -1,4 +1,4 @@
-import PcLayout from '../../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import { Input, Avatar, Pagination, Modal, Card } from 'antd';
 import { useState } from 'react';
 import { UserOutlined, ExclamationCircleOutlined } from '@ant-design/icons';

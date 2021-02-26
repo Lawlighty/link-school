@@ -85,6 +85,9 @@ li {
 .mgb10 {
     margin-bottom: 10px;
 }
+.mgb20 {
+    margin-bottom: 20px;
+}
 .pat10 {
     padding-top: 10px;
 }
@@ -257,3 +260,5 @@ li {
 .relative{
   position: relative;
 }
+
+

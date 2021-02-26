@@ -1,4 +1,4 @@
-import PcLayout from "../components/layouts/PcLayout";
+import PcLayout from "@/components/layouts/PcLayout";
 import Link from "next/link";
 import { Input, Checkbox, Modal, Button, message } from "antd";
 import { useState, useEffect } from "react";
@@ -6,7 +6,7 @@ import { timer_clock, psw_reg, phone_reg } from '../config';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 import AccountState from '../store/accountinfo';
-import { _register } from '../server/server';
+import { _register } from '@/server/server';
 
 const { confirm } = Modal;
 

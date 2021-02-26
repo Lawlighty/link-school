@@ -1,4 +1,4 @@
-import PcLayout from '../../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import { Input, Avatar, Pagination, Affix } from 'antd';
 import { useState, useEffect} from 'react';
 import {

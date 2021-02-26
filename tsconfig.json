@@ -15,11 +15,14 @@
     "jsx": "preserve",
     "paths": {
       "@/*": ["./*"],
-      "components/*": ["./components/*"],
-      "server/*": ["./server/*"],
-      "page/*": ["./page/*"],
-      "public/*": ["./public/*"],
-      "utils/*": ["./utils/*"]
+      "@components/*": ["./components/*"],
+      "@page/*": ["./page/*"],
+      "@public/*": ["./public/*"],
+      "@utils/*": ["./utils/*"],
+      "@server/*": ["./server/*"],
+      "@store/*": ["./store/*"],
+      "@styles/*": ["./styles/*"],
+      "@config/*": ["./config/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

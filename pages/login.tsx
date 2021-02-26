@@ -1,11 +1,11 @@
-import PcLayout from "../components/layouts/PcLayout";
+import PcLayout from "@/components/layouts/PcLayout";
 import Link from "next/link";
 import { Input, Checkbox, Modal, Button, message } from "antd";
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { timer_clock, phone_reg } from '../config';
-import { _login_with_account } from '../server/server';
-import { _get_users_list } from '../server/users';
+import { _login_with_account } from '@/server/server';
+import { _get_users_list } from '@/server/users';
 import AccountState from '../store/accountinfo';
 
 

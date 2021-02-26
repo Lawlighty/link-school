@@ -1,11 +1,10 @@
-import PcLayout from "../components/layouts/PcLayout";
+import PcLayout from "@/components/layouts/PcLayout";
 import { Carousel, Menu, Card, Avatar  } from 'antd';
 import { useState, useEffect } from 'react';
 import {RightOutlined, UserOutlined, EyeOutlined, LikeOutlined } from '@ant-design/icons';
-import HeaderIndexer from '../store/headerIndex';
+import HeaderIndexer from '@/store/headerIndex';
 import { useRouter } from 'next/router';
-import { demo } from '../server/server';
-import { _get_users_list } from '../server/users';
+import { _get_users_list } from '@/server/users';
 
 export default function Home() {
     useEffect(() => {

@@ -1,11 +1,11 @@
-import PcLayout from '../../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import {
     Button,
     Input,
     message,
 } from 'antd';
 import { useState, useEffect } from 'react';
-import AccountLeft from '../../components/account_left/AccountLeft';
+import AccountLeft from '@/components/account_left/AccountLeft';
 import AccountState from '../../store/accountinfo';
 import { useRouter } from 'next/router';
 import { timer_clock, phone_reg ,psw_reg } from '../../config';

@@ -1,7 +1,7 @@
-import PcLayout from '../../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import { Modal, Button } from 'antd';
 import { useState } from 'react';
-import CashierDesk from '../../components/pay/CashierDesk';
+import CashierDesk from '@/components/pay/CashierDesk';
 
 
 export default function Vip() {

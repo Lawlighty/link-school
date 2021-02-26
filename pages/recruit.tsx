@@ -1,5 +1,5 @@
-import PcLayout from '../components/layouts/PcLayout';
-import AccountLeft from '../components/account_left/AccountLeft';
+import PcLayout from '@/components/layouts/PcLayout';
+import AccountLeft from '@/components/account_left/AccountLeft';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 

@@ -1,4 +1,4 @@
-import PcLayout from '../../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import { Input, Pagination, Affix, Modal } from 'antd';
 import { useState, useEffect } from 'react';
 import {
@@ -9,9 +9,9 @@ import {
     ExclamationCircleOutlined,
 } from '@ant-design/icons';
 import { withRouter } from 'next/router';
-import { getWeekDate } from '../../utils/utils';
+import { getWeekDate } from '@/utils/utils';
 import AccountState from '../../store/accountinfo';
-import Comment from '../../components/comment/Comment';
+import Comment from '@/components/comment/Comment';
 
 
 const { confirm } = Modal;

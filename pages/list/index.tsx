@@ -1,6 +1,5 @@
-import PcLayout from "../../components/layouts/PcLayout";
+import PcLayout from '@/components/layouts/PcLayout';
 import { withRouter } from 'next/router';
-// import './list_index.css';
 import { Card, Avatar, Pagination } from 'antd';
 import { useState } from 'react';
 import {

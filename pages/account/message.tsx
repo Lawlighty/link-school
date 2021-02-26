@@ -1,6 +1,6 @@
-import PcLayout from '../../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import { Button,  Modal } from 'antd';
-import AccountLeft from '../../components/account_left/AccountLeft';
+import AccountLeft from '@/components/account_left/AccountLeft';
 import { ExclamationCircleOutlined, DatabaseOutlined } from '@ant-design/icons';
 
 

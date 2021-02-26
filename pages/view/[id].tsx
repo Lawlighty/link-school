@@ -1,4 +1,4 @@
-import PcLayout from '../../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import {
     Modal,
     Input,
@@ -21,7 +21,7 @@ import {
     DeleteOutlined,
     ExclamationCircleOutlined,
 } from '@ant-design/icons';
-import Comment from '../../components/comment/Comment';
+import Comment from '@/components/comment/Comment';
 
 
 const { confirm } = Modal;

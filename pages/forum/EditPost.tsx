@@ -1,4 +1,4 @@
-import PcLayout from '../../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import { Input, Avatar, Pagination, Affix, message, Tag, Tooltip, Button,Modal } from 'antd';
 import { useState, useEffect, useRef } from 'react';
 import {
@@ -7,10 +7,10 @@ import {
     ImportOutlined,
 } from '@ant-design/icons';
 import { withRouter } from 'next/router';
-import { getTagColor, getWeekDate } from '../../utils/utils';
+import { getTagColor, getWeekDate } from '@/utils/utils';
 import AccountState from '../../store/accountinfo';
 import dynamic from 'next/dynamic';
-import { postTags } from '../../config';
+import { postTags } from '../../config/config';
 // import BraftEditor from 'braft-editor';
 // const BraftEditor = dynamic(() => import('braft-editor'), {
 //     ssr: false, //这个要加上,禁止使用 SSR

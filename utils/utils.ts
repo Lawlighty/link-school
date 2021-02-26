@@ -26,3 +26,8 @@ export const getTagColor = (tag) => {
     return color;
 };
 
+export const getColorByStrLength=(str: string)=> {
+  const color =
+    str.length <= 4 ? 'geekblue' : str.length <= 6 ? 'green' : 'volcano';
+  return color;
+}

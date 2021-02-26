@@ -1,4 +1,4 @@
-import PcLayout from "../components/layouts/PcLayout";
+import PcLayout from "@/components/layouts/PcLayout";
 import Link from "next/link";
 import { Input, Modal, Button, message } from "antd";
 import { useState, useEffect } from "react";

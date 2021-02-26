@@ -1,10 +1,10 @@
-import PcLayout from '../../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import {  message, Pagination } from 'antd';
 import { useState, } from 'react';
-import AccountLeft from '../../components/account_left/AccountLeft';
+import AccountLeft from '@/components/account_left/AccountLeft';
 import {  DatabaseOutlined } from '@ant-design/icons';
 import { orderStatusList, payTypeList, productTypeList } from '../../config';
-import CashierDesk from '../../components/pay/CashierDesk';
+import CashierDesk from '@/components/pay/CashierDesk';
 
 export default function Order() {
 

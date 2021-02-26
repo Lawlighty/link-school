@@ -1,4 +1,4 @@
-import PcLayout from '../../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import {
     Modal,
     Input,
@@ -8,7 +8,7 @@ import {
     Upload,
 } from 'antd';
 import { useState, useEffect } from 'react';
-import AccountLeft from '../../components/account_left/AccountLeft';
+import AccountLeft from '@/components/account_left/AccountLeft';
 import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import AccountState from '../../store/accountinfo';
 // import { _update_user_info } from '../../server/server';

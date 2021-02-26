@@ -1,4 +1,4 @@
-import PcLayout from '../components/layouts/PcLayout';
+import PcLayout from '@/components/layouts/PcLayout';
 import { useRouter } from 'next/router';
 import { useState, useEffect} from 'react';
 // import './apply.css'

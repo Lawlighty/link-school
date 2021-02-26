@@ -140,11 +140,10 @@ const Forum = ({ router }) => {
 
     //发帖
     const toPostPage = () => {
-        if (accountState.account.isLogin) {
-            router.push('/forum/EditPost');
-        }
-        else {
-            router.push('/login?from=/forum');
+        if (JSON.parse(localStorage.getItem('userInfo'))._id) {
+          router.push('/forum/EditPost');
+        } else {
+          router.push('/login?from=/forum');
         }
     }
     return (
