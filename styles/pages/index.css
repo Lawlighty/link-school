@@ -24,6 +24,10 @@
     height: 100%;
     color: #fff;
 }
+.banner_list .ant-menu-submenu-title{
+    height: 44px !important;
+    line-height: 44px !important;
+}
 .index_page .banner_pics{
     margin-left: 180px;
 }
@@ -378,6 +382,7 @@
     line-height: 18px;
 }
 .exam_item_title {
+    max-width: 200px;
     flex: 1;
     font-weight: 400;
     font-style: normal;
