@@ -6,11 +6,10 @@ import { _get_courses_list } from '@/server/courses';
 // 公告板块
 export default function CourseRecommendByCategory({ categoryId }: { categoryId: string } ) {
     const [courseList, setCourseList] = useState([]);
-    console.log('props categoryId', categoryId);
   const getCoursesRecommend = async () => {
       const query = {
         where: { category: categoryId },
-        limit: 1,
+        limit: 3,
       };
     await _get_courses_list(JSON.stringify(query)).then((data) => {
       if (data.status === 200) {
