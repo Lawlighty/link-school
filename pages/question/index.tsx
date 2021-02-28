@@ -1,140 +1,51 @@
 import PcLayout from '@/components/layouts/PcLayout';
-import { Input, Avatar, Pagination, Affix, message, Menu, Tag } from 'antd';
+import { Empty, Pagination, Affix, message, Menu, Tag } from 'antd';
 import { useState, useEffect } from 'react';
-import {
-    AppstoreFilled,
-    FireFilled,
-    StarFilled,
-    EyeOutlined,
-    CommentOutlined,
-} from '@ant-design/icons';
 import { withRouter } from 'next/router';
-import { getColorByStrLength } from '@/utils/utils';
 import AccountState from '../../store/accountinfo';
 import CategoryTags from '@/components/categoryTags/index';
-
+import QuestionItem from '@/components/questions';
+import Notices from '@/components/notice';
+import Visitors from '@/components/visitor';
+import { _get_questions } from '@/server/questions';
 
 const Question = ({ router }) => {
     const accountState = AccountState.useContainer();
     const [top, setTop] = useState(90);
     const [currentIndex, setCurrentIndex] = useState<string>('all');
+    const [questionList, setQuestionList] = useState([]);
 
-    const rmtj2 = [
-        {
-            ranking: 1,
-            name: '超全！2020年互联网大厂薪资和职级一览',
-        },
-        {
-            ranking: 2,
-            name: '微信小程序从基础到实战',
-        },
-        {
-            ranking: 3,
-            name: 'TypeScript Handbook',
-        },
-    ];
-
-    const posts = [
-        {
-            title: 'JAVA 学习路线老哥提供一下',
-            href: '/question/1',
-            avatar: '',
-            auther: '￥絶境逢生￥',
-            date: '2020-02-14',
-            last_back: '2020-11-21 20:39',
-            looks: 45,
-            talks: 22,
-        },
-        {
-            title: 'node.js 有啥东西',
-            href: '/question/2',
-            avatar:
-                'https://api.jikipedia.com/upload/ccf299950da5409ccb9109e6068be0ee_scaled_avatar.jpg',
-            auther: '爷傲奈我何',
-            date: '2020-02-14',
-            last_back: '2020-11-21 20:39',
-            looks: 25,
-            talks: 42,
-        },
-        {
-            title: 'PHP是世界上最好的语言',
-            href: '/question/3',
-            avatar:
-                'https://feed-image.baidu.com/0/pic/327375c109b2776581ca9179205f1b37.jpg',
-            auther: '乱世佳人',
-            date: '2020-02-14',
-            last_back: '2020-11-21 20:39',
-            looks: 456,
-            talks: 28,
-        },
-        {
-            title: 'JAVA 学习路线老哥提供一下',
-            href: '/question/1',
-            avatar: '',
-            auther: '￥絶境逢生￥',
-            date: '2020-02-14',
-            last_back: '2020-11-21 20:39',
-            looks: 45,
-            talks: 22,
-        },
-        {
-            title: 'node.js 有啥东西',
-            href: '/question/2',
-            avatar:
-                'https://api.jikipedia.com/upload/ccf299950da5409ccb9109e6068be0ee_scaled_avatar.jpg',
-            auther: '爷傲奈我何',
-            date: '2020-02-14',
-            last_back: '2020-11-21 20:39',
-            looks: 25,
-            talks: 42,
-        },
-        {
-            title: 'PHP是世界上最好的语言',
-            href: '/question/3',
-            avatar:
-                'https://feed-image.baidu.com/0/pic/327375c109b2776581ca9179205f1b37.jpg',
-            auther: '乱世佳人',
-            date: '2020-02-14',
-            last_back: '2020-11-21 20:39',
-            looks: 456,
-            talks: 28,
-        },
-        {
-            title: 'JAVA 学习路线老哥提供一下',
-            href: '/question/1',
-            avatar: '',
-            auther: '￥絶境逢生￥',
-            date: '2020-02-14',
-            last_back: '2020-11-21 20:39',
-            looks: 45,
-            talks: 22,
-        },
-        {
-            title: 'node.js 有啥东西',
-            href: '/question/2',
-            avatar:
-                'https://api.jikipedia.com/upload/ccf299950da5409ccb9109e6068be0ee_scaled_avatar.jpg',
-            auther: '爷傲奈我何',
-            date: '2020-02-14',
-            last_back: '2020-11-21 20:39',
-            looks: 25,
-            talks: 42,
-        },
-        {
-            title: 'PHP是世界上最好的语言',
-            href: '/question/3',
-            avatar:
-                'https://feed-image.baidu.com/0/pic/327375c109b2776581ca9179205f1b37.jpg',
-            auther: '乱世佳人',
-            date: '2020-02-14',
-            last_back: '2020-11-21 20:39',
-            looks: 456,
-            talks: 28,
-        },
-    ];
-
+     const [pagination, setPagination] = useState({
+       current: 1,
+       pageSize: 10,
+       //   total: courseListCount,
+     });
+  
+    const getQuestionLits = async (nowpaginatio = {}) => {
+      const query = {
+        where: {},
+        limit: nowpaginatio.pageSize || pagination.pageSize,
+        page: nowpaginatio.current || pagination.current,
+      };
+      await _get_questions(JSON.stringify(query)).then((data) => {
+        if (data.status === 200) {
+          setQuestionList(data.data.data);
+          console.log()
+          const n_pagination = {
+            ...pagination,
+            current: data.data.page,
+            total: data.data.total,
+          };
+          setPagination({ ...n_pagination });
+        }
+      });
+    };
+    useEffect(() => {
+      getQuestionLits();
+    }, []);
     const onChangePage = (page) => {
-        console.log('page', page);
+       const n_pagination = { ...pagination, current: page };
+       getQuestionLits(n_pagination);
     };
     const handleClick = (e:any) => {
         setCurrentIndex(e.key);
@@ -177,57 +88,27 @@ const Question = ({ router }) => {
                 <Menu.Item key="solved">已解决</Menu.Item>
                 <Menu.Item key="mine">我的问题</Menu.Item>
               </Menu>
-              <CategoryTags hasAll/>
+              <CategoryTags hasAll />
               <div className="post_items">
-                {posts.map((item, index) => (
-                  <div className="post_item" key={index}>
-                    <div className="post_item_body flex_1">
-                      <div
-                        className="post_item_body_title"
-                        onClick={() => {
-                          router.push(item.href);
-                        }}
-                      >
-                        {item.title}
-
-                        <div className="post_item_body_info clock_color">
-                          <div>
-                            <Tag
-                              color={getColorByStrLength(item.auther)}
-                              key={item.auther}
-                            >
-                              {item.auther.toUpperCase()}
-                            </Tag>
-                            {item.last_back}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="post_item_body_info">
-                        <div className="other_info">
-                          <EyeOutlined
-                            style={{
-                              margin: '0 10px 0 20px',
-                              fontSize: 18,
-                            }}
-                          />
-                          {item.looks}
-                          <CommentOutlined
-                            style={{
-                              margin: '0 10px 0 20px',
-                            }}
-                          />
-                          {item.talks}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                {questionList.map((item, index) => (
+                  <QuestionItem item={item} />
                 ))}
+                {questionList.length === 0 && (
+                  <Empty
+                    style={{
+                      padding: '100px 0',
+                      color: '#999',
+                      fontSize: '16px',
+                    }}
+                    description={<span>暂无问答数据,快去提问把!</span>}
+                  />
+                )}
 
                 <Pagination
                   defaultCurrent={1}
-                  total={50}
+                  total={pagination.total || 10}
                   onChange={onChangePage}
-                  defaultPageSize={10}
+                  defaultPageSize={pagination.pageSize}
                   style={{
                     textAlign: 'center',
                     margin: '20px 0',
@@ -238,42 +119,7 @@ const Question = ({ router }) => {
             </div>
             <div className="question_left_div">
               <Affix offsetTop={top}>
-                <div className="question_left_item">
-                  <div className="question_left_title">公告</div>
-                  <div className="question_left_list">
-                    <ul>
-                      <li
-                        onClick={() => {
-                          router.push('/question/aa');
-                        }}
-                      >
-                        极客教育开启新时代
-                      </li>
-                      <li
-                        onClick={() => {
-                          router.push('/question/aa');
-                        }}
-                      >
-                        彻底保护你的iPhone隐私，教你开启Apple ID两步验证
-                      </li>
-                      <li
-                        onClick={() => {
-                          router.push('/question/aa');
-                        }}
-                      >
-                        Amazon Polly 上手实验
-                      </li>
-                      <li
-                        onClick={() => {
-                          router.push('/question/aa');
-                        }}
-                      >
-                        揭秘你不知道的CloudFront用法
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-
+                <Notices />
                 <div className="question_left_item flex">
                   <div
                     className="btn_item left1"
@@ -294,61 +140,7 @@ const Question = ({ router }) => {
                     我要提问
                   </div>
                 </div>
-
-                <div
-                  className="question_left_item flex"
-                  style={{ alignItems: 'center' }}
-                >
-                  <div className="user_img_div">
-                    <img
-                      src="https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg"
-                      alt=""
-                      className="user_img"
-                    />
-                  </div>
-                  <div className="flex_1">
-                    {accountState.account.isLogin ? (
-                      <div>
-                        <div
-                          style={{
-                            paddingBottom: '10px',
-                            maxWidth: '120px',
-                          }}
-                        >
-                          {accountState.account.phoneNumber + '  ,你好'}
-                        </div>
-                        <div className="tologin_green">
-                          极客学院助你天天向上
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <div
-                          style={{
-                            paddingBottom: '10px',
-                            maxWidth: '120px',
-                          }}
-                        >
-                          游客,你好
-                        </div>
-                        <div>
-                          <span
-                            style={{
-                              textDecoration: 'underline',
-                            }}
-                            className="tologin_green"
-                            onClick={() => {
-                              router.push('/login?from=/question');
-                            }}
-                          >
-                            登录
-                          </span>{' '}
-                          再玩耍，妥妥哒。
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <Visitors />
               </Affix>
             </div>
           </div>

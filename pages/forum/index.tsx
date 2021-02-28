@@ -11,7 +11,7 @@ import {
 import { withRouter } from 'next/router';
 import { getWeekDate } from '../../utils/utils';
 import AccountState from '../../store/accountinfo';
-
+import Visitors from '@/components/visitor';
 
 
 const Forum = ({ router }) => {
@@ -147,276 +147,216 @@ const Forum = ({ router }) => {
         }
     }
     return (
-        <PcLayout
-            showHeader={true}
-            customSeo={null}
-            showFooter={true}
-            isBlack={false}
-        >
-            <div className="forum_page">
-                <div className="forum_body flex">
-                    <div className="flex_1 forum_div">
-                        <div className="form_head">
-                            <ul className="form_head_ul">
-                                <li
-                                    style={{ border: 'none' }}
-                                    className={[
-                                        'flex_r_a',
-                                        currentIndex === 0 ? 'c_red' : '',
-                                    ].join(' ')}
-                                    onClick={() => {
-                                        setCurrentIndex(0);
-                                    }}
-                                >
-                                    <AppstoreFilled
-                                        style={{
-                                            marginRight: '10px',
-                                            fontSize: '20px',
-                                        }}
-                                    />
-                                    全部
-                                </li>
-                                <li
-                                    className={[
-                                        'flex_r_a',
-                                        currentIndex === 1 ? 'c_red' : '',
-                                    ].join(' ')}
-                                    onClick={() => {
-                                        setCurrentIndex(1);
-                                    }}
-                                >
-                                    <FireFilled
-                                        style={{
-                                            marginRight: '10px',
-                                            fontSize: '20px',
-                                        }}
-                                    />
-                                    精华
-                                </li>
-                                <li
-                                    className={[
-                                        'flex_r_a',
-                                        currentIndex === 2 ? 'c_red' : '',
-                                    ].join(' ')}
-                                    onClick={() => {
-                                        setCurrentIndex(2);
-                                    }}
-                                >
-                                    <StarFilled
-                                        style={{
-                                            marginRight: '10px',
-                                            fontSize: '20px',
-                                        }}
-                                    />
-                                    推荐
-                                </li>
-                            </ul>
-                        </div>
+      <PcLayout
+        showHeader={true}
+        customSeo={null}
+        showFooter={true}
+        isBlack={false}
+      >
+        <div className="forum_page">
+          <div className="forum_body flex">
+            <div className="flex_1 forum_div">
+              <div className="form_head">
+                <ul className="form_head_ul">
+                  <li
+                    style={{ border: 'none' }}
+                    className={[
+                      'flex_r_a',
+                      currentIndex === 0 ? 'c_red' : '',
+                    ].join(' ')}
+                    onClick={() => {
+                      setCurrentIndex(0);
+                    }}
+                  >
+                    <AppstoreFilled
+                      style={{
+                        marginRight: '10px',
+                        fontSize: '20px',
+                      }}
+                    />
+                    全部
+                  </li>
+                  <li
+                    className={[
+                      'flex_r_a',
+                      currentIndex === 1 ? 'c_red' : '',
+                    ].join(' ')}
+                    onClick={() => {
+                      setCurrentIndex(1);
+                    }}
+                  >
+                    <FireFilled
+                      style={{
+                        marginRight: '10px',
+                        fontSize: '20px',
+                      }}
+                    />
+                    精华
+                  </li>
+                  <li
+                    className={[
+                      'flex_r_a',
+                      currentIndex === 2 ? 'c_red' : '',
+                    ].join(' ')}
+                    onClick={() => {
+                      setCurrentIndex(2);
+                    }}
+                  >
+                    <StarFilled
+                      style={{
+                        marginRight: '10px',
+                        fontSize: '20px',
+                      }}
+                    />
+                    推荐
+                  </li>
+                </ul>
+              </div>
 
-                        <div className="post_items">
-                            {posts.map((item, index) => (
-                                <div className="post_item" key={index}>
-                                    <div className="user_img_div">
-                                        <img
-                                            src={
-                                                item.avatar
-                                                    ? item.avatar
-                                                    : 'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg'
-                                            }
-                                            alt=""
-                                            className="user_img"
-                                        />
-                                    </div>
-                                    <div className="post_item_body flex_1">
-                                        <div
-                                            className="post_item_body_title"
-                                            onClick={() => {
-                                                router.push(item.href);
-                                            }}
-                                        >
-                                            【标签】{item.title}
-                                        </div>
-                                        <div className="post_item_body_info">
-                                            <div>
-                                                作者：{item.auther}
-                                                <span
-                                                    style={{
-                                                        display: 'inline-block',
-                                                        margin: '0 10px',
-                                                    }}
-                                                >
-                                                    |
-                                                </span>
-                                                最新回帖：{item.last_back}
-                                            </div>
-                                            <div>
-                                                <EyeOutlined
-                                                    style={{
-                                                        margin: '0 10px 0 20px',
-                                                    }}
-                                                />
-                                                {item.looks}
-                                                <CommentOutlined
-                                                    style={{
-                                                        margin: '0 10px 0 20px',
-                                                    }}
-                                                />
-                                                {item.talks}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-
-                            <Pagination
-                                defaultCurrent={1}
-                                total={50}
-                                onChange={onChangePage}
-                                defaultPageSize={10}
-                                style={{
-                                    textAlign: 'center',
-                                    margin: '20px 0',
-                                    paddingBottom: '20px',
-                                }}
-                            />
-                        </div>
+              <div className="post_items">
+                {posts.map((item, index) => (
+                  <div className="post_item" key={index}>
+                    <div className="user_img_div">
+                      <img
+                        src={
+                          item.avatar
+                            ? item.avatar
+                            : 'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg'
+                        }
+                        alt=""
+                        className="user_img"
+                      />
                     </div>
-                    <div className="forum_left_div">
-                        <Affix offsetTop={top}>
-                            <div className="forum_left_item">
-                                <div className="forum_left_title">公告</div>
-                                <div className="forum_left_list">
-                                    <ul>
-                                        <li
-                                            onClick={() => {
-                                                router.push('/forum/aa');
-                                            }}
-                                        >
-                                            极客教育开启新时代
-                                        </li>
-                                        <li
-                                            onClick={() => {
-                                                router.push('/forum/aa');
-                                            }}
-                                        >
-                                            彻底保护你的iPhone隐私，教你开启Apple
-                                            ID两步验证
-                                        </li>
-                                        <li
-                                            onClick={() => {
-                                                router.push('/forum/aa');
-                                            }}
-                                        >
-                                            Amazon Polly 上手实验
-                                        </li>
-                                        <li
-                                            onClick={() => {
-                                                router.push('/forum/aa');
-                                            }}
-                                        >
-                                            揭秘你不知道的CloudFront用法
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div className="forum_left_item flex">
-                                <div
-                                    className="btn_item left1"
-                                    style={{ borderRight: '1px solid #e4e4e4' }}
-                                    onClick={toPostPage}
-                                >
-                                    <div className="item_div">
-                                        <img
-                                            src="/imgs/forum/发布.png"
-                                            alt=""
-                                            className="item_div_img"
-                                        />
-                                    </div>
-                                    发帖
-                                </div>
-                                <div className="btn_item right1">
-                                    <div
-                                        className="item_div"
-                                        style={{ backgroundColor: '#ff8300' }}
-                                    >
-                                        <img
-                                            src="/imgs/forum/签到.png"
-                                            alt=""
-                                            className="item_div_img"
-                                        />
-                                    </div>
-                                    <div className="weekdate_tip">签到</div>
-
-                                    <div className="weekdate">
-                                        {getWeekDate()}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div
-                                className="forum_left_item flex"
-                                style={{ alignItems: 'center' }}
-                            >
-                                <div className="user_img_div">
-                                    <img
-                                        src="https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg"
-                                        alt=""
-                                        className="user_img"
-                                    />
-                                </div>
-                                <div className="flex_1">
-                                    {accountState.account.isLogin ? (
-                                        <div>
-                                            <div
-                                                style={{
-                                                    paddingBottom: '10px',
-                                                    maxWidth: '120px',
-                                                }}
-                                            >
-                                                {accountState.account
-                                                    .phoneNumber + '  ,你好'}
-                                            </div>
-                                            <div className="tologin_green">
-                                                极客学院助你天天向上
-                                            </div>
-                                        </div>
-                                    ) : (
-                                        <div>
-                                            <div
-                                                style={{
-                                                    paddingBottom: '10px',
-                                                    maxWidth: '120px',
-                                                }}
-                                            >
-                                                游客,你好
-                                            </div>
-                                            <div>
-                                                <span
-                                                    style={{
-                                                        textDecoration:
-                                                            'underline',
-                                                    }}
-                                                    className="tologin_green"
-                                                    onClick={() => {
-                                                        router.push(
-                                                            '/login?from=/forum',
-                                                        );
-                                                    }}
-                                                >
-                                                    登录
-                                                </span>{' '}
-                                                再玩耍，妥妥哒。
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </Affix>
+                    <div className="post_item_body flex_1">
+                      <div
+                        className="post_item_body_title"
+                        onClick={() => {
+                          router.push(item.href);
+                        }}
+                      >
+                        【标签】{item.title}
+                      </div>
+                      <div className="post_item_body_info">
+                        <div>
+                          作者：{item.auther}
+                          <span
+                            style={{
+                              display: 'inline-block',
+                              margin: '0 10px',
+                            }}
+                          >
+                            |
+                          </span>
+                          最新回帖：{item.last_back}
+                        </div>
+                        <div>
+                          <EyeOutlined
+                            style={{
+                              margin: '0 10px 0 20px',
+                            }}
+                          />
+                          {item.looks}
+                          <CommentOutlined
+                            style={{
+                              margin: '0 10px 0 20px',
+                            }}
+                          />
+                          {item.talks}
+                        </div>
+                      </div>
                     </div>
-                </div>
+                  </div>
+                ))}
+
+                <Pagination
+                  defaultCurrent={1}
+                  total={50}
+                  onChange={onChangePage}
+                  defaultPageSize={10}
+                  style={{
+                    textAlign: 'center',
+                    margin: '20px 0',
+                    paddingBottom: '20px',
+                  }}
+                />
+              </div>
             </div>
-        </PcLayout>
+            <div className="forum_left_div">
+              <Affix offsetTop={top}>
+                <div className="forum_left_item">
+                  <div className="forum_left_title">公告</div>
+                  <div className="forum_left_list">
+                    <ul>
+                      <li
+                        onClick={() => {
+                          router.push('/forum/aa');
+                        }}
+                      >
+                        极客教育开启新时代
+                      </li>
+                      <li
+                        onClick={() => {
+                          router.push('/forum/aa');
+                        }}
+                      >
+                        彻底保护你的iPhone隐私，教你开启Apple ID两步验证
+                      </li>
+                      <li
+                        onClick={() => {
+                          router.push('/forum/aa');
+                        }}
+                      >
+                        Amazon Polly 上手实验
+                      </li>
+                      <li
+                        onClick={() => {
+                          router.push('/forum/aa');
+                        }}
+                      >
+                        揭秘你不知道的CloudFront用法
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="forum_left_item flex">
+                  <div
+                    className="btn_item left1"
+                    style={{ borderRight: '1px solid #e4e4e4' }}
+                    onClick={toPostPage}
+                  >
+                    <div className="item_div">
+                      <img
+                        src="/imgs/forum/发布.png"
+                        alt=""
+                        className="item_div_img"
+                      />
+                    </div>
+                    发帖
+                  </div>
+                  <div className="btn_item right1">
+                    <div
+                      className="item_div"
+                      style={{ backgroundColor: '#ff8300' }}
+                    >
+                      <img
+                        src="/imgs/forum/签到.png"
+                        alt=""
+                        className="item_div_img"
+                      />
+                    </div>
+                    <div className="weekdate_tip">签到</div>
+
+                    <div className="weekdate">{getWeekDate()}</div>
+                  </div>
+                </div>
+
+                <Visitors />
+              </Affix>
+            </div>
+          </div>
+        </div>
+      </PcLayout>
     );
 };
 export default withRouter(Forum);

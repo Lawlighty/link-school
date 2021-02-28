@@ -9,8 +9,12 @@ import { _get_banners } from '@/server/banners';
 import { _get_courses_recommend, _get_courses_stick } from '@/server/courses';
 import { _get_documents } from '@/server/documents';
 import { _get_all_categorys } from '@/server/categorys';
-import { setSubStr, getBannerSubItems } from '@/utils/utils';
+import {  getBannerSubItems } from '@/utils/utils';
 import  CourseRecommendByCategory  from '@/components/banner/courses'
+import CoursesItem from '@/components/courses';
+import IndexPageDoc from '@/components/documents/IndexPageDoc';
+import LiveCoursesItem from '@/components/live/courses';
+import NewsItem from '@/components/news';
 
  const { SubMenu } = Menu;
 export default function Home() {
@@ -261,84 +265,7 @@ export default function Home() {
 
             <div className="zone_body">
               {courseRecommendList.map((item) => (
-                <div className="zone_body_item" key={item._id}>
-                  <Card
-                    onClick={() => {
-                      router.push(`view/${item._id}`);
-                    }}
-                    hoverable
-                    style={{ width: '100%' }}
-                    cover={
-                      <img
-                        alt="example"
-                        src={item.cover}
-                        className="card_img"
-                      />
-                    }
-                  >
-                    <div>
-                      <div className="zone_body_item_name">{item.name}</div>
-                      <div className="zone_body_item_tag">
-                        {!item.price || item.price === 0 ? (
-                          <div className="free">免费</div>
-                        ) : (
-                          <div
-                            style={{
-                              display: 'flex',
-                            }}
-                          >
-                            <div
-                              style={{
-                                paddingRight: '10px',
-                                color: '#333',
-                              }}
-                            >
-                              ￥{item.price}
-                            </div>
-                            <div
-                              style={{
-                                color: '#fb6260',
-                              }}
-                            >
-                              SVIP:￥{item.sprice || 0}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      <div className="zone_body_item_info">
-                        <div className="zone_body_item_who_info">
-                          {item.author ? (
-                            <Avatar size="small" src={item.author.avatar} />
-                          ) : (
-                            <Avatar
-                              size="small"
-                              style={{
-                                backgroundColor: '#87d068',
-                              }}
-                              icon={<UserOutlined />}
-                            />
-                          )}
-
-                          <div
-                            className="name"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              router.push(`/lecturer/${item.author._id}`);
-                            }}
-                          >
-                            {item.author.nickname}
-                          </div>
-                        </div>
-                        <div>
-                          <span>
-                            {item.leanrs + ' '}
-                            人已经学习
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                </div>
+                <CoursesItem item={item} />
               ))}
             </div>
           </div>
@@ -363,57 +290,7 @@ export default function Home() {
 
             <div className="zone_body bg_white" style={{ padding: '20px' }}>
               {documentList.map((item) => (
-                <div className="exam_div doc_div" key={item._id}>
-                  <div
-                    className="exam_item"
-                    onClick={() => {
-                      router.push(`/resource/${item._id}`);
-                    }}
-                  >
-                    <div className="desc">
-                      <a className="text">{setSubStr(item.introduce, 50)}</a>
-                    </div>
-                    <div className="">
-                      {item.cover ? (
-                        <img
-                          style={{
-                            width: '100px',
-                            height: '60px',
-                            marginRight: '20px',
-                          }}
-                          src={item.cover}
-                          alt=""
-                        />
-                      ) : (
-                        <img
-                          style={{
-                            width: '100px',
-                            height: '60px',
-                            marginRight: '20px',
-                          }}
-                          src="https://a1.jikexueyuan.com/home/201507/22/d4b9/55af0345ca2d0.jpg"
-                          alt=""
-                        />
-                      )}
-                    </div>
-                    <div className="flex_1">
-                      <div className="exam_item_title_div">
-                        <div className="exam_item_title">{item.name}</div>
-                      </div>
-
-                      <div className="exam-item-tip">
-                        浏览:
-                        <span style={{ margin: '0 5px' }}>
-                          {item.looks}
-                        </span>{' '}
-                        下载:
-                        <span style={{ margin: '0 5px' }}>{item.download}</span>
-                        次
-                      </div>
-                    </div>
-                    <div></div>
-                  </div>
-                </div>
+                <IndexPageDoc item={item} />
               ))}
             </div>
           </div>
@@ -438,84 +315,7 @@ export default function Home() {
 
             <div className="zone_body">
               {courseStickList.map((item) => (
-                <div className="zone_body_item" key={item._id}>
-                  <Card
-                    onClick={() => {
-                      router.push(`view/${item._id}`);
-                    }}
-                    hoverable
-                    style={{ width: '100%' }}
-                    cover={
-                      <img
-                        alt="example"
-                        src={item.cover}
-                        className="card_img"
-                      />
-                    }
-                  >
-                    <div>
-                      <div className="zone_body_item_name">{item.name}</div>
-                      <div className="zone_body_item_tag">
-                        {!item.price || item.price === 0 ? (
-                          <div className="free">免费</div>
-                        ) : (
-                          <div
-                            style={{
-                              display: 'flex',
-                            }}
-                          >
-                            <div
-                              style={{
-                                paddingRight: '10px',
-                                color: '#333',
-                              }}
-                            >
-                              ￥{item.price}
-                            </div>
-                            <div
-                              style={{
-                                color: '#fb6260',
-                              }}
-                            >
-                              SVIP:￥{item.sprice || 0}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                      <div className="zone_body_item_info">
-                        <div className="zone_body_item_who_info">
-                          {item.author ? (
-                            <Avatar size="small" src={item.author.avatar} />
-                          ) : (
-                            <Avatar
-                              size="small"
-                              style={{
-                                backgroundColor: '#87d068',
-                              }}
-                              icon={<UserOutlined />}
-                            />
-                          )}
-
-                          <div
-                            className="name"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              router.push(`/lecturer/${item.author._id}`);
-                            }}
-                          >
-                            {item.author.nickname}
-                          </div>
-                        </div>
-                        <div>
-                          <span>
-                            {item.leanrs + ' '}
-                            人已经学习
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </Card>
-                </div>
+                <CoursesItem item={item} />
               ))}
             </div>
           </div>
@@ -541,95 +341,7 @@ export default function Home() {
 
               <div className="zone_body">
                 {live_reco.map((item, index) => (
-                  <div className="zone_body_item" key={item.name + index}>
-                    {item.sale_tag ? (
-                      <div className="sale_tag">
-                        优惠券
-                        <div className="sale_tag_price">{item.sale_tag}</div>
-                      </div>
-                    ) : null}
-
-                    <Card
-                      hoverable
-                      style={{ width: '100%' }}
-                      cover={
-                        <img
-                          alt="example"
-                          src={item.img_url}
-                          className="card_img"
-                        />
-                      }
-                    >
-                      <div className="rel_div">
-                        {item.live_time ? (
-                          <div className="live_time">
-                            开播时间: {item.live_time}
-                          </div>
-                        ) : null}
-
-                        <div className="zone_body_item_name">{item.name}</div>
-                        <div className="zone_body_item_tag">
-                          {item.isfree ? (
-                            <div className="free">免费</div>
-                          ) : (
-                            <div
-                              style={{
-                                display: 'flex',
-                              }}
-                            >
-                              <div
-                                style={{
-                                  paddingRight: '10px',
-                                  color: '#333',
-                                }}
-                              >
-                                ￥100.00
-                              </div>
-                              <div
-                                style={{
-                                  color: '#fb6260',
-                                }}
-                              >
-                                SVIP:￥90.00
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                        <div className="zone_body_item_info">
-                          <div className="zone_body_item_who_info">
-                            {item.avatar ? (
-                              <Avatar size="small" src={item.avatar} />
-                            ) : (
-                              // <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
-                              <Avatar
-                                size="small"
-                                style={{
-                                  backgroundColor: '#87d068',
-                                }}
-                                icon={<UserOutlined />}
-                              />
-                            )}
-
-                            <div
-                              className="name"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                router.push('/lecturer/' + index);
-                              }}
-                            >
-                              {item.username}
-                            </div>
-                          </div>
-                          <div>
-                            <span>
-                              {item.leanrs + ' '}
-                              人已经学习
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
+                  <LiveCoursesItem item={item} index={index} />
                 ))}
               </div>
             </div>
@@ -655,60 +367,7 @@ export default function Home() {
               </div>
 
               <div className="zone_body">
-                {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
-                  <div className="info_item" key={index}>
-                    <div
-                      className="info_item_div"
-                      style={{
-                        padding: '20px',
-                        background: '#fff',
-                        borderRadius: '8px',
-                      }}
-                    >
-                      <div className="info_title">
-                        <div className="info_title_left"></div>
-                        <div className="info_title_name">行业动态</div>
-                        <a href="/list" className="small_text" target="_bank">
-                          更多
-                          <RightOutlined />
-                        </a>
-                      </div>
-                      <div>
-                        <img
-                          src="https://static-dev.roncoo.com/course/20a864190ac74acda0838d0eb41d3a43.png"
-                          alt="资讯图片"
-                          className="info_img"
-                        />
-                      </div>
-
-                      <div className="info_content_name">
-                        超全！2020年互联网大厂薪资和职级一览
-                      </div>
-                      <div className="info_content">
-                        以BAT为代表的互联网大厂，一直是求职者眼中的香饽饽，“大厂经历”在国内就业环境中无异于一块金子招牌。本文来源：运营黑客社区。感谢社区分享对于企业和HR来说，大...
-                      </div>
-                      <div className="info_footer">
-                        <div className="time">2020-11-03 12:45</div>
-                        <div className="more">
-                          <div>
-                            <EyeOutlined
-                              style={{
-                                margin: '0 10px',
-                              }}
-                            />
-                            148
-                            <LikeOutlined
-                              style={{
-                                margin: '0 10px',
-                              }}
-                            />
-                            1
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+                {[1, 2, 3, 4, 5, 6, 7].map((item, index) => <NewsItem item={item} index={index} />)}
               </div>
             </div>
           </div>

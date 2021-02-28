@@ -6,6 +6,7 @@ import {
     UserOutlined,
 } from '@ant-design/icons';
 import { _get_courses_list } from '@/server/courses';
+import CoursesItem from '@/components/courses';
 
 const List = ({ router }) => {
 
@@ -104,7 +105,7 @@ const List = ({ router }) => {
           const n_pagination = {
             ...pagination,
             current: data.data.page,
-            total: data.data.data.total,
+            total: data.data.total,
           };
           setPagination({ ...n_pagination });
         }
@@ -134,7 +135,6 @@ const List = ({ router }) => {
     };
   
     const onChangePage = (page) => {
-        console.log('page', page); 
         const n_pagination = { ...pagination, current:page};
       
         getCoursesLits(n_pagination);
@@ -210,84 +210,7 @@ const List = ({ router }) => {
             <div className="index_content_zone">
               <div className="zone_body">
                 {courseList.map((item) => (
-                  <div className="zone_body_item" key={item.name}>
-                    <Card
-                      onClick={() => {
-                        router.push(`view/${item._id}`);
-                      }}
-                      hoverable
-                      style={{ width: '100%' }}
-                      cover={
-                        <img
-                          alt="example"
-                          src={item.cover}
-                          className="card_img"
-                        />
-                      }
-                    >
-                      <div>
-                        <div className="zone_body_item_name">{item.name}</div>
-                        <div className="zone_body_item_tag">
-                          {!item.price || item.price === 0 ? (
-                            <div className="free">免费</div>
-                          ) : (
-                            <div
-                              style={{
-                                display: 'flex',
-                              }}
-                            >
-                              <div
-                                style={{
-                                  paddingRight: '10px',
-                                  color: '#333',
-                                }}
-                              >
-                                ￥{item.price}
-                              </div>
-                              <div
-                                style={{
-                                  color: '#fb6260',
-                                }}
-                              >
-                                SVIP:￥{item.sprice || 0}
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                        <div className="zone_body_item_info">
-                          <div className="zone_body_item_who_info">
-                            {item.author ? (
-                              <Avatar size="small" src={item.author.avatar} />
-                            ) : (
-                              <Avatar
-                                size="small"
-                                style={{
-                                  backgroundColor: '#87d068',
-                                }}
-                                icon={<UserOutlined />}
-                              />
-                            )}
-
-                            <div
-                              className="name"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                router.push(`/lecturer/${item.author._id}`);
-                              }}
-                            >
-                              {item.author.nickname}
-                            </div>
-                          </div>
-                          <div>
-                            <span>
-                              {item.leanrs + ' '}
-                              人已经学习
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
+                  <CoursesItem item={item} />
                 ))}
               </div>
               {/* <Pagination
