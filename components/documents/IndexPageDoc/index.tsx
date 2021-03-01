@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { _get_courses_list } from '@/server/courses';
 import { setSubStr } from '@/utils/utils';
-
+import GetBrowserNum from '@/components/actions/getBrowseNum';
 // 首页文档样式
 export default function IndexPageDoc({ item }: { item: any }) {
    const router = useRouter();
@@ -48,7 +48,10 @@ export default function IndexPageDoc({ item }: { item: any }) {
 
           <div className="exam-item-tip">
             浏览:
-            <span style={{ margin: '0 5px' }}>{item.looks}</span> 下载:
+            <span style={{ margin: '0 5px' }}>
+              <GetBrowserNum type="Document" id={item._id} />
+            </span>{' '}
+            点赞:
             <span style={{ margin: '0 5px' }}>{item.download}</span>次
           </div>
         </div>

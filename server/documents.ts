@@ -5,3 +5,7 @@ import { MethodType, request } from '../request.js';
 export const _get_documents = async (query: string='') => {
   return await request(`/documents?query=${query}`, MethodType.GET);
 };
+// 获取文档详情
+export const _get_documents_detail = async (id: string = '') => {
+  return await request(`/documents/${id}`, MethodType.GET);
+};

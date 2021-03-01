@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { setSubStr } from '@/utils/utils';
 import { Affix } from 'antd';
 import { _get_documents } from '@/server/documents';
 
@@ -8,7 +7,7 @@ import { _get_documents } from '@/server/documents';
 export default function RecommendDoc({ top }: { top: number }) {
   const router = useRouter();
     const [documentList, setDocumentList] = useState([]);
-    const getDocumentsList = async (nowpaginatio = {}) => {
+    const getDocumentsList = async () => {
       const query = {
         where: {
           recommend:true,

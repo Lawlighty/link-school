@@ -3,6 +3,9 @@ import { useRouter } from 'next/router';
 import { setSubStr } from '@/utils/utils';
 import { Card, Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import GetBrowserNum from '@/components/actions/getBrowseNum';
+
+
 // 文档样式
 export default function DocumentItem({ item }: { item: any }) {
   const router = useRouter();
@@ -79,8 +82,8 @@ export default function DocumentItem({ item }: { item: any }) {
               </div>
               <div>
                 <span>
-                  {item.leanrs + ' '}
-                  人已经学习
+                  <GetBrowserNum type="Document" id={item._id} />
+                  {` `}次浏览
                 </span>
               </div>
             </div>

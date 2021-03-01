@@ -5,6 +5,10 @@ import { MethodType, request } from '../request.js';
 export const _get_courses_list= async (query: string = '') => {
   return await request(`/courses?query=${query}`, MethodType.GET);
 };
+// 获取课程详情
+export const _get_courses_detail = async (id: string = '') => {
+  return await request(`/courses/${id}`, MethodType.GET);
+};
 // 获取推荐课程
 export const _get_courses_recommend = async (query:string='') => {
   return await request(`/courses/recommend?query=${query}`, MethodType.GET);

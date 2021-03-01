@@ -5,6 +5,7 @@ import {
   RightOutlined,
   UserOutlined,
 } from '@ant-design/icons';
+import GetBrowserNum from '@/components/actions/getBrowseNum';
 
 // 课程展示
 export default function CoursesItem({ item }: { item: any }) {
@@ -74,8 +75,7 @@ export default function CoursesItem({ item }: { item: any }) {
             </div>
             <div>
               <span>
-                {item.leanrs + ' '}
-                人已经学习
+                <GetBrowserNum type="Course" id={item._id}/> 人已经学习
               </span>
             </div>
           </div>

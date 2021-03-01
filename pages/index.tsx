@@ -265,7 +265,7 @@ export default function Home() {
 
             <div className="zone_body">
               {courseRecommendList.map((item) => (
-                <CoursesItem item={item} />
+                <CoursesItem item={item} key={item._id} />
               ))}
             </div>
           </div>
@@ -290,7 +290,7 @@ export default function Home() {
 
             <div className="zone_body bg_white" style={{ padding: '20px' }}>
               {documentList.map((item) => (
-                <IndexPageDoc item={item} />
+                <IndexPageDoc item={item} key={item._id} />
               ))}
             </div>
           </div>
@@ -315,7 +315,7 @@ export default function Home() {
 
             <div className="zone_body">
               {courseStickList.map((item) => (
-                <CoursesItem item={item} />
+                <CoursesItem item={item} key={item._id} />
               ))}
             </div>
           </div>
@@ -367,7 +367,9 @@ export default function Home() {
               </div>
 
               <div className="zone_body">
-                {[1, 2, 3, 4, 5, 6, 7].map((item, index) => <NewsItem item={item} index={index} />)}
+                {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
+                  <NewsItem item={item} index={index} />
+                ))}
               </div>
             </div>
           </div>
