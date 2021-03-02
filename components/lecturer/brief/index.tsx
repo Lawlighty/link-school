@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { setSubStr } from '@/utils/utils';
+import LikeBtn from '@/components/actions/likeBtn';
 // 讲师简介
 export default function LecturerBrief({ author }: { author: any }) {
 
@@ -29,21 +30,13 @@ export default function LecturerBrief({ author }: { author: any }) {
                 <a>{author.nickname || ''}</a>
               </div>
 
-              <a
-                onClick={() => setIsCollPer(!isCollPer)}
-                className={['collect_btn', isCollPer ? 'on' : ''].join(' ')}
-              >
-                {isCollPer ? (
-                  <img src="/imgs/收藏 _red.png" alt="" />
-                ) : (
-                  <img src="/imgs/收藏.png" alt="" />
-                )}
-                &nbsp;关注
-              </a>
+              <LikeBtn type="Course" title="关注" object={author._id}>
+                <></>
+              </LikeBtn>
             </div>
           </div>
           <div className="info_box">
-                <p>{setSubStr(author.introduc || '' , 150)}</p>
+            <p>{setSubStr(author.introduc || '', 150)}</p>
           </div>
         </div>
       </div>

@@ -23,6 +23,7 @@ export const request =(url, method, params)=> {
         return axios.get(url, {
           params,
           headers: {
+            Authorization: 'Bearer ' + localStorage.token,
             // token: localStorage.token,
             // 'X-AUTH-TOKEN': localStorage.token,
             // 'Content-Type': 'application/json;charset=utf-8',
@@ -31,7 +32,7 @@ export const request =(url, method, params)=> {
       case MethodType.POST:
         return axios.post(url, params, {
           headers: {
-            // token: localStorage.token,
+            Authorization: 'Bearer ' + localStorage.token,
             // 'X-AUTH-TOKEN': localStorage.token,
             // 'Content-Type': 'application/json;charset=utf-8',
           },
@@ -39,7 +40,7 @@ export const request =(url, method, params)=> {
       case MethodType.PUT:
         return axios.put(url, params, {
           headers: {
-            // token: localStorage.token,
+            Authorization: 'Bearer ' + localStorage.token,
             // 'X-AUTH-TOKEN': localStorage.token,
             // 'Content-Type': 'application/json;charset=utf-8',
           },
@@ -48,7 +49,7 @@ export const request =(url, method, params)=> {
         return axios.delete(url, {
           params,
           headers: {
-            // token: localStorage.token,
+            Authorization: 'Bearer ' + localStorage.token,
             // 'X-AUTH-TOKEN': localStorage.token,
             // 'Content-Type': 'application/json;charset=utf-8',
           },

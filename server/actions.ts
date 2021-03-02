@@ -7,9 +7,9 @@ export const _get_actions_list= async (query: string = '') => {
 };
 
 export const _get_actions_status = async (query: string = '') => {
-  return await request(`/status?query=${query}`, MethodType.GET);
+  return await request(`/actions/status?query=${query}`, MethodType.GET);
 };
 
 export const _post_actions_toogle = async (params:{}) => {
-  return await request(`/status`, MethodType.POST, params);
+  return await request(`/actions/toogle`, MethodType.POST, params);
 };

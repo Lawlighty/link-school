@@ -6,26 +6,28 @@ import {
 } from '@/server/actions';
 import { LikeOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
-import  GetUpVoteNum  from '@/components/actions/getUpVoteNum';
-// 点赞操作
-export default function UpVote({
+import GetUpVoteNum from '@/components/actions/getUpVoteNum';
+// 收藏操作
+export default function LikeBtn({
   children,
   type,
+  title,
   object,
 }: {
   children: React.ReactNode;
   type: string;
-  object?: string;
+  title: string;
+  object: string;
 }) {
-  const childRef: any = useRef(null);
+  //   const childRef: any = useRef(null);
   const router = useRouter();
   const [likes, seLikes] = useState<boolean>(false);
 
   const getActionList = async () => {
     const query = {
       type: type,
-      name: 'UP_VOTE',
-      object: object || router.query.id,
+      name: 'LIKE',
+      object: object||router.query.id,
     };
     await _get_actions_status(JSON.stringify(query)).then((data) => {
       if (data.status === 200) {
@@ -36,7 +38,7 @@ export default function UpVote({
   const actionToogle = async () => {
     const query = {
       type: type,
-      name: 'UP_VOTE',
+      name: 'LIKE',
       object: object || router.query.id,
     };
     const params = {
@@ -44,7 +46,7 @@ export default function UpVote({
     };
     await _post_actions_toogle(params).then((data) => {
       getActionList();
-      childRef.current.getActionList();
+      //   childRef.current.getActionList();
     });
   };
   useEffect(() => {
@@ -70,20 +72,18 @@ export default function UpVote({
   };
   return (
     <>
-      <div
-        className={['hot_item can_click', likes ? 'c_red' : ''].join(' ')}
-        onClick={() => {
-          changeAction();
-        }}
+      <a
+        onClick={() => changeAction()}
+        className={['collect_btn', likes ? 'on' : ''].join(' ')}
       >
-        <span className="iconfont">
-          <LikeOutlined />
-        </span>
-        {` `}
-        <GetUpVoteNum cRef={childRef} type="Document" object={object}/>
-        {` `}
-        {children}
-      </div>
+        {likes ? (
+          <img src="/imgs/收藏 _red.png" alt="" />
+        ) : (
+          <img src="/imgs/收藏.png" alt="" />
+        )}
+        &nbsp;{likes ? '已' : ''}
+        {title || '收藏'}
+      </a>
     </>
   );
 }

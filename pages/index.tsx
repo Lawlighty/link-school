@@ -18,6 +18,7 @@ import NewsItem from '@/components/news';
 
  const { SubMenu } = Menu;
 export default function Home() {
+
   const router = useRouter();
   //轮播图
   const [bannerList, setBannerList] = useState([]);
@@ -72,6 +73,8 @@ export default function Home() {
     });
   };
   useEffect(() => {
+      console.log('localStorage.token', localStorage.token);
+      console.log('localStorage.token', typeof localStorage.token);
     getCategoryList();
     getBanners();
     getCoursesRecommend();
@@ -181,11 +184,6 @@ export default function Home() {
       live_time: '2020-09-09 22:31:00',
     },
   ];
-  // 查询限制(分页)
-  const query = {
-    limit: 1,
-    page: 1,
-  };
 
   return (
     <PcLayout

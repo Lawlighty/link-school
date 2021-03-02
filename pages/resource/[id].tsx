@@ -54,11 +54,11 @@ export default function Doc() {
                     className="flex_1 hot_div"
                     style={{ textAlign: 'right' }}
                   >
-                    <UpVote type="Document">
+                    <UpVote type="Document" object={router.query.id}>
                       {` `}
-                      <GetUpVoteNum type="Document" />
+                      <></>
                     </UpVote>
-                    
+
                     <div className="hot_item">
                       <span className="iconfont">
                         <EyeOutlined />

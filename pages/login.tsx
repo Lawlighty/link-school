@@ -86,9 +86,6 @@ export default function Login() {
                     // console.log('response==>', response);
 
                     await _login_with_account(phoneNumber, passWord).then((data:any) => {
-                        console.log('login data==>', data);
-                        console.log('login user==>', data.data.user);
-                        console.log('login token==>', data.data.token);
                         if (data.status && data.status === 201) {
                           message.success('登录成功');
                           localStorage.setItem(
@@ -97,7 +94,7 @@ export default function Login() {
                           );
                           localStorage.setItem(
                             'token',
-                            JSON.stringify(data.data.token)
+                            data.data.token
                           );
 
                           if (router.query.from) {

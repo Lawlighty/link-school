@@ -16,7 +16,7 @@ export default function GetBrowserNum({ type,id }: { type: string,id: string}) {
         setCurrent(data.data.data[0]);
       }
     });
-    };
+  };
   const getDocumentsBrowser = async () => {
     if (id) {
          const query = {
@@ -42,7 +42,7 @@ export default function GetBrowserNum({ type,id }: { type: string,id: string}) {
           getDocumentsBrowser();
           break;
       }
-    }, [type,id]);
+    }, [type, id]);
 
     return (
       <>

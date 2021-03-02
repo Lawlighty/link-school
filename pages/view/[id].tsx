@@ -16,6 +16,7 @@ import Comment from '@/components/comment/Comment';
 import LecturerBrief from '@/components/lecturer/brief';
 import HotCourses from '@/components/courses/hotCourses';
 import EpisodesList from '@/components/courses/episodes/episodesList';
+import LikeBtn from '@/components/actions/likeBtn';
 import { useRouter } from 'next/router';
 import { _get_courses_detail } from '@/server/courses';
 
@@ -130,7 +131,7 @@ export default function View() {
                   </div>
                 )}
 
-                <div className="video_info" style={{display: 'none'}}>
+                <div className="video_info" style={{ display: 'none' }}>
                   <div className="video_info_tab" onClick={showDrawer}>
                     <DatabaseOutlined className="icon" />
                     <div>章节</div>
@@ -171,17 +172,9 @@ export default function View() {
                       justifyContent: 'flex-end',
                     }}
                   >
-                    <a
-                      onClick={() => setIsColl(!isColl)}
-                      className={['collect_btn', isColl ? 'on' : ''].join(' ')}
-                    >
-                      {isColl ? (
-                        <img src="/imgs/收藏 _red.png" alt="" />
-                      ) : (
-                        <img src="/imgs/收藏.png" alt="" />
-                      )}
-                      &nbsp;收藏
-                    </a>
+                    <LikeBtn type="Course" title="收藏">
+                      <></>
+                    </LikeBtn>
                   </div>
                 </ul>
 
