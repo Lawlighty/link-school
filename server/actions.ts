@@ -1,4 +1,4 @@
-import { MethodType, request } from '../request.js';
+import { MethodType, request, request2 } from '../request.js';
 
 // 动作
 // 查询动作列表

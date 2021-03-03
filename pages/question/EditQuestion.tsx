@@ -11,7 +11,7 @@ import {  getWeekDate } from '@/utils/utils';
 import AccountState from '../../store/accountinfo';
 import CategoryTags from '@/components/categoryTags/index';
 import MEDitor from '@uiw/react-md-editor';
-
+import { _post_question } from '@/server/questions';
 
 const { confirm } = Modal;
 const initCurrentQuestion = {
@@ -25,15 +25,40 @@ const EditQuestion = ({ router }) => {
     const [loading, setLoading] = useState(false);
     const [currentQuestion, setCurrentQuestion] = useState(initCurrentQuestion);
 
-    const toReset =() => {
-        setCurrentQuestion(initCurrentQuestion);
+  // 判断是否登录
+  const isLogin = () => {
+    if (
+      JSON.parse(localStorage.getItem('userInfo')) &&
+      localStorage.getItem('token')
+    ) {
+      return 
+    } else {
+      // 去登陆
+      // router.push('/login');
+      router.push(`/login?from=${router.asPath}`);
     }
-    const toPost = () => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-            message.success('发布成功!');
-        }, 2000);
+  };
+  useEffect(() => {isLogin()},[])
+  const toReset =() => {
+    setCurrentQuestion(initCurrentQuestion);
+    childRef.current.clearTag();
+  }
+  const toPost = async () => {
+    if (!childRef.current.getCurrentTag()) {
+      message.info('请选择类型')
+    }
+    console.log('currentQuestion', currentQuestion);
+    const category =childRef.current.getCurrentTag() ;
+    const params = {
+      ...currentQuestion,
+      category,
+    };
+    await _post_question(params).then((data) => {
+      if (data.status === 200 || data.status === 201) {
+        message.success('发布成功!')
+          router.push('/question');
+        }
+      });
     }
    
 
@@ -82,7 +107,7 @@ const EditQuestion = ({ router }) => {
                 <div className="flex flex_1">
                   <div className="ma_r_20 font20 mgt20">分类:</div>
                   <div className="flex_1">
-                    <CategoryTags hasAll={false} />
+                    <CategoryTags hasAll={false} cRef={childRef} />
                   </div>
                 </div>
 
@@ -114,6 +139,10 @@ const EditQuestion = ({ router }) => {
                       message.warning('请输入标题');
                       return;
                     }
+                    if (!childRef.current.getCurrentTag()) {
+                         message.warning('请选择类型');
+                         return;
+                    }
                     confirm({
                       title: '确定发布吗?',
                       icon: <ExclamationCircleOutlined />,
@@ -138,7 +167,6 @@ const EditQuestion = ({ router }) => {
               }}
             />
             <div style={{ padding: '50px 0 0 0' }} />
-            
           </div>
         </div>
       </PcLayout>

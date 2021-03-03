@@ -33,7 +33,6 @@ export default function Home() {
   // 获取分类
   const getCategoryList = async () => {
     await _get_all_categorys().then((data) => {
-        console.log('getCategoryList', data);
         if (data.status === 200) {
                setCategoryList(getBannerSubItems(data.data));
         }

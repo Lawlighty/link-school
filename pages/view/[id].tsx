@@ -172,7 +172,7 @@ export default function View() {
                       justifyContent: 'flex-end',
                     }}
                   >
-                    <LikeBtn type="Course" title="收藏">
+                    <LikeBtn type="Course" title="收藏" object={router.query.id}>
                       <></>
                     </LikeBtn>
                   </div>
@@ -200,7 +200,7 @@ export default function View() {
                     </>
                   ) : (
                     <>
-                      <Comment />
+                      <Comment type='Course'/>
                     </>
                   )}
                 </div>

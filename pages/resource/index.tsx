@@ -261,7 +261,7 @@ const Resource = ({ router }) => {
    const onChangePage = (page) => {
      const n_pagination = { ...pagination, current: page };
 
-     getDocumentsList(n_pagination);
+     getDocumentsList({ ...n_pagination });
    };
 
   return (

@@ -1,4 +1,4 @@
-import { MethodType, request } from '../request.js';
+import { MethodType, request2, request } from '../request.js';
 
 // 文档
 // 获取文档列表

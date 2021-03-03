@@ -81,7 +81,7 @@
 .view_page .course_tab li.on a {
     color: #d51423;
 }
-.view_page .collect_btn {
+ .collect_btn {
     color: #666;
     float: right;
     height: 36px;
@@ -91,10 +91,10 @@
     display: flex;
     align-items: center;
 }
-.view_page .collect_btn img{
+ .collect_btn img{
     width: 20px
 }
-.view_page .collect_btn.on{
+ .collect_btn.on{
     color: #d51423;
 }
 .detail_box .content_info {

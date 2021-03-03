@@ -8,8 +8,8 @@ import MEDitor from '@uiw/react-md-editor';
 import { utc2beijing } from '@/utils/utils';
 import { useRouter } from 'next/router';
 import GetBrowserNum from '@/components/actions/getBrowseNum';
-import GetUpVoteNum from '@/components/actions/getUpVoteNum';
 import UpVote from '@/components/actions/upVote';
+import LikeBtn from '@/components/actions/likeBtn';
 // const Doc = ({ router }) => { 
 export default function Doc() { 
   const router = useRouter();
@@ -58,7 +58,6 @@ export default function Doc() {
                       {` `}
                       <></>
                     </UpVote>
-
                     <div className="hot_item">
                       <span className="iconfont">
                         <EyeOutlined />
@@ -67,6 +66,11 @@ export default function Doc() {
                         type="Document"
                         id={currentDoc._id || ''}
                       />
+                    </div>
+                    <div style={{ marginLeft: '20px' }}>
+                      <LikeBtn type="Document" object={router.query.id}>
+                        <></>
+                      </LikeBtn>
                     </div>
                   </div>
                 </div>
@@ -77,27 +81,29 @@ export default function Doc() {
                   source={currentDoc.content}
                   style={{ marginBottom: '50px' }}
                 />
-                <div className="func">
-                  <div
-                    className="func_item"
-                    onClick={() => message.success('分享成功!')}
-                  >
-                    <img src="/imgs/分享.png" alt="" className="icon" />
-                    分享
+                {false && (
+                  <div className="func">
+                    <div
+                      className="func_item"
+                      onClick={() => message.success('分享成功!')}
+                    >
+                      <img src="/imgs/分享.png" alt="" className="icon" />
+                      分享
+                    </div>
+                    <div
+                      className={['func_item', isColl ? 'c_red' : ''].join(' ')}
+                      onClick={() => setColl(!isColl)}
+                    >
+                      <img
+                        style={{ width: '36px' }}
+                        src={!isColl ? '/imgs/收藏.png' : '/imgs/收藏 _red.png'}
+                        alt=""
+                        className="icon"
+                      />
+                      收藏
+                    </div>
                   </div>
-                  <div
-                    className={['func_item', isColl ? 'c_red' : ''].join(' ')}
-                    onClick={() => setColl(!isColl)}
-                  >
-                    <img
-                      style={{ width: '36px' }}
-                      src={!isColl ? '/imgs/收藏.png' : '/imgs/收藏 _red.png'}
-                      alt=""
-                      className="icon"
-                    />
-                    收藏
-                  </div>
-                </div>
+                )}
               </div>
             </div>
             <div className="resource_page ma_l_20">

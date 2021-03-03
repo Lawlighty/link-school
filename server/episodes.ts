@@ -1,4 +1,4 @@
-import { MethodType, request } from '../request.js';
+import { MethodType, request2, request } from '../request.js';
 
 // 子课程
 // 查询课程列表

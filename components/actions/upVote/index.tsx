@@ -4,6 +4,7 @@ import {
   _get_actions_status,
   _post_actions_toogle,
 } from '@/server/actions';
+import {  message } from 'antd';
 import { LikeOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router';
 import  GetUpVoteNum  from '@/components/actions/getUpVoteNum';
@@ -31,7 +32,7 @@ export default function UpVote({
       if (data.status === 200) {
         seLikes(data.data.status);
       }
-    });
+    })
   };
   const actionToogle = async () => {
     const query = {
@@ -42,7 +43,7 @@ export default function UpVote({
     const params = {
       query: JSON.stringify(query),
     };
-    await _post_actions_toogle(params).then((data) => {
+    await _post_actions_toogle(params).then(() => {
       getActionList();
       childRef.current.getActionList();
     });
@@ -61,6 +62,7 @@ export default function UpVote({
       JSON.parse(localStorage.getItem('userInfo')) &&
       localStorage.getItem('token')
     ) {
+      console.log('点赞动作')
       actionToogle();
     } else {
       // 去登陆

@@ -16,8 +16,8 @@ export default function LikeBtn({
 }: {
   children: React.ReactNode;
   type: string;
-  title: string;
-  object: string;
+  title?: string;
+  object?: string;
 }) {
   //   const childRef: any = useRef(null);
   const router = useRouter();
@@ -80,9 +80,10 @@ export default function LikeBtn({
           <img src="/imgs/收藏 _red.png" alt="" />
         ) : (
           <img src="/imgs/收藏.png" alt="" />
-        )}
-        &nbsp;{likes ? '已' : ''}
-        {title || '收藏'}
+          )}
+        {title?<>&nbsp;{likes ? '已' : ''}
+        {title}</>:null}
+        
       </a>
     </>
   );

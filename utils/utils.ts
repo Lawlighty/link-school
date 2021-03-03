@@ -1,4 +1,8 @@
+import { message } from 'antd';
+import Router from 'next/router';
 // 将时间戳转换成日期格式
+
+//  const router = useRouter();
 export const  timestampToTime=(timestamp: any)=> {
   if (!timestamp) {
     return '-';
@@ -109,4 +113,11 @@ export const getBannerSubItems = (data = []) => {
     });
     const list = subItems.slice(0,7);
     return list;
+};
+// 重新登录
+export const reLogin = () => {
+  message.info('请重新登录!');
+  localStorage.removeItem('userInfo');
+  localStorage.removeItem('token');
+  Router.push(`/login?from=${Router.router.asPath}`);
 };
