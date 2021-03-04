@@ -2,7 +2,8 @@ import { MethodType, request, request2 } from '../request.js';
 
 // 课程
 // 查询课程列表
-export const _get_courses_list= async (query: string = '') => {
+export const _get_courses_list = async (query: string = '') => {
+  console.log('get courses',query)
   return await request(`/courses?query=${query}`, MethodType.GET);
 };
 // 获取课程详情

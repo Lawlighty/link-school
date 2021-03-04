@@ -33,8 +33,12 @@ export default function Home() {
   // 获取分类
   const getCategoryList = async () => {
     await _get_all_categorys().then((data) => {
-        if (data.status === 200) {
-               setCategoryList(getBannerSubItems(data.data));
+      if (data.status === 200) {
+          console.log(
+            'getBannerSubItems(data.data)',
+            getBannerSubItems(data.data,7),
+          );
+               setCategoryList(getBannerSubItems(data.data,7));
         }
     });
   };

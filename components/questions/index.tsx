@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 import { Tag } from 'antd';
 import { CommentOutlined, EyeOutlined, LikeOutlined } from '@ant-design/icons';
 import { getColorByStrLength, utc2beijing } from '@/utils/utils';
-
+import GetBrowserNum from '@/components/actions/getBrowseNum';
+import GetCommentNum from '@/components/actions/getCommentNum';
 // 问答
 export default function QuestionItem({
   item,
@@ -45,13 +46,13 @@ export default function QuestionItem({
                 fontSize: 18,
               }}
             />
-            {item.looks}
+            <GetBrowserNum type="Question" id={item._id} />
             <CommentOutlined
               style={{
                 margin: '0 10px 0 20px',
               }}
             />
-            {item.talks}
+            <GetCommentNum type="Question" id={item._id || ''} />
           </div>
         </div>
       </div>

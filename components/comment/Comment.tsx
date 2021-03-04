@@ -215,7 +215,7 @@ export default function Comment({
                 ))}
 
                 <Pagination
-                  defaultCurrent={1}
+                  current={pagination.current}
                   total={pagination.total || 10}
                   onChange={onChangePage}
                   defaultPageSize={pagination.pageSize}

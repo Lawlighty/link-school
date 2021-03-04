@@ -10,7 +10,15 @@ import { _get_all_categorys } from '@/server/categorys';
 
 const { CheckableTag } = Tag;
 
-export default function CategoryTags({ hasAll, cRef }: { hasAll: boolean; cRef: any }) {
+export default function CategoryTags({
+  hasAll,
+  cRef,
+  changeFunc,
+}: {
+  hasAll: boolean;
+  cRef: any;
+  changeFunc?:any;
+}) {
   const [currentTag, setCurrentTag] = useState<string>('');
   const [tagsData, setTagsData] = useState([]);
 
@@ -20,20 +28,29 @@ export default function CategoryTags({ hasAll, cRef }: { hasAll: boolean; cRef: 
     },
     clearTag: () => {
       setCurrentTag('');
-    }
+      
+    },
   }));
-   const getCategoryList = async () => {
-     await _get_all_categorys().then((data) => {
-       if (data.status === 200) {
-         setTagsData(data.data)
-       }
-     });
+  const getCategoryList = async () => {
+    await _get_all_categorys().then((data) => {
+      if (data.status === 200) {
+        setTagsData(data.data);
+      }
+    });
   };
-  useEffect(() => {getCategoryList()},[])
+  useEffect(() => {
+    getCategoryList();
+  }, []);
 
   const handleChange = (tag, e) => {
     if (e) {
-      setCurrentTag(tag._id)
+      if (tag === '') {
+        setCurrentTag('');
+        changeFunc('');
+      } else {
+        setCurrentTag(tag._id);
+        changeFunc(tag._id);
+      }
     }
   };
 

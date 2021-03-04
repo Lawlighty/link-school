@@ -13,10 +13,11 @@
 }
 .list_page .content_ul {
     display: inline-block;
-    margin-top: 23px;
+    /* margin-top: 23px; */
     margin-block-end: 1em !important;
 }
 .list_page .content_ul li {
+    margin-top: 23px !important;
     float: left;
     font-size: 14px;
     height: 26px;

@@ -1,6 +1,6 @@
 import PcLayout from '@/components/layouts/PcLayout';
 import { Empty, Pagination, Affix, message, Menu, Tag } from 'antd';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { withRouter } from 'next/router';
 import AccountState from '../../store/accountinfo';
 import CategoryTags from '@/components/categoryTags/index';
@@ -9,48 +9,62 @@ import Notices from '@/components/notice';
 import Visitors from '@/components/visitor';
 import { _get_questions } from '@/server/questions';
 
+const initPaging = {
+  current: 1,
+  pageSize: 10,
+  //   total: courseListCount,
+};
 const Question = ({ router }) => {
-    const accountState = AccountState.useContainer();
+    const childRef: any = useRef(null);
     const [top, setTop] = useState(90);
     const [currentIndex, setCurrentIndex] = useState<string>('all');
     const [questionList, setQuestionList] = useState([]);
 
-     const [pagination, setPagination] = useState({
-       current: 1,
-       pageSize: 10,
-       //   total: courseListCount,
-     });
+     const [pagination, setPagination] = useState(initPaging);
+  const [currentQuery, setCurrentQuery] = useState({});
   
-    const getQuestionLits = async (nowpaginatio = {}) => {
-      const query = {
-        where: {},
-        limit: nowpaginatio.pageSize || pagination.pageSize,
-        page: nowpaginatio.current || pagination.current,
-      };
-      await _get_questions(JSON.stringify(query)).then((data) => {
-        if (data.status === 200) {
-          setQuestionList(data.data.data);
-          console.log()
-          const n_pagination = {
-            ...pagination,
-            current: data.data.page,
-            total: data.data.total,
-          };
-          setPagination({ ...n_pagination });
-        }
-      });
+  const getQuestionLits = async (nowpaginatio = {}, nowcurrentQuery={}) => {
+    console.log('现在的currentQuery', nowcurrentQuery);
+    const query = {
+      where: Object.keys(nowcurrentQuery).length?nowcurrentQuery : currentQuery,
+      limit: nowpaginatio.pageSize || pagination.pageSize,
+      page: nowpaginatio.current || pagination.current,
     };
+    await _get_questions(JSON.stringify(query)).then((data) => {
+      if (data.status === 200) {
+        setQuestionList(data.data.data);
+        console.log();
+        const n_pagination = {
+          ...pagination,
+          current: data.data.page,
+          total: data.data.total,
+        };
+        setPagination({ ...n_pagination });
+      }
+    });
+  };
     useEffect(() => {
       getQuestionLits();
     }, []);
     const onChangePage = (page) => {
        const n_pagination = { ...pagination, current: page };
-       getQuestionLits(n_pagination);
+       getQuestionLits(n_pagination,{});
     };
     const handleClick = (e:any) => {
         setCurrentIndex(e.key);
     };
 
+  const changeFunc = (id:string) => {
+    let queryInfo={};
+    if (id) {
+      queryInfo = {
+        category: id,
+      };
+      setCurrentQuery({ ...queryInfo });
+    }
+    setPagination({ ...initPaging });
+    getQuestionLits(initPaging, queryInfo);
+  };
 
     //发帖
     const toPostPage = () => {
@@ -88,10 +102,10 @@ const Question = ({ router }) => {
                 <Menu.Item key="solved">已解决</Menu.Item>
                 <Menu.Item key="mine">我的问题</Menu.Item>
               </Menu>
-              <CategoryTags hasAll />
+              <CategoryTags hasAll cRef={childRef} changeFunc={changeFunc} />
               <div className="post_items">
                 {questionList.map((item, index) => (
-                  <QuestionItem item={item} />
+                  <QuestionItem item={item} key={item._id} />
                 ))}
                 {questionList.length === 0 && (
                   <Empty
@@ -105,7 +119,7 @@ const Question = ({ router }) => {
                 )}
 
                 <Pagination
-                  defaultCurrent={1}
+                  current={pagination.current}
                   total={pagination.total || 10}
                   onChange={onChangePage}
                   defaultPageSize={pagination.pageSize}
