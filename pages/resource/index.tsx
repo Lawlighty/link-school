@@ -68,7 +68,7 @@ const Resource = ({ router }) => {
         <div className="course_content">
           <div className="index_content_zone flex">
             <RecommendDoc top={top} />
-            <div className="flex_1" style={{ marginLeft: 15 }}>
+            <div className="flex_1 flex_c" style={{ marginLeft: 15 }}>
               {documentList.length === 0 && (
                 <Empty
                   style={{

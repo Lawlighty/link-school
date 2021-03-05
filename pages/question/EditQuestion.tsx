@@ -107,7 +107,7 @@ const EditQuestion = ({ router }) => {
                 <div className="flex flex_1">
                   <div className="ma_r_20 font20 mgt20">分类:</div>
                   <div className="flex_1">
-                    <CategoryTags hasAll={false} cRef={childRef} />
+                    <CategoryTags hasAll={false} cRef={childRef} changeFunc={() => { }} />
                   </div>
                 </div>
 
@@ -140,8 +140,8 @@ const EditQuestion = ({ router }) => {
                       return;
                     }
                     if (!childRef.current.getCurrentTag()) {
-                         message.warning('请选择类型');
-                         return;
+                      message.warning('请选择类型');
+                      return;
                     }
                     confirm({
                       title: '确定发布吗?',

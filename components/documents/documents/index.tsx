@@ -17,7 +17,7 @@ export default function DocumentItem({ item }: { item: any }) {
       }}
       className="zone_body_item width100"
       key={item._id}
-      style={{ marginBottom: 8 }}
+      style={{ marginBottom: 8,flex: 1 }}
     >
       <Card
         hoverable

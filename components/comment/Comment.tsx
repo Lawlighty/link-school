@@ -32,6 +32,10 @@ export default function Comment({
     pageSize: 10,
     //   total: courseListCount,
   });
+   const [accountState, setAccountState] = useState<any>({});
+   useEffect(() => {
+     setAccountState(JSON.parse(localStorage.getItem('userInfo')) || {});
+   }, []);
 
   const getCommentsList = async (nowpaginatio = {}) => {
     const query = {
@@ -69,20 +73,24 @@ export default function Comment({
 
       getCommentsList({ ...n_pagination });
     };
-    const subCommon = async () => {
+  const subCommon = async () => {
+    if (accountState._id) {
         const params = {
           type,
           object: object || router.query.id,
           content: topComm,
         };
         await _post_comments(params).then((data) => {
-            console.log('评论res', data);
-            if (data.data && data.data._id) {
-                message.info('评论成功')
-                getCommentsList();
-             }
-            setTopComm('')
+          console.log('评论res', data);
+          if (data.data && data.data._id) {
+            message.info('评论成功');
+            getCommentsList();
+          }
+          setTopComm('');
         });
+    } else {
+      router.push(`/login?from=${router.asPath}`);
+      } 
     };
     const delComm = async (id: string) => {
         await _delete_comments(id).then((data) => {

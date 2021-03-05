@@ -211,12 +211,14 @@ export default function Home() {
                     >
                       <div className="sub_div">
                         {item.children
-                          ? item.children.map((litem) => (
+                          ? item.children.map((litem,lindex) => (
                               <div className="sub_div_item" key={litem._id}>
                                 <a
                                   className="name"
                                   onClick={() => {
-                                    router.push('/list');
+                                    router.push(
+                                      `/list?from=${litem._id}&index=${lindex}&parentid=${item._id}&pindex=${index}`,
+                                    );
                                   }}
                                 >
                                   {litem.name}

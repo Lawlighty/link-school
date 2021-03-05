@@ -13,17 +13,20 @@ const initcurrentTags = [{ index: 0, key: 'all' }];
 export default function CategoryMenu({
     changeFunction
 }) {
+   const router = useRouter();
   // 分类树
   const [categoryList, setCategoryList] = useState([]);
   const [currentTags, setCurrentTags] = useState(initcurrentTags);
   const [currentPriceTags, setCurrentPriceTags] = useState('allprice');
   // 获取分类
   const getCategoryList = async () => {
-    await _get_all_categorys().then((data) => {
+    const res = await _get_all_categorys().then((data) => {
       if (data.status === 200) {
         setCategoryList(getBannerSubItems(data.data));
+        return getBannerSubItems(data.data);
       }
     });
+    return res;
   };
   // 获取子分类
   const getCategoryChildList = async (query: string) => {
@@ -51,7 +54,27 @@ export default function CategoryMenu({
     },
   ];
   useEffect(() => {
-    getCategoryList();
+    getCategoryList().then((data) => {
+      console.log('getCategoryList',data);
+       if (router.query.from) {
+         console.log('router', router);
+         console.log('router.query', router.query);
+         console.log('router.query.from', router.query.from);
+
+         const tag = [
+           {
+             index: parseInt(router.query.pindex, 10),
+             key: router.query.parentid,
+           },
+           { index: parseInt(router.query.index, 10), key: router.query.from },
+         ];
+         console.log('router.query.from==>tag', tag);
+         setCurrentTags([...tag]);
+         getQueryInfo(tag);
+       }
+    })
+   
+    
   }, []);
   const getChildList= (result, id) => {
     let list = [];

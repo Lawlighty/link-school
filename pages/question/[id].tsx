@@ -23,7 +23,7 @@ import Notices from '@/components/notice';
 
 export default function QuestionDetail() {
    const router = useRouter();
-  const accountState = AccountState.useContainer();
+   const [accountState, setAccountState] = useState<any>({});
   const [top, setTop] = useState(90);
 
     const [currentQuestion, setCurrentQuestion] = useState<any>({});
@@ -39,6 +39,7 @@ export default function QuestionDetail() {
     });
   };
   useEffect(() => {
+      setAccountState(JSON.parse(localStorage.getItem('userInfo')) || {});
     if (router.query.id) {
       const id = router.query.id;
       getQuestionsDetail(id);
@@ -50,7 +51,7 @@ export default function QuestionDetail() {
     };
     
   const toPostPage = () => {
-    if (JSON.parse(localStorage.getItem('userInfo'))._id) {
+    if (accountState._id) {
       router.push('/question/EditQuestion');
     } else {
       router.push('/login?from=/question');

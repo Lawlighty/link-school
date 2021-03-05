@@ -20,16 +20,45 @@ const Question = ({ router }) => {
     const [currentIndex, setCurrentIndex] = useState<string>('all');
     const [questionList, setQuestionList] = useState([]);
 
-     const [pagination, setPagination] = useState(initPaging);
+    const [pagination, setPagination] = useState(initPaging);
   const [currentQuery, setCurrentQuery] = useState({});
+  const [accountState, setAccountState] = useState<any>({});
+  const [token, setToken] = useState({});
   
-  const getQuestionLits = async (nowpaginatio = {}, nowcurrentQuery={}) => {
-    console.log('现在的currentQuery', nowcurrentQuery);
+  const getQuestionLits = async (
+    nowpaginatio = {},
+    nowcurrentQuery = {},
+    nowcurrentIndex='',
+  ) => {
     const query = {
-      where: Object.keys(nowcurrentQuery).length?nowcurrentQuery : currentQuery,
+      where: nowcurrentQuery,
       limit: nowpaginatio.pageSize || pagination.pageSize,
       page: nowpaginatio.current || pagination.current,
     };
+    if (nowcurrentIndex) {
+      if (nowcurrentIndex === 'unsolved') {
+        query['where']['$or'] = [
+          { accept: { $exists: false } },
+          { accept: null },
+        ];
+      } else if (nowcurrentIndex === 'solved') {
+        query['where']['accept'] = { $exists: true };
+      } else if (nowcurrentIndex === 'mine') {
+        query['where']['author'] = accountState._id || '';
+      }
+    }
+    else {
+       if (currentIndex === 'unsolved') {
+         query['where']['$or'] = [
+           { accept: { $exists: false } },
+           { accept: null },
+         ];
+       } else if (currentIndex === 'solved') {
+         query['where']['accept'] = { $exists: true };
+       } else if (currentIndex === 'mine') {
+         query['where']['author'] = accountState._id || '';
+       }
+    }
     await _get_questions(JSON.stringify(query)).then((data) => {
       if (data.status === 200) {
         setQuestionList(data.data.data);
@@ -43,18 +72,23 @@ const Question = ({ router }) => {
       }
     });
   };
-    useEffect(() => {
-      getQuestionLits();
+  useEffect(() => {
+    setAccountState(JSON.parse(localStorage.getItem('userInfo')) || {});
+       setToken(localStorage.getItem('token'));
+      getQuestionLits({},{});
     }, []);
     const onChangePage = (page) => {
        const n_pagination = { ...pagination, current: page };
        getQuestionLits(n_pagination,{});
     };
-    const handleClick = (e:any) => {
-        setCurrentIndex(e.key);
+    const handleClick = (e: any) => {
+      setPagination({ ...initPaging });
+      setCurrentIndex(e.key);
+      const type = e.key
+      getQuestionLits(initPaging, {}, type);
     };
 
-  const changeFunc = (id:string) => {
+  const changeFunc = (id: string) => {
     let queryInfo={};
     if (id) {
       queryInfo = {
@@ -62,13 +96,14 @@ const Question = ({ router }) => {
       };
       setCurrentQuery({ ...queryInfo });
     }
+    setCurrentQuery({  });
     setPagination({ ...initPaging });
     getQuestionLits(initPaging, queryInfo);
   };
 
     //发帖
     const toPostPage = () => {
-        if (JSON.parse(localStorage.getItem('userInfo'))._id) {
+        if (accountState._id) {
           router.push('/question/EditQuestion');
         } else {
           router.push('/login?from=/question');
@@ -97,10 +132,11 @@ const Question = ({ router }) => {
                 mode="horizontal"
               >
                 <Menu.Item key="all">全部问题</Menu.Item>
-                <Menu.Item key="latest">最新回答</Menu.Item>
+                {/* <Menu.Item key="latest">最新回答</Menu.Item> */}
                 <Menu.Item key="unsolved">未解决</Menu.Item>
                 <Menu.Item key="solved">已解决</Menu.Item>
-                <Menu.Item key="mine">我的问题</Menu.Item>
+                { token && <Menu.Item key="mine">我的问题</Menu.Item> }
+               
               </Menu>
               <CategoryTags hasAll cRef={childRef} changeFunc={changeFunc} />
               <div className="post_items">
@@ -117,6 +153,7 @@ const Question = ({ router }) => {
                     description={<span>暂无问答数据,快去提问把!</span>}
                   />
                 )}
+                <div className="flex_1"></div>
 
                 <Pagination
                   current={pagination.current}

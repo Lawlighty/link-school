@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { _get_courses_list } from '@/server/courses';
-
+import Link from 'next/link';
 
 // 公告板块
 export default function CourseRecommendByCategory({ categoryId }: { categoryId: string } ) {
@@ -28,15 +28,14 @@ export default function CourseRecommendByCategory({ categoryId }: { categoryId: 
         <div key={item._id}>
           <div className="foot_course fl">
             <div className="img_box">
-              <a href={item.href} className="" target="_blank">
+              <a href={`view/${item._id}`} className="">
                 <img src={item.cover} alt="" className="course_img" />
               </a>
             </div>
             <div className="course_info">
               <a
-                href="/view/1262283551264952322"
+                href={`view/${item._id}`}
                 className="course_name"
-                target="_blank"
               >
                 {item.name}
               </a>

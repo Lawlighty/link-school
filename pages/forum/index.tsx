@@ -15,7 +15,14 @@ import Visitors from '@/components/visitor';
 
 
 const Forum = ({ router }) => {
-    const accountState = AccountState.useContainer();
+  // const accountState = AccountState.useContainer();
+    const [accountState, setAccountState] = useState<any>({});
+  const [token, setToken] = useState({});
+  
+  useEffect(() => {
+    setAccountState(JSON.parse(localStorage.getItem('userInfo')) || {});
+    setToken(localStorage.getItem('token'));
+  },[])
     const [top, setTop] = useState(90);
     const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -140,7 +147,7 @@ const Forum = ({ router }) => {
 
     //发帖
     const toPostPage = () => {
-        if (JSON.parse(localStorage.getItem('userInfo'))._id) {
+        if (accountState._id) {
           router.push('/forum/EditPost');
         } else {
           router.push('/login?from=/forum');

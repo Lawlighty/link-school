@@ -8,18 +8,31 @@ export default function Visitors({ }) {
     const [accountState, setAccountState] = useState<any>({});
     const [token, setToken] = useState({});
     useEffect(() => {
-        setAccountState(JSON.parse(localStorage.getItem('userInfo')));
+        setAccountState(JSON.parse(localStorage.getItem('userInfo'))||{});
         setToken(localStorage.getItem('token'));
     }, []);
   return (
-    <div className="question_left_item flex" style={{ alignItems: 'center',width: '100%',
-    color: '#333',
-    backgroundColor: '#fff',
-    borderRadius: '6px',
-    fontSize: '14px',
-    marginBottom: '20px'}}>
+    <div
+      className="question_left_item flex"
+      style={{
+        alignItems: 'center',
+        width: '100%',
+        color: '#333',
+        backgroundColor: '#fff',
+        borderRadius: '6px',
+        fontSize: '14px',
+        marginBottom: '20px',
+      }}
+    >
       <div className="user_img_div">
-        <img src={accountState.avatar} alt="" className="user_img" />
+        <img
+          src={
+            accountState.avatar ||
+            'http://all.meedu.tech/images/default_avatar.jpg'
+          }
+          alt=""
+          className="user_img"
+        />
       </div>
       <div className="flex_1">
         {accountState._id ? (

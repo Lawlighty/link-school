@@ -1,3 +1,4 @@
+
 .resource_page .header_list {
     border-top: 1px solid #d7d7d7;
     background: #fff;
@@ -41,6 +42,7 @@
 }
 
 .resource_page .index_content_zone {
+    min-height: 700px;
     width: 1200px;
     margin: 0 auto;
     padding-bottom: 60px;

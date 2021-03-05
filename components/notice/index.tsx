@@ -18,7 +18,7 @@ export default function Notices({}) {
   return (
     <div className="comm_comm">
       <div className="question_left_item">
-        <div className="question_left_title">公告组件</div>
+        <div className="question_left_title">公告</div>
         <div className="question_left_list">
           <ul>
             <li
