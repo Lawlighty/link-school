@@ -35,6 +35,9 @@ export default function QuestionItem({
               )}
 
               {utc2beijing(item.createdAt)}
+              {item.accept && (
+                <Tag color="#108ee9" style={{marginLeft:10}} key={item._id}>已解决</Tag>
+              )}
             </div>
           </div>
         </div>

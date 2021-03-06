@@ -1,6 +1,6 @@
 import PcLayout from '../../components/layouts/PcLayout';
 import { Input, Pagination, Affix, Modal } from 'antd';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import {
   EyeOutlined,
   CommentOutlined,
@@ -12,6 +12,7 @@ import { withRouter } from 'next/router';
 import { getWeekDate } from '../../utils/utils';
 import AccountState from '../../store/accountinfo';
 import Comment from '../../components/comment/Comment';
+import MdWithComment from '../../components/comment/MdComm';
 import MEDitor from '@uiw/react-md-editor';
 import { _get_questions_detail } from '@/server/questions';
 import { useRouter } from 'next/router';
@@ -20,9 +21,11 @@ import GetBrowserNum from '@/components/actions/getBrowseNum';
 import GetCommentNum from '@/components/actions/getCommentNum';
 import Visitors from '@/components/visitor';
 import Notices from '@/components/notice';
+import MkDownModal from '@/components/mkDownView';
 
 export default function QuestionDetail() {
-   const router = useRouter();
+  const router = useRouter();
+  const childRef: any = useRef(null);
    const [accountState, setAccountState] = useState<any>({});
   const [top, setTop] = useState(90);
 
@@ -46,15 +49,21 @@ export default function QuestionDetail() {
     }
   }, [router]);
 
+  const flushPage = () => {
+     if (router.query.id) {
+       const id = router.query.id;
+       getQuestionsDetail(id);
+     }
+  }
   const onChangePage = (page) => {
     console.log('page', page);
     };
     
   const toPostPage = () => {
     if (accountState._id) {
-      router.push('/question/EditQuestion');
+      childRef.current.changeMDVisible(true);
     } else {
-      router.push('/login?from=/question');
+      router.push(`/login?from=${router.asPath}`);
     }
   };
 
@@ -106,14 +115,17 @@ export default function QuestionDetail() {
             </div>
 
             <div className="comm_box">
-              <Comment type="Question" />
+              <MdWithComment
+                type="Question"
+                object={router.query.id}
+                accept={currentQuestion.accept}
+              />
             </div>
           </div>
 
           <div className="question_left_div">
             <Affix offsetTop={top}>
               <Notices />
-
               <div className="question_left_item flex">
                 <div
                   className="btn_item left1"
@@ -134,7 +146,12 @@ export default function QuestionDetail() {
                   我来回答
                 </div>
               </div>
-
+              <MkDownModal
+                cRef={childRef}
+                object={router.query.id}
+                type="Question"
+                flushPage={flushPage}
+              />
               <Visitors />
             </Affix>
           </div>

@@ -262,9 +262,14 @@
     line-height: 20px;
     color: #333;
 }
+.myComm{
+    border-bottom: 1px solid #e5e5e5;
+    display: flex;
+    padding-bottom: 20px;
+}
 .comm .courseCommentItem{
     padding: 20px 0;
-    border-bottom: 1px solid #e5e5e5;
+    /* border-bottom: 1px solid #e5e5e5; */
 }
 .comm .courseCommentItem .userLogo img{
     width: 48px;

@@ -5,6 +5,9 @@ import { MethodType, request, request2 } from '../request.js';
 export const _get_comments_list = async (query: string = '') => {
   return await request(`/comments?query=${query}`, MethodType.GET);
 };
+export const _get_deep_comments_list = async (query: string = '') => {
+  return await request(`/comments/deep?query=${query}`, MethodType.GET);
+};
 export const _post_comments = async (params: {}) => {
   return await request(`/comments`, MethodType.POST, params);
 };
