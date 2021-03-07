@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { _get_courses_list } from '@/server/courses';
 import { setSubStr } from '@/utils/utils';
 import GetBrowserNum from '@/components/actions/getBrowseNum';
+import GetUpVoteNum from '@/components/actions/getUpVoteNum';
 // 首页文档样式
 export default function IndexPageDoc({ item }: { item: any }) {
    const router = useRouter();
-
+  const childRef: any = useRef(null);
   return (
     <div className="exam_div doc_div" key={item._id}>
       <div
@@ -52,7 +53,10 @@ export default function IndexPageDoc({ item }: { item: any }) {
               <GetBrowserNum type="Document" id={item._id} />
             </span>{' '}
             点赞:
-            <span style={{ margin: '0 5px' }}>{item.download}</span>次
+            <span style={{ margin: '0 5px' }}>
+              <GetUpVoteNum cRef={childRef} type="Document" object={item._id} />
+            </span>
+            次
           </div>
         </div>
         <div></div>

@@ -15,6 +15,7 @@ import CoursesItem from '@/components/courses';
 import IndexPageDoc from '@/components/documents/IndexPageDoc';
 import LiveCoursesItem from '@/components/live/courses';
 import NewsItem from '@/components/news';
+import AdDiv from '@/components/ad';
 
  const { SubMenu } = Menu;
 export default function Home() {
@@ -44,7 +45,10 @@ export default function Home() {
   };
   // 获取轮播图
   const getBanners = async () => {
-    await _get_banners().then((data) => {
+    const query = {
+      type: 'HOME_PAGE',
+    };
+    await _get_banners(JSON.stringify(query)).then((data) => {
       if (data.status === 200) {
         setBannerList(data.data);
       }
@@ -195,6 +199,7 @@ export default function Home() {
       showFooter={true}
       isBlack={true}
     >
+      <AdDiv/> 
       <div className="index_page">
         {/* 轮播图 */}
         <div className="banner_div">
@@ -211,7 +216,7 @@ export default function Home() {
                     >
                       <div className="sub_div">
                         {item.children
-                          ? item.children.map((litem,lindex) => (
+                          ? item.children.map((litem, lindex) => (
                               <div className="sub_div_item" key={litem._id}>
                                 <a
                                   className="name"

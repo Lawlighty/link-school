@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useImperativeHandle } from 'react';
 import { useRouter } from 'next/router';
 import {
   MessageOutlined,
@@ -17,18 +17,27 @@ import {
 import { _post_question_accept } from '@/server/questions';
 import { utc2beijing } from '@/utils/utils';
 import MkDownModal from '@/components/mkDownView';
+import Id from '@/pages/search/[id]';
 const { confirm } = Modal;
 
 export default function DeepComment({
   type,
   object,
   replayto,
+  cRef,
 }: {
   type: string;
   object?: string;
   replayto?: string;
+  cRef:any;
 }) {
   const router = useRouter();
+    useImperativeHandle(cRef, () => ({
+      refushDeepCommonList: () => {
+        console.log('refushDeepCommonList');
+        getDeepCommentsList();
+      },
+    }));
   // 评论
   const [commentsList, setCommentsList] = useState([]);
   // 页码
@@ -48,8 +57,8 @@ export default function DeepComment({
       type: 'Comment',
       object: object || router.query.id,
     };
-      await _get_deep_comments_list(JSON.stringify(query)).then((data) => {
-        console.log('getDeepCommentsList',data);
+    await _get_deep_comments_list(JSON.stringify(query)).then((data) => {
+      console.log('getDeepCommentsList', data);
       if (data.status === 200) {
         setCommentsList(data.data);
       }
@@ -63,32 +72,13 @@ export default function DeepComment({
   const [topComm, setTopComm] = useState('');
   const [commObj, setCommObj] = useState('');
   const [deepComm, setDeepComm] = useState(false);
+  const [showAll, setShowAll] = useState(false);
 
   const onChangePage = (page) => {
     const n_pagination = { ...pagination, current: page };
 
     getDeepCommentsList({ ...n_pagination });
   };
-  const subCommon = async () => {
-    if (accountState._id) {
-      const params = {
-        type,
-        object: object || router.query.id,
-        content: topComm,
-      };
-      await _post_comments(params).then((data) => {
-        console.log('评论res', data);
-        if (data.data && data.data._id) {
-          message.info('评论成功');
-          getDeepCommentsList();
-        }
-        setTopComm('');
-      });
-    } else {
-      router.push(`/login?from=${router.asPath}`);
-    }
-  };
-
 
   const toComm = (id) => {
     if (accountState._id) {
@@ -112,45 +102,109 @@ export default function DeepComment({
                 </span>
               </div>
               <div className="courseCommentList">
-                {commentsList.map((item, index) => (
-                  <div className="courseCommentItem" key={item._id}>
-                    <div className="myComm">
-                      <div className="userLogo">
-                        <img
-                          src="https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg"
-                          alt="用户头像"
-                        />
-                      </div>
-                      <div className="courseCommentItemText flex_1">
-                        <div className="userName">
-                          {item.user.nickname}
-                          {'   '}
-                          {item.replayto ? (
-                            <span>
-                              <span className="c_999">回复</span>
-                              {`  `}
-                              {item.replayto.user.nickname}
-                            </span>
-                          ) : null}
-                        </div>
-                        <div className="commentText">{item.content}</div>
-                        <div className="courseCommentItemfooter flex">
-                          <div className="flex_1">
-                            {utc2beijing(item.createdAt)}
-                          </div>
-                          <div>
-                            <MessageOutlined
-                              className="icon toComm"
-                              onClick={(e) => {
-                                toComm(item._id);
-                              }}
+                {commentsList.map((item, index) => {
+                  if (showAll) {
+                    return (
+                      <div className="courseCommentItem" key={item._id}>
+                        <div className="myComm">
+                          <div className="userLogo">
+                            <img
+                              src="https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg"
+                              alt="用户头像"
                             />
                           </div>
+                          <div className="courseCommentItemText flex_1">
+                            <div className="userName">
+                              {item.user.nickname}
+                              {'   '}
+                              {item.replayto ? (
+                                <span>
+                                  <span className="c_999">回复</span>
+                                  {`  `}
+                                  {item.replayto.user.nickname}
+                                </span>
+                              ) : null}
+                            </div>
+                            <div className="commentText">{item.content}</div>
+                            <div className="courseCommentItemfooter flex">
+                              <div className="flex_1">
+                                {utc2beijing(item.createdAt)}
+                              </div>
+                              <div>
+                                <MessageOutlined
+                                  className="icon toComm"
+                                  onClick={(e) => {
+                                    toComm(item._id);
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    );
+                  } else {
+                    if (index <= 4) {
+                      return (
+                        <div className="courseCommentItem" key={item._id}>
+                          <div className="myComm">
+                            <div className="userLogo">
+                              <img
+                                src="https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg"
+                                alt="用户头像"
+                              />
+                            </div>
+                            <div className="courseCommentItemText flex_1">
+                              <div className="userName">
+                                {item.user.nickname}
+                                {'   '}
+                                {item.replayto ? (
+                                  <span>
+                                    <span className="c_999">回复</span>
+                                    {`  `}
+                                    {item.replayto.user.nickname}
+                                  </span>
+                                ) : null}
+                              </div>
+                              <div className="commentText">{item.content}</div>
+                              <div className="courseCommentItemfooter flex">
+                                <div className="flex_1">
+                                  {utc2beijing(item.createdAt)}
+                                </div>
+                                <div>
+                                  <MessageOutlined
+                                    className="icon toComm"
+                                    onClick={(e) => {
+                                      toComm(item._id);
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    }
+                    else {
+                      return null
+                    }
+                  }
+                })}
+                {commentsList.length > 5&&!showAll && (
+                  <div className="tip">
+                    共
+                    <span>
+                      {` `}
+                      {commentsList.length}
+                      {` `}
+                    </span>
+                    条回复,
+                    <a onClick={(e) => {
+                      e.stopPropagation();
+                      setShowAll(true)
+                    }} className="lookMore">点击查看</a>
                   </div>
-                ))}
+                )}
 
                 <MkDownModal
                   cRef={childRef}

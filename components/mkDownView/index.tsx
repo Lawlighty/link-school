@@ -28,6 +28,7 @@ export default function MkDownModal({
   useImperativeHandle(cRef, () => ({
     changeMDVisible: (e) => {
       setVisible(e);
+      setCurrentComment('');
     },
   }));
   const commitComm = async () => {

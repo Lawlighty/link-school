@@ -279,4 +279,15 @@ li {
     padding-top: 20px;
     text-align: center;
 }
+.lookMore{
+  outline: none;
+  color: #00a1d6;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 2px 3px;
+  border-radius: 4px;
+}
+.lookMore:hover{
+  background-color: #d3d3d3;
+}
 

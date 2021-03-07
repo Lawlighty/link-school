@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useImperativeHandle } from 'react';
 import { useRouter } from 'next/router';
 import {
   MessageOutlined,
@@ -24,13 +24,25 @@ export default function MdWithComment({
   object,
   replayto,
   accept,
+  cRef,
+  refushDetail,
+  author,
 }: {
   type: string;
   object?: string;
   replayto?: string;
   accept: any;
+  cRef: any;
+  refushDetail: any;
+  author: string;
 }) {
   const router = useRouter();
+  useImperativeHandle(cRef, () => ({
+    refushCommonList: () => {
+      getCommentsList();
+    },
+  }));
+  const deepchildRef: any = useRef(null);
   // 评论
   const [commentsList, setCommentsList] = useState([]);
   const [acceptComm, setAcceptComm] = useState({});
@@ -49,27 +61,27 @@ export default function MdWithComment({
       queryAccept();
     }
   }, []);
-   useEffect(() => {
-     if (accept) {
-       console.log('查询采纳的答案',accept);
-       // 查询采纳的答案
-       queryAccept();
-     }
-   }, [accept]);
+  useEffect(() => {
+    if (accept) {
+      console.log('查询采纳的答案', accept);
+      // 查询采纳的答案
+      queryAccept();
+    }
+  }, [accept]);
 
   const queryAccept = async () => {
     const query = {
       where: {
-        _id:accept,
+        _id: accept,
       },
     };
     await _get_comments_list(JSON.stringify(query)).then((data) => {
-        console.log('查询采纳信息',data)
-        if (data.status === 200) {
-          setAcceptComm(data.data.data[0]);
-        }
-      });
-  }
+      console.log('查询采纳信息', data);
+      if (data.status === 200) {
+        setAcceptComm(data.data.data[0]);
+      }
+    });
+  };
   const getCommentsList = async (nowpaginatio = {}) => {
     const query = {
       where: {
@@ -138,11 +150,12 @@ export default function MdWithComment({
       if (data.status === 200 || data.status === 201) {
         message.info('采纳成功!');
         getCommentsList();
+        refushDetail(router.query.id);
       }
     });
   };
 
-  const toComm = (id,deepComm) => {
+  const toComm = (id, deepComm) => {
     if (accountState._id) {
       setCommObj(id);
       setDeepComm(deepComm);
@@ -151,32 +164,13 @@ export default function MdWithComment({
       router.push(`/login?from=${router.asPath}`);
     }
   };
+  const flushDeepComm = () => {
+    deepchildRef.current.refushDeepCommonList();
+  };
   return (
     <div className="comm_comm">
       <div>
         <div className="comm">
-          <div className="inputBox box_has_bor">
-            <Input
-              className="commentInput"
-              value={topComm}
-              onChange={(e) => {
-                setTopComm(e.target.value.substr(0, 300));
-              }}
-            />
-            <div
-              disabled={!topComm}
-              onClick={() => {
-                subCommon();
-              }}
-              className={[
-                'submitBtn',
-                'pointer',
-                topComm.length > 0 ? 'cancom' : '',
-              ].join(' ')}
-            >
-              <span>评论</span>
-            </div>
-          </div>
           {!pagination.total && (
             <Empty
               style={{
@@ -197,45 +191,51 @@ export default function MdWithComment({
                 </span>
               </div>
               <div className="courseCommentList">
-                <div
-                  className="courseCommentItem"
-                  key={acceptComm._id}
-                  style={{ position: 'relative', overflow: 'hidden' }}
-                >
-                  <div className="correct_answer">
-                    <span>已采纳</span>
-                  </div>
-                  <div className="myComm">
-                    <div className="userLogo">
-                      <img
-                        src={acceptComm.user ? acceptComm.user.avatar : ''}
-                        alt="用户头像"
+                {acceptComm._id && (
+                  <div
+                    className="courseCommentItem"
+                    key={acceptComm._id}
+                    style={{ position: 'relative', overflow: 'hidden' }}
+                  >
+                    <div className="correct_answer">
+                      <span>已采纳</span>
+                    </div>
+                    <div className="myComm">
+                      <div className="userLogo">
+                        <img
+                          src={acceptComm.user ? acceptComm.user.avatar : ''}
+                          alt="用户头像"
+                        />
+                      </div>
+                      <div className="courseCommentItemText flex_1">
+                        <div className="userName">
+                          {acceptComm.user ? acceptComm.user.nickname : ''}
+                        </div>
+                        <div className="commentText">{acceptComm.content}</div>
+                        <div className="courseCommentItemfooter flex">
+                          <div className="flex_1">
+                            {utc2beijing(acceptComm.createdAt)}
+                          </div>
+                          <div>
+                            <MessageOutlined
+                              className="icon toComm"
+                              onClick={(e) => {
+                                toComm(acceptComm._id, false);
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <DeepComment
+                        cRef={deepchildRef}
+                        type="Comment"
+                        object={acceptComm._id}
                       />
                     </div>
-                    <div className="courseCommentItemText flex_1">
-                      <div className="userName">
-                        {acceptComm.user ? acceptComm.user.nickname : ''}
-                      </div>
-                      <div className="commentText">{acceptComm.content}</div>
-                      <div className="courseCommentItemfooter flex">
-                        <div className="flex_1">
-                          {utc2beijing(acceptComm.createdAt)}
-                        </div>
-                        <div>
-                          <MessageOutlined
-                            className="icon toComm"
-                            onClick={(e) => {
-                              toComm(acceptComm._id, false);
-                            }}
-                          />
-                        </div>
-                      </div>
-                    </div>
                   </div>
-                  <div>
-                    <DeepComment type="Comment" object={acceptComm._id} />
-                  </div>
-                </div>
+                )}
 
                 {commentsList.map((item, index) => {
                   if (!accept || item._id !== accept._id) {
@@ -262,38 +262,41 @@ export default function MdWithComment({
                                     toComm(item._id, false);
                                   }}
                                 />
-                                {!accept
-                                  ? JSON.parse(localStorage.userInfo)._id ===
-                                      item.user._id && (
-                                      <a
-                                        style={{
-                                          fontSize: '16px',
-                                          marginRight: 20,
-                                          cursor: 'pointer',
-                                        }}
-                                        onClick={() => {
-                                          confirm({
-                                            title: '确定采纳?',
-                                            icon: <ExclamationCircleOutlined />,
-                                            okText: '确定',
-                                            onOk() {
-                                              toBeAccept(item._id);
-                                            },
-                                            cancelText: '取消',
-                                            onCancel() {},
-                                          });
-                                        }}
-                                      >
-                                        采纳为答案
-                                      </a>
-                                    )
-                                  : null}
+                                {!accept &&
+                                JSON.parse(localStorage.userInfo)._id ===
+                                  author ? (
+                                  <a
+                                    style={{
+                                      fontSize: '16px',
+                                      marginRight: 20,
+                                      cursor: 'pointer',
+                                    }}
+                                    onClick={() => {
+                                      confirm({
+                                        title: '确定采纳?',
+                                        icon: <ExclamationCircleOutlined />,
+                                        okText: '确定',
+                                        onOk() {
+                                          toBeAccept(item._id);
+                                        },
+                                        cancelText: '取消',
+                                        onCancel() {},
+                                      });
+                                    }}
+                                  >
+                                    采纳为答案
+                                  </a>
+                                ) : null}
                               </div>
                             </div>
                           </div>
                         </div>
                         <div>
-                          <DeepComment type="Comment" object={item._id} />
+                          <DeepComment
+                            cRef={deepchildRef}
+                            type="Comment"
+                            object={item._id}
+                          />
                         </div>
                       </div>
                     );
@@ -305,7 +308,7 @@ export default function MdWithComment({
                   object={commObj}
                   type="Comment"
                   replayto={deepComm ? commObj : null}
-                  flushPage={getCommentsList}
+                  flushPage={flushDeepComm}
                 />
                 <Pagination
                   current={pagination.current}

@@ -1,5 +1,5 @@
 import PcLayout from '../../components/layouts/PcLayout';
-import { Input, Pagination, Affix, Modal } from 'antd';
+import { Input, Pagination, Affix, Modal, Tag } from 'antd';
 import { useState, useEffect, useRef } from 'react';
 import {
   EyeOutlined,
@@ -26,6 +26,7 @@ import MkDownModal from '@/components/mkDownView';
 export default function QuestionDetail() {
   const router = useRouter();
   const childRef: any = useRef(null);
+  const childRefComm: any = useRef(null);
    const [accountState, setAccountState] = useState<any>({});
   const [top, setTop] = useState(90);
 
@@ -49,11 +50,9 @@ export default function QuestionDetail() {
     }
   }, [router]);
 
+  // 重新刷新评论
   const flushPage = () => {
-     if (router.query.id) {
-       const id = router.query.id;
-       getQuestionsDetail(id);
-     }
+    childRefComm.current.refushCommonList();
   }
   const onChangePage = (page) => {
     console.log('page', page);
@@ -85,7 +84,14 @@ export default function QuestionDetail() {
                 <div className="font24 font_b">{currentQuestion.name}</div>
                 <div className="c_999 mgt20 pab10 bor_bot_f0 flex flex_a_c">
                   <div className="flex_1">
-                    {' '}
+                    {currentQuestion.author
+                      ? currentQuestion.author.nickname
+                      : ''}{' '}
+                    <Tag color="#108ee9" style={{ marginLeft: 10 }}>
+                      {currentQuestion.category
+                        ? currentQuestion.category.name
+                        : ''}
+                    </Tag>
                     {utc2beijing(currentQuestion.createdAt)}
                   </div>
                   <EyeOutlined
@@ -116,9 +122,12 @@ export default function QuestionDetail() {
 
             <div className="comm_box">
               <MdWithComment
+                author={currentQuestion.author?currentQuestion.author._id:''}
+                cRef={childRefComm}
                 type="Question"
                 object={router.query.id}
                 accept={currentQuestion.accept}
+                refushDetail={getQuestionsDetail}
               />
             </div>
           </div>
