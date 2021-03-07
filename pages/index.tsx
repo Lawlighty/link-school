@@ -199,7 +199,7 @@ export default function Home() {
       showFooter={true}
       isBlack={true}
     >
-      <AdDiv/> 
+      <AdDiv />
       <div className="index_page">
         {/* 轮播图 */}
         <div className="banner_div">
@@ -214,7 +214,12 @@ export default function Home() {
                         top: `-${index * 52 + 4}px`,
                       }}
                     >
-                      <div className="sub_div">
+                      <div
+                        className={[
+                          'sub_div',
+                          item.children ? 'width_200_padding_20' : '',
+                        ].join(' ')}
+                      >
                         {item.children
                           ? item.children.map((litem, lindex) => (
                               <div className="sub_div_item" key={litem._id}>

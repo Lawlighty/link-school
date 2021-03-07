@@ -47,6 +47,13 @@ li {
 .width100{
   width: 100% !important;
 }
+.width_200{
+  width: 200px;
+}
+.width_200_padding_20{
+  width: 200px;
+  padding: 0 20px
+}
 
 .c_green{
   color: #19be6b;

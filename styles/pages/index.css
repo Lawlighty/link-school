@@ -78,11 +78,11 @@
     /* padding: 20px; */
 }
 .banner_list_sub .sub_div{
-    padding: 0 20px;
+    /* padding: 0 20px; */
     overflow-y: auto;
     overflow-x: hidden;
     height: 100%;
-    width: 200px;
+    /* width: 200px; */
 }
 .banner_list_sub .foot_courses{
     width: 300px;
