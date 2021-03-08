@@ -5,7 +5,7 @@ import {
   RightOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import GetBrowserNum from '@/components/actions/getBrowseNum';
+import GetStudyNum from '@/components/actions/getStudyNum';
 
 // 课程展示
 export default function CoursesItem({ item }: { item: any }) {
@@ -75,7 +75,8 @@ export default function CoursesItem({ item }: { item: any }) {
             </div>
             <div>
               <span>
-                <GetBrowserNum type="Course" id={item._id}/> 人已经学习
+                <GetStudyNum type="Course" id={item._id} />
+              人已经学习
               </span>
             </div>
           </div>

@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { timer_clock, phone_reg } from '../config';
 import { _login_with_account } from '@/server/server';
-import { _get_users_list } from '@/server/users';
 import AccountState from '../store/accountinfo';
 
 
@@ -96,6 +95,7 @@ export default function Login() {
                             'token',
                             data.data.token
                           );
+                          accountState.setAccount(data.data.user);
 
                           if (router.query.from) {
                             router.push(router.query.from + '');

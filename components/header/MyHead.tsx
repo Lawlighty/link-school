@@ -34,17 +34,19 @@ export default function MyHead({
     isLogin: boolean;
 }) {
     let router = useRouter();
-    const [accountState,setAccountState] = useState({});
+    // const [accountState,setAccountState] = useState({});
     const [token,setToken] = useState({});
     // const [headerIndexer, setHeaderIndexer] = useState(
     //     HeaderIndexer.useContainer(),
     // );
     const headerIndexer = HeaderIndexer.useContainer();
-    // const accountState = AccountState.useContainer();
+    const accountState = AccountState.useContainer();
    
 
-    useEffect(() => {
-        setAccountState(JSON.parse(localStorage.getItem('userInfo')));
+  useEffect(() => {
+        accountState.setAccount({
+          ...JSON.parse(localStorage.getItem('userInfo')),
+        });
         setToken(localStorage.getItem('token'));
 
         if (router.route === '/') {
@@ -93,7 +95,7 @@ export default function MyHead({
         }
     };
     const toLogout=() => {
-        // accountState.clearAccount();
+        accountState.clearAccount();
         localStorage.removeItem('userInfo');
         localStorage.removeItem('token');
         router.push('/login')
@@ -285,19 +287,20 @@ export default function MyHead({
                       <div className="mine">
                         <img
                           src={
-                            accountState.avatar
-                              ? accountState.avatar
+                            accountState.account.avatar
+                              ? accountState.account.avatar
                               : '/imgs/头像 (1).png'
                           }
-                          //   src={
-                          //     '/imgs/头像 (1).png'
-                          //   }
                           alt=""
                           className="item"
-                          onClick={() => {
-                            router.push('/account/info');
+                          // onClick={() => {
+                          //   router.push('/account/info');
+                          // }}
+                          style={{
+                            borderRadius: '50%',
+                            width: '50px',
+                            objectFit: 'cover',
                           }}
-                          style={{ borderRadius: '50%' }}
                         />
                         <div className="mine_more_items">
                           <ul
@@ -307,6 +310,9 @@ export default function MyHead({
                             }}
                           >
                             <CaretUpOutlined className="mine_circle" />
+                            <Link href="/account/info">
+                                <li className="more_item">个人中心</li>
+                            </Link>
                             <Link href="/vip">
                               <a target="_blank" className="">
                                 <li className="more_item">超级会员</li>

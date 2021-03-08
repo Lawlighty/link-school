@@ -13,32 +13,28 @@ import { LoadingOutlined, PlusOutlined } from '@ant-design/icons';
 import AccountState from '../../store/accountinfo';
 // import { _update_user_info } from '../../server/server';
 import { _update_user_info } from '@/server/server';
+import { _get_users_detail } from '@/server/users';
+import { UPLOAD_IMG_URL } from '@/server/url';
 
 
+const initAccount = {}
+const { TextArea } = Input;
 export default function AccountInfo() {
 
-    const accountState = AccountState.useContainer();
+
     const [isEdit, setIsEdit] = useState(false);
-    // let account = {
-    //     phoneNumber:'13616859570',
-    //     userName: 'Lawlighty',
-    //     age: 18,
-    //     gender: 0,
-    //     profilephoto: 'https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg',
-    // }
-    // let account = accountState.account;
-    
-    let account = {};
-
-    const [accountInfo, setAccountInfo] = useState<any>(account);
-
+    const [accountInfo, setAccountInfo] = useState<any>(initAccount);
+    const accountState = AccountState.useContainer();
+  const getUserDetail = async() => {
+    await _get_users_detail().then((data) => {
+      console.log('获取的个人信息', data)
+      if (data.status == 200) {
+        setAccountInfo({ ...data.data });
+      }
+    })
+  }
     useEffect(() => {
-        setAccountInfo(JSON.parse(localStorage.getItem('userInfo')));
-        console.log(
-          'localStorage.getItem',
-          JSON.parse(localStorage.getItem('userInfo')),
-      );
-      
+      getUserDetail();
     }, []);
 
     const [loading, setLoading] = useState(false);
@@ -50,11 +46,7 @@ export default function AccountInfo() {
     const [previewTitle, setPreviewTitle] = useState('');
 
     const changeAccountInfo = (key:string, value:any) => {
-        let new_account = accountInfo;
-        new_account[key] = value;
-        // console.log('accountInfo', accountInfo);
-        // console.log('new_account', new_account);
-        setAccountInfo(new_account);
+        setAccountInfo({ ...accountInfo ,[key]:value});
     }
 
     const getBase64=(img, callback)=> {
@@ -84,14 +76,19 @@ export default function AccountInfo() {
         }
         if (info.file.status === 'done') {
             // Get this url from response in real world.
-            getBase64(info.file.originFileObj, (imageUrl) =>
-                {
-                setLoading(false);
-                // setImageUrl(imageUrl);
-                setAccountInfo({...accountInfo, ['avatar']:imageUrl});
-               }
+           setLoading(false);
+                setAccountInfo({
+                  ...accountInfo,
+                  ['avatar']: info.file.response.url,
+                });
+            // getBase64(info.file.originFileObj, (imageUrl) =>
+            //     {
+            //     setLoading(false);
+            //     // setImageUrl(imageUrl);
+            //     setAccountInfo({...accountInfo, ['avatar']:imageUrl});
+            //    }
                 
-            );
+            // );
         }
     };
 
@@ -132,21 +129,11 @@ export default function AccountInfo() {
         
   }
   const updateInfo = async () => {
-    const user = {
-      _id: accountInfo._id,
-      avatar: accountInfo.avatar,
-      nickname: accountInfo.nickname,
-      gender: accountInfo.gender,
-    };
-    await _update_user_info(user._id, user)
+    await _update_user_info(accountInfo._id, accountInfo)
       .then((data) => {
-        if (data.data.code === 200) {
-          const new_accountInfo = accountInfo;
-          new_accountInfo['avatar'] = user.avatar;
-          new_accountInfo['nickname'] = user.nickname;
-          new_accountInfo['gender'] = user.gender;
-          localStorage.setItem('userInfo', JSON.stringify(new_accountInfo));
-          setAccountInfo(new_accountInfo);
+        if (data.status === 200) {
+          localStorage.setItem('userInfo', JSON.stringify(data.data));
+          accountState.setAccount(data.data);
           Modal.success({
             content: '修改成功!',
             okText: '确定',
@@ -154,7 +141,6 @@ export default function AccountInfo() {
         }
       })
       .catch((err) => {
-        console.log('更新err', err);
         message.error(err.message);
       });
   }
@@ -184,30 +170,13 @@ export default function AccountInfo() {
                     <Input
                       className="info_input"
                       placeholder="请输入昵称"
-                      defaultValue={accountInfo.nickname}
+                      value={accountInfo.nickname}
                       onChange={(e) => {
                         changeAccountInfo('nickname', e.target.value);
                       }}
                     />
                   ) : (
                     <div className="text">{accountInfo.nickname}</div>
-                  )}
-                </div>
-                <div className="form_item">
-                  <div className="label">年龄:</div>
-                  {isEdit ? (
-                    <InputNumber
-                      min={1}
-                      max={150}
-                      className="info_input"
-                      placeholder="请输入年龄"
-                      defaultValue={accountInfo.age}
-                      onChange={(e) => {
-                        changeAccountInfo('age', e);
-                      }}
-                    />
-                  ) : (
-                    <div className="text">{accountInfo.age}</div>
                   )}
                 </div>
                 <div className="form_item">
@@ -218,7 +187,7 @@ export default function AccountInfo() {
                       onChange={(e) => {
                         changeAccountInfo('gender', e.target.value);
                       }}
-                      defaultValue={accountInfo.gender}
+                      value={accountInfo.gender}
                     >
                       <Radio value={0}>男</Radio>
                       <Radio value={1}>女</Radio>
@@ -234,16 +203,38 @@ export default function AccountInfo() {
                     </div>
                   )}
                 </div>
-                <div className="form_item">
+                <div className="form_item" style={{ alignItems: 'flex-start' }}>
+                  <div className="label">简介:</div>
+                  {isEdit ? (
+                    <TextArea
+                      rows={4}
+                      style={{width:600}}
+                      className="info_input"
+                      placeholder="请输入简介"
+                      value={accountInfo.introduc}
+                      onChange={(e) => {
+                        changeAccountInfo('introduc', e.target.value);
+                      }}
+                    />
+                  ) : (
+                    <div className="text" style={{ width: '600px' }}>
+                      {accountInfo.introduc}
+                    </div>
+                  )}
+                </div>
+                <div
+                  className="form_item"
+                  style={{ alignItems: 'flex-start' }}
+                >
                   <div className="label">头像:</div>
                   <div className="text">
                     {isEdit ? (
                       <Upload
-                        name="avatar"
+                        name="file"
                         listType="picture-card"
                         className="avatar-uploader"
                         showUploadList={false}
-                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                        action={UPLOAD_IMG_URL}
                         beforeUpload={beforeUpload}
                         onChange={handleChange}
                         onPreview={handlePreview}
@@ -264,8 +255,6 @@ export default function AccountInfo() {
                     ) : (
                       <img
                         style={{ width: '120px' }}
-                        // src="https://static-dev.roncoo.com/course/0948d9f30817454ea5386118fe1ac20a.jpg"
-                        // src="/imgs/头像 (1).png"
                         src={
                           accountInfo.avatar
                             ? accountInfo.avatar

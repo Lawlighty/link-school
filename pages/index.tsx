@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import {RightOutlined, UserOutlined, EyeOutlined, LikeOutlined } from '@ant-design/icons';
 import HeaderIndexer from '@/store/headerIndex';
 import { useRouter } from 'next/router';
-import { _get_users_list } from '@/server/users';
 import { _get_banners } from '@/server/banners';
 import { _get_courses_recommend, _get_courses_stick } from '@/server/courses';
 import { _get_documents } from '@/server/documents';

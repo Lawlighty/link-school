@@ -1,16 +1,22 @@
 import { useState, useEffect } from 'react';
 import { setSubStr } from '@/utils/utils';
-import { PlayCircleOutlined } from '@ant-design/icons';
+import { Modal } from 'antd';
+import {
+  PlayCircleOutlined,
+  ExclamationCircleOutlined,
+} from '@ant-design/icons';
 import { _get_episodes_list } from '@/server/episodes';
 // 子课程列表
 export default function EpisodesList({
+  isStudy,
   courseId,
   currentIndex,
   changeEpisodes,
 }: {
+  isStudy: boolean;
   courseId: any;
   currentIndex: string;
-  changeEpisodes:any;
+  changeEpisodes: any;
 }) {
   const [episodesList, setEpisodesList] = useState<any>([]);
   const [currentEpisodes, setCurrentEpisodes] = useState<string>('');
@@ -31,7 +37,6 @@ export default function EpisodesList({
         }
       });
     }
-      
   };
   useEffect(() => {
     getEpisodesLits(courseId);
@@ -39,6 +44,25 @@ export default function EpisodesList({
   useEffect(() => {
     setCurrentEpisodes(currentIndex);
   }, [currentIndex]);
+
+    const confirm = () => {
+      Modal.confirm({
+        title: '提示',
+        icon: <ExclamationCircleOutlined />,
+        content: '加入学习后才能观看',
+        okText: '确认',
+        cancelText: '取消',
+      });
+    };
+  const changeEpisodesItem = (item) => {
+    if (isStudy) {
+        setCurrentEpisodes(item._id);
+        changeEpisodes(item);
+     } else {
+       confirm();
+     }
+   
+  };
   return (
     <div
       className="content_items"
@@ -48,9 +72,8 @@ export default function EpisodesList({
         <div className="content_item" key={item._id}>
           <div className="content_item_item">
             <div
-              onClick={() => {
-                setCurrentEpisodes(item._id);
-                changeEpisodes(item);
+              onClick={(item) => {
+                changeEpisodesItem(item);
               }}
               className={[
                 'content_item_item_title',

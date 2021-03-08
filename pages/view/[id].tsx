@@ -17,13 +17,28 @@ import LecturerBrief from '@/components/lecturer/brief';
 import HotCourses from '@/components/courses/hotCourses';
 import EpisodesList from '@/components/courses/episodes/episodesList';
 import LikeBtn from '@/components/actions/likeBtn';
+import Mask from '@/components/mask';
 import { useRouter } from 'next/router';
 import { _get_courses_detail } from '@/server/courses';
+import { _get_studys_status } from '@/server/studys';
 
 export default function View() { 
-    const router = useRouter();
+  const router = useRouter();
+   const [isStudy, setIsStudy] = useState<boolean>(false);
     const [courseInfo, setCourseInfo] = useState<any>({});
-    const [currentEpisodes, setCurrentEpisodes] = useState<any>({});
+  const [currentEpisodes, setCurrentEpisodes] = useState<any>({});
+  const queryStudy = async (id: string) => {
+       const query = {
+         type: 'Course',
+         object: id || router.query.id,
+       };
+    await _get_studys_status(JSON.stringify(query)).then((data) => {
+      console.log('_get_studys_status', data);
+      if (data.status === 200) {
+        setIsStudy(data.data.status);
+      }
+    });
+  };
     const getCoursesDetail = async (id: string) => {
       await _get_courses_detail(id).then((data) => {
           if (data.status === 200) {
@@ -32,12 +47,12 @@ export default function View() {
       });
     };
     useEffect(() => {
-        if (router.query.id) {
-          
-            const id = router.query.id;
-            getCoursesDetail(id);
-        }
-    },[])
+      if (router.query.id) {
+        const id = router.query.id;
+        getCoursesDetail(id);
+        queryStudy(id);
+      }
+    }, [router]);
     
     const [visible, setVisible] = useState(false);
     const showDrawer = () => {
@@ -57,14 +72,12 @@ export default function View() {
     };
     
   const changeEpisodes = (episode:any) => {
-    console.log('原来的currentEpisodes', currentEpisodes);
-    console.log('接受的episode', episode);
     let new_episode = Object.assign({}, currentEpisodes);
     new_episode = { ...episode };
-    console.log('new_episode', new_episode);
     setCurrentEpisodes(new_episode);
-    // console.log('setCurrentEpisodes', currentEpisodes);
-    // forceUpdate();
+  };
+  const changeStudy = (e:boolean) => {
+    setIsStudy(e);
   };
     return (
       <PcLayout
@@ -77,58 +90,67 @@ export default function View() {
           <div className="detail_video">
             <div className="video_body">
               <div className="video_content ">
-                {currentEpisodes._id && (
-                  <div className="win_box " style={{ position: 'relative' }}>
-                    <Drawer
-                      title="章节目录"
-                      placement="right"
-                      closable={false}
-                      onClose={onClose}
-                      visible={visible}
-                      getContainer={false}
-                      style={{ position: 'absolute', zIndex: 10 }}
-                    >
-                      <Tree
-                        showLine
-                        switcherIcon={<DownOutlined />}
-                        defaultExpandedKeys={['0-0']}
-                        defaultSelectedKeys={['0-0-0']}
-                        onSelect={onSelect}
-                        treeData={[
-                          {
-                            title: '第1章：数据',
-                            key: '0-0',
-                            children: [
+                {!isStudy ? (
+                  <Mask currentInfo={courseInfo} changeStudy={changeStudy} />
+                ) : (
+                  <>
+                    {currentEpisodes._id && (
+                      <div
+                        className="win_box "
+                        style={{ position: 'relative' }}
+                      >
+                        <Drawer
+                          title="章节目录"
+                          placement="right"
+                          closable={false}
+                          onClose={onClose}
+                          visible={visible}
+                          getContainer={false}
+                          style={{ position: 'absolute', zIndex: 10 }}
+                        >
+                          <Tree
+                            showLine
+                            switcherIcon={<DownOutlined />}
+                            defaultExpandedKeys={['0-0']}
+                            defaultSelectedKeys={['0-0-0']}
+                            onSelect={onSelect}
+                            treeData={[
                               {
-                                title: '第一讲: 1',
-                                key: '0-0-0',
+                                title: '第1章：数据',
+                                key: '0-0',
+                                children: [
+                                  {
+                                    title: '第一讲: 1',
+                                    key: '0-0-0',
+                                  },
+                                  {
+                                    title: '第一讲: 2',
+                                    key: '0-0-1',
+                                  },
+                                  {
+                                    title: '第一讲: 3',
+                                    key: '0-0-2',
+                                  },
+                                ],
                               },
-                              {
-                                title: '第一讲: 2',
-                                key: '0-0-1',
-                              },
-                              {
-                                title: '第一讲: 3',
-                                key: '0-0-2',
-                              },
-                            ],
-                          },
-                        ]}
-                      />
-                    </Drawer>
-                    <video
-                      width="100%"
-                      height="100%"
-                      controls
-                      src={currentEpisodes.file || ''}
-                    >
-                      {/* <source
+                            ]}
+                          />
+                        </Drawer>
+                        <video
+                          width="100%"
+                          height="100%"
+                          controls
+                          src={currentEpisodes.file || ''}
+                        >
+                          {/* <source
                         src={currentEpisodes.file || ''}
                         type="video/mp4"
                       /> */}
-                      您的浏览器不支持 HTML5 video 标签。
-                    </video>
-                  </div>
+                          您的浏览器不支持 HTML5 video 标签。
+                        </video>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 <div className="video_info" style={{ display: 'none' }}>
@@ -172,7 +194,11 @@ export default function View() {
                       justifyContent: 'flex-end',
                     }}
                   >
-                    <LikeBtn type="Course" title="收藏" object={router.query.id}>
+                    <LikeBtn
+                      type="Course"
+                      title="收藏"
+                      object={router.query.id}
+                    >
                       <></>
                     </LikeBtn>
                   </div>
@@ -192,6 +218,7 @@ export default function View() {
                           课程大纲
                         </div>
                         <EpisodesList
+                          isStudy={isStudy}
                           courseId={router.query.id || ''}
                           currentIndex={currentEpisodes._id || ''}
                           changeEpisodes={changeEpisodes}
@@ -200,7 +227,7 @@ export default function View() {
                     </>
                   ) : (
                     <>
-                      <Comment type='Course'/>
+                      <Comment type="Course" />
                     </>
                   )}
                 </div>

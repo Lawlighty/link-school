@@ -26,5 +26,5 @@ export const _login_with_account = async (phone: string, password: string) => {
 
 //修改个人信息
 export const _update_user_info = async (id: string, params:any) => {
-    return await request2('/auth/' + id, MethodType.PUT, params);
+    return await request(`/auth/${id}`, MethodType.PUT, params);
 };
