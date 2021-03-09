@@ -276,7 +276,7 @@ export default function MyHead({
                       </Link>
                     </div>
                   ) : (
-                    <div>
+                    <div className="flex">
                       <Link href="/account/message">
                         <a className="">
                           <img src="/imgs/邮件.png" alt="" className="item" />
@@ -298,7 +298,7 @@ export default function MyHead({
                           // }}
                           style={{
                             borderRadius: '50%',
-                            width: '50px',
+                            width: '48px',
                             objectFit: 'cover',
                           }}
                         />
@@ -311,7 +311,7 @@ export default function MyHead({
                           >
                             <CaretUpOutlined className="mine_circle" />
                             <Link href="/account/info">
-                                <li className="more_item">个人中心</li>
+                              <li className="more_item">个人中心</li>
                             </Link>
                             <Link href="/vip">
                               <a target="_blank" className="">
@@ -324,6 +324,13 @@ export default function MyHead({
                             </a>
                           </ul>
                         </div>
+                      </div>
+                      <div>
+                        <img
+                          src="/imgs/vip/白银会员.png"
+                          alt=""
+                          className="item"
+                        />
                       </div>
                     </div>
                   )}

@@ -71,7 +71,8 @@ export default function View() {
         console.log('selected', selectedKeys, info);
     };
     
-  const changeEpisodes = (episode:any) => {
+  const changeEpisodes = (episode: any) => {
+    console.log('changeEpisodes', episode);
     let new_episode = Object.assign({}, currentEpisodes);
     new_episode = { ...episode };
     setCurrentEpisodes(new_episode);

@@ -72,7 +72,7 @@ export default function EpisodesList({
         <div className="content_item" key={item._id}>
           <div className="content_item_item">
             <div
-              onClick={(item) => {
+              onClick={(e) => {
                 changeEpisodesItem(item);
               }}
               className={[

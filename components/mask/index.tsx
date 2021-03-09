@@ -57,6 +57,9 @@ export default function Mask({ currentInfo, changeStudy }: { currentInfo: any; c
             </div>
             <div className="mgt10">
               SVIP: <span>￥{currentInfo.sprice || 0}</span>
+              <a href="/vip" className="set_vip">
+                更多权益&gt;&gt;
+              </a>
             </div>
           </div>
           <div className="view_teacher">
