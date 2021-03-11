@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { setSubStr } from '@/utils/utils';
 import LikeBtn from '@/components/actions/likeBtn';
+import Link from 'next/link';
 // 讲师简介
 export default function LecturerBrief({ author }: { author: any }) {
 
@@ -27,10 +28,12 @@ export default function LecturerBrief({ author }: { author: any }) {
                 }}
               />
               <div className="teacher_name">
-                <a>{author.nickname || ''}</a>
+                <Link href={`/lecturer/${author._id}`}>
+                  {author.nickname || ''}
+                </Link>
               </div>
 
-              <LikeBtn type="Course" title="关注" object={author._id}>
+              <LikeBtn type="User" title="关注" object={author._id}>
                 <></>
               </LikeBtn>
             </div>

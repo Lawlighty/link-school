@@ -134,6 +134,7 @@ export default function AccountInfo() {
         if (data.status === 200) {
           localStorage.setItem('userInfo', JSON.stringify(data.data));
           accountState.setAccount(data.data);
+          
           Modal.success({
             content: '修改成功!',
             okText: '确定',

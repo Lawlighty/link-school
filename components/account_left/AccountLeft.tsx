@@ -17,6 +17,8 @@ export default function AccountLeft({
     //2 --> 修改密码
     //3 -->  我的通知
     //4-->  我的关注
+    //5-->  我的学习
+    //6-->  我的收藏
     const [personal_center, setPersonalCenter] = useState(0);
 
     //招募
@@ -32,9 +34,13 @@ export default function AccountLeft({
             } else if (router.route === '/account/message') {
                 setPersonalCenter(3);
             } else if (router.route === '/account/attention') {
-                setPersonalCenter(4);
+              setPersonalCenter(4);
+            } else if (router.route === '/account/study') {
+              setPersonalCenter(5);
+            } else if (router.route === '/account/collect') {
+              setPersonalCenter(6);
             } else {
-                setPersonalCenter(10);
+              setPersonalCenter(10);
             }
         }
         if (showRecruit) {
@@ -45,100 +51,74 @@ export default function AccountLeft({
     }, []);
 
     return (
-        <div className="account_left">
-            {/* 个人中心 */}
-            {showPerCenter ? (
-                <div className="menu_panel">
-                    <h3 className="title">
-                        <img
-                            src="/imgs/account/用户.png"
-                            alt=""
-                            className="iconfont"
-                        />
-                        个人中心
-                    </h3>
-                    <ul className="menus">
-                        <li className="">
-                            <Link href="/account/order">
-                                <a
-                                    className={
-                                        personal_center === 0 ? 'on' : ''
-                                    }
-                                >
-                                    我的订单
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="">
-                            <Link href="/account/attention">
-                                <a
-                                    className={
-                                        personal_center === 4 ? 'on' : ''
-                                    }
-                                >
-                                    我的关注
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="">
-                            <Link href="/account/message">
-                                <a
-                                    className={
-                                        personal_center === 3 ? 'on' : ''
-                                    }
-                                >
-                                    我的通知
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="">
-                            <Link href="/account/info">
-                                <a
-                                    className={
-                                        personal_center === 1 ? 'on' : ''
-                                    }
-                                >
-                                    个人信息
-                                </a>
-                            </Link>
-                        </li>
-                        <li className="">
-                            <Link href="/account/reset">
-                                <a
-                                    className={
-                                        personal_center === 2 ? 'on' : ''
-                                    }
-                                >
-                                    修改密码
-                                </a>
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            ) : null}
+      <div className="account_left">
+        {/* 个人中心 */}
+        {showPerCenter ? (
+          <div className="menu_panel">
+            <h3 className="title">
+              <img src="/imgs/account/用户.png" alt="" className="iconfont" />
+              个人中心
+            </h3>
+            <ul className="menus">
+              <li className="">
+                <Link href="/account/order">
+                  <a className={personal_center === 0 ? 'on' : ''}>我的订单</a>
+                </Link>
+              </li>
+              <li className="">
+                <Link href="/account/attention">
+                  <a className={personal_center === 4 ? 'on' : ''}>我的关注</a>
+                </Link>
+              </li>
+              <li className="">
+                <Link href="/account/study">
+                  <a className={personal_center === 5 ? 'on' : ''}>我的学习</a>
+                </Link>
+              </li>
+              <li className="">
+                <Link href="/account/collect">
+                  <a className={personal_center === 6 ? 'on' : ''}>我的收藏</a>
+                </Link>
+              </li>
+              <li className="">
+                <Link href="/account/message">
+                  <a className={personal_center === 3 ? 'on' : ''}>我的通知</a>
+                </Link>
+              </li>
+              <li className="">
+                <Link href="/account/info">
+                  <a className={personal_center === 1 ? 'on' : ''}>个人信息</a>
+                </Link>
+              </li>
+              <li className="">
+                <Link href="/account/reset">
+                  <a className={personal_center === 2 ? 'on' : ''}>修改密码</a>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        ) : null}
 
-            {/* 招募中心 */}
-            {showRecruit ? (
-                <div className="menu_panel">
-                    <h3 className="title">
-                        <img
-                            src="/imgs/account/志愿招募.png"
-                            alt=""
-                            className="iconfont"
-                        />
-                        招募中心
-                    </h3>
-                    <ul className="menus">
-                        <li className="">
-                            <Link href="/recruit">
-                                <a className={recruit_index === 0 ? 'on' : ''}>
-                                    讲师招募
-                                </a>
-                            </Link>
-                        </li>
-                    </ul>
-                </div>
-            ) : null}
-        </div>
+        {/* 招募中心 */}
+        {showRecruit ? (
+          <div className="menu_panel">
+            <h3 className="title">
+              <img
+                src="/imgs/account/志愿招募.png"
+                alt=""
+                className="iconfont"
+              />
+              招募中心
+            </h3>
+            <ul className="menus">
+              <li className="">
+                <Link href="/recruit">
+                  <a className={recruit_index === 0 ? 'on' : ''}>讲师招募</a>
+                </Link>
+              </li>
+            </ul>
+          </div>
+        ) : null}
+      </div>
     );
 }
